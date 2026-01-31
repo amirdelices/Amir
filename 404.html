@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style404.css">
     <title>404 - الصفحة غير موجودة</title>
     <style>
         :root {
@@ -27,12 +26,12 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 1rem;
             background-color: var(--light-bg-color);
             color: var(--light-text-color);
             text-align: center;
             flex-direction: column;
             transition: background-color 0.5s ease, color 0.5s ease;
-            padding: 1rem;
         }
 
         body.dark-mode {
@@ -46,8 +45,9 @@
             border-radius: 20px;
             box-shadow: var(--light-shadow);
             transition: all 0.5s ease;
-            max-width: 500px;
             width: 100%;
+            max-width: 90%; /* الآن البطاقة متجاوبة على كل الشاشات */
+            box-sizing: border-box; /* يشمل padding ضمن العرض */
         }
 
         .dark-mode .content {
@@ -55,7 +55,7 @@
             box-shadow: var(--dark-shadow);
         }
 
-        /* استبدال الـ GIF بأيقونة أو صورة كبيرة */
+        /* الصورة الكبيرة */
         .error-icon {
             display: block;
             margin: 1rem auto;
@@ -63,7 +63,6 @@
 
         .error-icon img {
             width: 100%;
-            max-width: 500px; /* الحد الأقصى للحجم على الشاشات الكبيرة */
             height: auto;
             object-fit: contain;
             border-radius: 10px;
@@ -123,11 +122,8 @@
         /* ======== تجاوبية الهواتف ======== */
         @media screen and (max-width: 768px) {
             .content {
+                max-width: 95%;
                 padding: 1.5rem;
-            }
-
-            .error-icon img {
-                max-width: 100%;
             }
 
             .text h2 {
@@ -145,6 +141,11 @@
         }
 
         @media screen and (max-width: 480px) {
+            .content {
+                max-width: 98%;
+                padding: 1rem;
+            }
+
             .text h2 {
                 font-size: 1.3rem;
             }
@@ -163,7 +164,7 @@
 
 <body class="light-mode">
     <div class="content">
-        <!-- استبدال الإيموجي بصورة -->
+        <!-- الصورة -->
         <span class="error-icon">
             <img src="images/001.png" alt="Error Icon">
         </span>
@@ -191,4 +192,5 @@
 </body>
 
 </html>
+
 
