@@ -17,8 +17,8 @@
             --white: #ffffff;
             --text: #333;
             --muted: #666;
-            --radius: 30px;
-            --shadow: 0 20px 40px rgba(255, 107, 129, 0.15);
+            --radius: 40px; /* زوايا أنعم قليلاً */
+            --shadow: 0 25px 50px rgba(255, 107, 129, 0.2);
             
             --dark-bg: #1a1a1a;
             --dark-card: #2d2d2d;
@@ -39,74 +39,88 @@
 
         body.dark-mode { background: var(--dark-bg); }
 
+        /* تعديل الحاوية لتكون أكبر في الشاشات الكبيرة */
         .content {
             background-color: var(--white);
             width: 100%;
-            max-width: 450px;
+            max-width: 600px; /* زيادة العرض الأقصى للحاسوب */
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 3.5rem 2rem;
+            padding: 4rem 3rem; /* زيادة المسافات الداخلية */
             text-align: center;
             transition: 0.5s;
         }
 
-        .dark-mode .content { background-color: var(--dark-card); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        /* تنسيق خاص للهواتف */
+        @media (max-width: 480px) {
+            .content {
+                max-width: 100%;
+                padding: 3rem 1.5rem;
+                --radius: 30px;
+            }
+            .error-num { font-size: 3.5rem !important; }
+            h2 { font-size: 1.5rem !important; }
+        }
 
-        /* جعل الصورة 001.png هي الأيقونة الأساسية */
+        .dark-mode .content { background-color: var(--dark-card); box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+
         .main-image {
             display: block;
-            margin: 0 auto 25px;
+            margin: 0 auto 30px;
             animation: float 3s ease-in-out infinite;
         }
 
         .main-image img {
-            max-width: 200px; /* حجم مناسب للظهور كأيقونة كبيرة */
+            width: 100%;
+            max-width: 250px; /* تكبير الصورة في الحاسوب */
             height: auto;
-            filter: drop-shadow(0 12px 12px rgba(255, 107, 129, 0.25));
+            filter: drop-shadow(0 15px 15px rgba(255, 107, 129, 0.3));
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
         .error-num {
-            font-size: 3.5rem;
+            font-size: 5rem; /* تكبير الرقم في الحاسوب */
             font-weight: 900;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             line-height: 1;
+            letter-spacing: -2px;
         }
 
-        h2 { color: var(--primary-dark); font-size: 1.7rem; margin-bottom: 15px; font-weight: 700; }
-        p { color: var(--muted); line-height: 1.6; margin-bottom: 35px; font-size: 1.1rem; }
+        h2 { color: var(--primary-dark); font-size: 2.2rem; margin-bottom: 20px; font-weight: 700; }
+        p { color: var(--muted); line-height: 1.8; margin-bottom: 40px; font-size: 1.2rem; }
         .dark-mode p { color: #aaa; }
 
         .btn-home {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px 35px;
+            gap: 15px;
+            padding: 18px 45px; /* زر أكبر وأبرز */
             background: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 60px;
             font-weight: 700;
+            font-size: 1.1rem;
             transition: 0.4s;
-            box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 107, 129, 0.3);
         }
 
         .btn-home:hover {
             background: var(--primary-dark);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(255, 107, 129, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 129, 0.4);
         }
 
         .footer-credit {
-            margin-top: 35px;
-            padding-top: 20px;
+            margin-top: 45px;
+            padding-top: 25px;
             border-top: 1px solid rgba(0,0,0,0.06);
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: #999;
         }
 
@@ -120,9 +134,10 @@
         <div class="main-image">
             <img src="images/001.png" alt="مدرسة أمير" 
         </div>
-   
+
+        
         <h2>أوووه! لقد احترقت الوصفة</h2>
-        <p>يبدو أنك ضللت الطريق. الصفحة التي تبحث عنها غير موجودة في مطبخنا حالياً.</p>
+        <p>عذراً، الصفحة التي تبحث عنها غير موجودة في مطبخنا حالياً. ربما تم نقلها أو حذفها تماماً.</p>
         
         <a href="https://amirdelices.pages.dev/" class="btn-home">
             <i class="fa-solid fa-house-chimney"></i> العودة للرئيسية
