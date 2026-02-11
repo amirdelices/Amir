@@ -281,136 +281,185 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const sweets = [
-        { id: 1, name: "بقلاوة تقليدية", price: 120, img: "images/sweet1.jpg" },
-        { id: 2, name: "مقروط اللوز", price: 150, img: "images/sweet2.jpg" },
-        { id: 3, name: "عرايش ملكي", price: 130, img: "images/sweet3.jpg" },
-        { id: 4, name: "تشاراك مسكر", price: 110, img: "images/sweet4.jpg" }
-    ];
+    // 1. البيانات المحدثة
+const sweets = [
+    { id: 1, name: "تشارك مسكّر", price: 70, img: "images/tcharakmsakar.jpg" },
+    { id: 2, name: "تشارك العريان", price: 70, img: "images/tcharakarian.jpg" },
+    { id: 3, name: "عرايش", price: 90, img: "images/araiech.jpg" },
+    { id: 4, name: "كعيكعات", price: 80, img: "images/kaikat.jpg" },
+    { id: 5, name: "مقروض زمان", price: 70, img: "images/maqrout.jpg" },
+    { id: 6, name: "مقروض اللوز", price: 100, img: "images/maqroutlouz.jpg" },
+    { id: 7, name: "كفتة", price: 200, img: "images/kefta.jpg" },
+    { id: 8, name: "دزيريات", price: 100, img: "images/dziriyat.jpg" },
+    { id: 9, name: "بقلاوة", price: 80, img: "images/baklawa.jpg" },
+    { id: 10, name: "بقلاوة تركية", price: 80, img: "images/turkish.jpg" },
+    { id: 11, name: "قنيدلات", price: 80, img: "images/qnidlet.jpg" },
+    { id: 12, name: "مشوك الباي", price: 200, img: "images/mcheweklouz.jpg" },
+    { id: 13, name: "الفاكهة", price: 200, img: "images/fruits.jpg" },
+    { id: 14, name: "صابلي المعجون", price: 40, img: "images/sabli.jpg" },
+    { id: 15, name: "مشوك", price: 60, img: "images/mchewek.jpg" },
+    { id: 16, name: "جلجلانية", price: 70, img: "images/djeljlania.jpg" },
+    { id: 17, name: "مخبز", price: 120, img: "images/mkhabez.jpg" },
+    { id: 18, name: "كعك النقاش", price: 70, img: "images/naqach.jpg" },
+    { id: 19, name: "سنيكرز", price: 80, img: "images/snickers.jpg" },
+    { id: 20, name: "قلوب الشكولاطة", price: 80, img: "images/chikoula.jpg" },
+    { id: 21, name: "بنيون", price: 80, img: "images/bniwen.jpg" },
+    { id: 22, name: "طابع زمان", price: 30, img: "images/tabaa.jpg" },
+    { id: 23, name: "طابع الطلية", price: 40, img: "images/tabaatalia.jpg" },
+    { id: 24, name: "غريبية", price: 50, img: "images/ghriba.jpg" }
+];
 
-    let cart = [];
-    let deliveryCost = 0;
-    const origin = { lat: 36.1622, lng: 1.3417 }; // إحداثيات أولاد محمد
+let cart = [];
+let deliveryCost = 0;
+const origin = { lat: 36.1622, lng: 1.3417 }; // إحداثيات أولاد محمد
 
-    function renderSweets() {
-        const grid = document.getElementById('sweetsGrid');
-        grid.innerHTML = sweets.map(s => `
-            <div class="sweet-card">
-                <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150'">
-                <div style="font-weight:bold; margin:8px 0; font-size:0.9rem;">${s.name}</div>
-                <div style="color:var(--primary-dark); font-weight:800;">${s.price} دج</div>
-                <button class="add-to-cart-btn" onclick="addToCart(${s.id})">أضف للطلب</button>
+// 2. عرض المنتجات في الشبكة
+function renderSweets() {
+    const grid = document.getElementById('sweetsGrid');
+    if (!grid) return;
+    grid.innerHTML = sweets.map(s => `
+        <div class="sweet-card">
+            <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150?text=Amir+School'">
+            <div style="font-weight:bold; margin:8px 0; font-size:0.9rem;">${s.name}</div>
+            <div style="color:var(--primary-dark); font-weight:800;">${s.price} دج</div>
+            <button class="add-to-cart-btn" onclick="addToCart(${s.id})">أضف للطلب</button>
+        </div>
+    `).join('');
+}
+
+// 3. إدارة السلة (الحد الأدنى 50 حبة عند الإضافة الأولى)
+function addToCart(id) {
+    const item = sweets.find(s => s.id === id);
+    const inCart = cart.find(c => c.id === id);
+    
+    if (inCart) {
+        inCart.qty += 10; // زيادة بـ 10 عند تكرار الضغط
+    } else {
+        cart.push({ ...item, qty: 50 }); // أول إضافة تبدأ بـ 50 حبة
+    }
+    
+    updateCartUI();
+    
+    // تأثير بصري بسيط على الزر
+    const btn = event.currentTarget;
+    const originalText = btn.innerText;
+    btn.innerText = "تمت الإضافة ✓";
+    btn.style.background = "var(--success)";
+    setTimeout(() => { 
+        btn.innerText = originalText;
+        btn.style.background = ""; 
+    }, 800);
+}
+
+function updateCartUI() {
+    const countEl = document.getElementById('cartCount');
+    if (countEl) countEl.innerText = cart.length; // عدد أنواع الحلويات في السلة
+    
+    const list = document.getElementById('cartItemsList');
+    if (!list) return;
+
+    if (cart.length === 0) {
+        list.innerHTML = `
+            <div style="text-align:center; padding:40px 20px;">
+                <i class="fas fa-shopping-basket" style="font-size:3rem; color:#eee;"></i>
+                <p style="color:#888; margin-top:10px;">السلة فارغة حالياً</p>
+            </div>`;
+    } else {
+        list.innerHTML = cart.map(c => `
+            <div class="cart-item-card">
+                <img src="${c.img}" class="item-img-mini" onerror="this.src='https://via.placeholder.com/50'">
+                <div style="flex:1; text-align:right; margin-right:10px;">
+                    <div style="font-weight:bold; font-size:0.85rem;">${c.name}</div>
+                    <div style="color:var(--primary); font-size:0.8rem;">${c.price} دج للقطعة</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:5px; background:#f0f0f0; padding:5px; border-radius:10px;">
+                    <button onclick="changeQty(${c.id}, 10)" style="border:none; background:white; width:25px; border-radius:5px; cursor:pointer;">+</button>
+                    <span style="min-width:30px; text-align:center; font-weight:bold;">${c.qty}</span>
+                    <button onclick="changeQty(${c.id}, -10)" style="border:none; background:white; width:25px; border-radius:5px; cursor:pointer;">-</button>
+                </div>
             </div>
         `).join('');
     }
+    calculateTotal();
+}
 
-    function addToCart(id) {
-        const item = sweets.find(s => s.id === id);
-        const inCart = cart.find(c => c.id === id);
-        if (inCart) inCart.qty++;
-        else cart.push({ ...item, qty: 1 });
-        updateCartUI();
+function changeQty(id, delta) {
+    const item = cart.find(c => c.id === id);
+    if (!item) return;
+    item.qty = Math.max(10, item.qty + delta); // الحد الأدنى للتعديل 10 حبات
+    if (item.qty < 10) cart = cart.filter(c => c.id !== id);
+    updateCartUI();
+}
+
+function calculateTotal() {
+    const subtotal = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+    const finalTotal = subtotal + deliveryCost;
+    const totalEl = document.getElementById('totalWithDelivery');
+    if (totalEl) totalEl.innerText = finalTotal.toLocaleString() + " دج";
+}
+
+// 4. نظام التوصيل المعتمد على الخريطة
+async function searchLocation(query) {
+    const dropdown = document.getElementById('searchSuggestions');
+    if (query.length < 3) { dropdown.style.display = 'none'; return; }
+    
+    try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}, Chlef, Algeria&limit=5`);
+        const data = await res.json();
+        dropdown.innerHTML = data.map(d => `
+            <div class="search-item" onclick="selectLoc(${d.lat}, ${d.lon}, '${d.display_name}')">${d.display_name}</div>
+        `).join('');
+        dropdown.style.display = 'block';
+    } catch (e) {}
+}
+
+function selectLoc(lat, lon, name) {
+    document.getElementById('destinationInput').value = name;
+    document.getElementById('searchSuggestions').style.display = 'none';
+    document.getElementById('targetLabel').innerText = name.split(',')[0];
+
+    fetch(`https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${lon},${lat}?overview=false`)
+        .then(r => r.json())
+        .then(data => {
+            const dist = data.routes[0].distance / 1000;
+            
+            if (dist > 50) {
+                alert("عذراً، التوصيل غير متوفر لمسافات أبعد من 50 كلم");
+                deliveryCost = 0;
+                return;
+            }
+
+            document.getElementById('distVal').innerText = dist.toFixed(1) + " كم";
+            
+            // التسعيرة: 150 دج + (50 دج لكل 3 كم)
+            deliveryCost = 150 + (Math.floor(dist / 3) * 50);
+            document.getElementById('deliveryCostText').innerText = deliveryCost + " دج";
+            
+            const move = Math.min((dist / 30) * 100, 92);
+            document.getElementById('motoIcon').style.right = move + "%";
+            calculateTotal();
+        });
+}
+
+// 5. إرسال الطلب النهائي
+function finalizeOrder() {
+    if (cart.length === 0) return alert("السلة فارغة!");
+    if (deliveryCost === 0 && document.getElementById('distVal').innerText === "0 كم") {
+        return alert("يرجى تحديد موقع التوصيل أولاً.");
     }
 
-    function updateCartUI() {
-        document.getElementById('cartCount').innerText = cart.reduce((a, b) => a + b.qty, 0);
-        const list = document.getElementById('cartItemsList');
-        if (cart.length === 0) {
-            list.innerHTML = "<p style='text-align:center; padding:20px;'>السلة فارغة</p>";
-        } else {
-            list.innerHTML = cart.map(c => `
-                <div class="cart-item-card">
-                    <img src="${c.img}" class="item-img-mini">
-                    <div style="flex:1; text-align:right;">
-                        <div style="font-weight:bold; font-size:0.85rem;">${c.name}</div>
-                        <div style="color:var(--primary); font-size:0.8rem;">${c.price} دج</div>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:5px; background:#eee; padding:5px; border-radius:10px;">
-                        <button onclick="changeQty(${c.id}, 1)" style="border:none; background:white; width:20px; border-radius:5px;">+</button>
-                        <span>${c.qty}</span>
-                        <button onclick="changeQty(${c.id}, -1)" style="border:none; background:white; width:20px; border-radius:5px;">-</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        calculateTotal();
-    }
-
-    function changeQty(id, delta) {
-        const item = cart.find(c => c.id === id);
-        item.qty += delta;
-        if (item.qty < 1) cart = cart.filter(c => c.id !== id);
-        updateCartUI();
-    }
-
-    function calculateTotal() {
-        const subtotal = cart.reduce((a, b) => a + (b.price * b.qty), 0);
-        document.getElementById('totalWithDelivery').innerText = (subtotal + deliveryCost) + " دج";
-    }
-
-    function toggleCart() {
-        const modal = document.getElementById('cartModal');
-        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-    }
-
-    // نظام البحث والتوصيل الذكي
-    async function searchLocation(query) {
-        const dropdown = document.getElementById('searchSuggestions');
-        if (query.length < 3) { dropdown.style.display = 'none'; return; }
-        
-        try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}, Chlef, Algeria&limit=5`);
-            const data = await res.json();
-            dropdown.innerHTML = data.map(d => `
-                <div class="search-item" onclick="selectLoc(${d.lat}, ${d.lon}, '${d.display_name}')">${d.display_name}</div>
-            `).join('');
-            dropdown.style.display = 'block';
-        } catch (e) {}
-    }
-
-    function selectLoc(lat, lon, name) {
-        document.getElementById('destinationInput').value = name;
-        document.getElementById('searchSuggestions').style.display = 'none';
-        document.getElementById('targetLabel').innerText = name.split(',')[0];
-
-        // حساب المسافة الحقيقية عبر الطرق
-        fetch(`https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${lon},${lat}?overview=false`)
-            .then(r => r.json())
-            .then(data => {
-                const dist = data.routes[0].distance / 1000;
-                
-                if (dist > 50) {
-                    alert("عذراً، التوصيل غير متوفر لمسافات أبعد من 50 كلم");
-                    return;
-                }
-
-                document.getElementById('distVal').innerText = dist.toFixed(1) + " كم";
-                
-                // منطق التسعير: 150 دج أساسي + 50 دج لكل 3 كلم إضافية
-                let cost = 150 + (Math.floor(dist / 3) * 50);
-                deliveryCost = cost;
-                document.getElementById('deliveryCostText').innerText = cost + " دج";
-                
-                // تحريك أيقونة الموتوسيكل
-                const move = Math.min((dist / 30) * 100, 92);
-                document.getElementById('motoIcon').style.right = move + "%";
-                calculateTotal();
-            });
-    }
-
-    function finalizeOrder() {
-        if (cart.length === 0) return alert("السلة فارغة!");
-        if (deliveryCost === 0) return alert("يرجى تحديد وجهة التوصيل أولاً!");
-
-        let msg = `*طلبية جديدة من مدرسة أمير*%0A`;
-        cart.forEach(c => msg += `• ${c.name} (${c.qty} قطعة)%0A`);
-        msg += `%0A*الوجهة:* ${document.getElementById('destinationInput').value}`;
-        msg += `%0A*المسافة:* ${document.getElementById('distVal').innerText}`;
-        msg += `%0A*سعر التوصيل:* ${deliveryCost} دج`;
-        msg += `%0A*الإجمالي النهائي:* ${document.getElementById('totalWithDelivery').innerText}`;
-        
-        window.open(`https://wa.me/213000000000?text=${msg}`); // استبدل بالأصفار رقم هاتفك
-    }
+    let msg = `*طلب جديد - مدرسة أمير*%0A%0A`;
+    cart.forEach(c => {
+        msg += `• *${c.name}*: ${c.qty} حبة (الإجمالي: ${c.price * c.qty} دج)%0A`;
+    });
+    
+    msg += `%0A--------------------------%0A`;
+    msg += `📍 *الوجهة:* ${document.getElementById('destinationInput').value}%0A`;
+    msg += `🛵 *التوصيل:* ${deliveryCost} دج%0A`;
+    msg += `💰 *الإجمالي النهائي:* ${document.getElementById('totalWithDelivery').innerText}`;
+    
+    window.open(`https://wa.me/213000000000?text=${msg}`); // ضع رقم هاتفك هنا
+}
 
     function typeEffect() {
         const texts = ["نتعلم لنبدع.. نصنع لنتميز", "دورات احترافية في الحلويات", "طلبياتكم تصلكم أينما كنتم"];
