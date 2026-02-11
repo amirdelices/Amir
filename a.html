@@ -7,7 +7,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
         :root {
@@ -23,6 +22,7 @@
             --success: #2ed573;
             --danger: #ff4757;
             --star-color: #FFD700;
+            --glass-bg: rgba(255, 255, 255, 0.95);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,6 @@
             background: var(--bg-gradient);
             min-height: 100vh;
             color: var(--text);
-            overflow-x: hidden;
         }
 
         /* شريط الأخبار */
@@ -45,19 +44,29 @@
             top: 0;
             z-index: 2000;
             font-size: 0.95rem;
+            font-weight: 600;
         }
         .ticker-content {
             display: inline-block;
             white-space: nowrap;
-            animation: ticker 40s linear infinite;
+            animation: ticker 40s linear infinite; 
         }
         @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
-        /* الحاوية الرئيسية */
+        #backToTop {
+            position: fixed; bottom: 30px; right: 20px; background: white;
+            color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 4000; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary-dark); transition: 0.3s;
+        }
+        #backToTop:hover { transform: translateY(-5px); background: var(--primary-dark); color: white; }
+
         .main-wrapper { display: flex; justify-content: center; padding: 20px 10px; }
+
         .container {
             background: rgba(255, 255, 255, 0.98);
             width: 100%;
@@ -67,428 +76,364 @@
             box-shadow: var(--shadow);
             text-align: center;
             position: relative;
+            padding-bottom: 40px;
         }
 
         .header-section { position: relative; margin-bottom: 70px; }
         .cover-photo {
-            width: 100%; height: 200px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/cover.jpg') center/cover;
+            width: 100%; height: 180px;
+            background: url('images/cover.jpg') center/cover no-repeat;
             background-color: var(--primary);
         }
+
         .profile-img {
             width: 130px; height: 130px; border-radius: 50%;
             object-fit: cover; border: 5px solid #fff;
             position: absolute; bottom: -65px; left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* أزرار عائمة */
-        #backToTop {
-            position: fixed; bottom: 30px; right: 20px;
-            width: 50px; height: 50px; background: white; color: var(--primary-dark);
-            border: 2px solid var(--primary-dark); border-radius: 50%;
-            display: none; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 4000; transition: 0.3s;
+        .status-badge {
+            display: inline-flex; flex-direction: column; align-items: center;
+            padding: 10px 20px; border-radius: 15px; margin-top: 15px;
+            font-weight: 700; font-size: 0.9rem;
         }
+        .status-open { background: #e7fbf2; color: var(--success); border: 1px solid #c1f2dc; }
+        .status-closed { background: #fff1f2; color: var(--danger); border: 1px solid #ffd1d6; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 5px; }
+        .dot-open { background: var(--success); animation: pulse 1.5s infinite; }
+        .dot-closed { background: var(--danger); }
+
+        .links-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px; margin: 30px 20px;
+        }
+
+        .link-btn {
+            position: relative; padding: 15px; border-radius: 15px; background: #fff;
+            border: 1px solid #fce4ec; text-decoration: none; color: var(--text);
+            font-weight: 700; transition: 0.4s; display: flex; align-items: center; justify-content: center;
+        }
+        .link-btn i { position: absolute; right: 15px; color: var(--primary); }
+        .link-btn:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--secondary-bg); }
+
+        .section-title { margin: 40px 0 25px; color: var(--primary-dark); font-size: 1.4rem; }
+        .section-title::after { content: ''; width: 50px; height: 4px; background: var(--primary); display: block; margin: 8px auto; border-radius: 10px; }
+
+        /* الحلويات */
+        .sweets-grid { display: grid; gap: 15px; padding: 0 20px; grid-template-columns: repeat(2, 1fr); }
+        @media(min-width:650px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media(min-width:900px){ .sweets-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .sweet-card { background: #fff; border-radius: 18px; padding: 12px; border: 1px solid #fce4ec; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .sweet-img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+        .sweet-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .sweet-price { color: var(--primary-dark); font-weight: 800; margin-bottom: 10px; }
+
+        /* السلة العائمة */
         .cart-floating-btn {
-            position: fixed; bottom: 30px; left: 20px;
-            background: linear-gradient(135deg, #ff6b81, #ff4757);
-            color: white; width: 65px; height: 65px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 5000; box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
-            border: 3px solid white;
+            position: fixed; bottom: 30px; left: 20px; background: linear-gradient(135deg, #ff6b81, #ff4757);
+            color: white; width: 65px; height: 65px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; cursor: pointer; z-index: 5000;
+            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.4); border: 3px solid white; transition: 0.4s;
         }
         .cart-count {
-            position: absolute; top: -5px; right: -5px;
-            background: var(--success); color: white;
-            font-size: 0.8rem; min-width: 25px; height: 25px;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; border: 2px solid white;
+            position: absolute; top: -5px; right: -5px; background: var(--success);
+            color: white; font-size: 0.8rem; min-width: 25px; height: 25px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 2px solid white; font-weight: bold;
         }
 
-        /* قسم التوصيل المطور */
-        .delivery-section {
-            background: #fdf2f4; border-radius: 20px; padding: 15px;
-            margin: 15px 0; border: 1px solid #ffccd5; text-align: right;
+        .add-to-cart-btn {
+            background: var(--primary); color: white; border: none; padding: 8px;
+            border-radius: 10px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s;
         }
-        .delivery-input-group { position: relative; margin-bottom: 10px; }
-        .delivery-input-group input {
-            width: 100%; padding: 12px 40px 12px 15px;
-            border-radius: 12px; border: 1px solid #ddd; font-family: 'Cairo';
-        }
-        .delivery-input-group i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
-        
-        .search-dropdown {
-            position: absolute; top: 100%; left: 0; width: 100%;
-            background: white; z-index: 1000; border-radius: 0 0 12px 12px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: none;
-            max-height: 150px; overflow-y: auto;
-        }
-        .search-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.85rem; }
-        .search-item:hover { background: var(--secondary-bg); }
-
-        .delivery-track {
-            height: 6px; background: #e0e0e0; width: 100%;
-            margin: 35px 0 10px; position: relative; border-radius: 10px;
-        }
-        .moto-icon {
-            position: absolute; top: -28px; right: 0%;
-            font-size: 1.8rem; color: var(--primary-dark);
-            transition: right 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .add-to-cart-btn:hover { background: var(--primary-dark); }
 
         /* نافذة السلة */
         .cart-modal {
-            display: none; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); z-index: 9999;
-            align-items: center; justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 9999;
+            align-items: center; justify-content: center; padding: 15px;
         }
         .cart-content {
-            background: white; width: 95%; max-width: 450px;
-            padding: 25px; border-radius: 30px; max-height: 90vh;
-            display: flex; flex-direction: column; animation: slideUp 0.4s ease;
+            background: white; width: 100%; max-width: 450px; padding: 25px;
+            border-radius: 25px; max-height: 80vh; display: flex; flex-direction: column;
         }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
         #cartItemsList { flex: 1; overflow-y: auto; margin: 15px 0; }
-        .cart-item-card {
-            display: flex; align-items: center; gap: 10px; padding: 10px;
-            background: #fafafa; border-radius: 15px; margin-bottom: 8px;
-        }
-        .item-img-mini { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
-
-        /* الحلويات */
-        .sweets-grid { display: grid; gap: 15px; padding: 20px; grid-template-columns: repeat(2, 1fr); }
-        @media(min-width:700px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
-        .sweet-card { background: #fff; border-radius: 20px; padding: 10px; border: 1px solid #fce4ec; transition: 0.3s; }
-        .sweet-img { width: 100%; height: 120px; object-fit: cover; border-radius: 15px; }
-        .add-to-cart-btn {
-            width: 100%; padding: 10px; margin-top: 10px;
-            background: var(--primary); color: white; border: none;
-            border-radius: 10px; cursor: pointer; font-family: 'Cairo'; font-weight: bold;
-        }
+        .cart-item-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
+        
+        /* تذييل الصفحة */
+        .main-footer { background: #2d3436; color: white; padding: 40px 15px; border-radius: 40px 40px 0 0; margin-top: 50px; }
+        .footer-logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(to right, #ff4757, #ff6b81); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* أوقات العمل */
-        .hours-card { background: #fff5f7; margin: 20px; padding: 15px; border-radius: 20px; border: 1px solid #fce4ec; }
-        .hours-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
-        .hours-table tr { background: white; border-radius: 10px; }
-        .hours-table td { padding: 12px; font-weight: bold; font-size: 0.9rem; }
-        .time-cell { color: #666; direction: ltr; text-align: left; }
+        .hours-card { background: #fff5f7; margin: 20px auto; padding: 20px; border-radius: 20px; border: 1px solid #fce4ec; max-width: 92%; }
+        .hours-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        .hours-table td { padding: 12px; background: white; border-radius: 10px; font-weight: 700; }
+        
+        /* عداد المناسبات */
+        .countdown-container { background: var(--primary-dark); color: white; padding: 20px; border-radius: 20px; margin: 20px; }
+        .countdown-grid { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+        .countdown-item { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; min-width: 100px; }
+        .cd-days { font-size: 1.5rem; font-weight: 800; display: block; }
 
-        /* تذييل الصفحة */
-        .main-footer { background: #2d3436; color: white; padding: 30px 15px; border-radius: 40px 40px 0 0; margin-top: 40px; }
-        .footer-logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 10px; display: block; }
+        /* النموذج */
+        .order-form { text-align: right; padding: 20px; background: white; border-radius: 20px; border: 1px solid #fce4ec; margin: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; color: var(--primary-dark); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 12px; font-family: 'Cairo'; }
+        .btn-send { width: 100%; background: var(--success); color: white; border: none; padding: 15px; border-radius: 15px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
+
 <body>
 
 <div class="news-ticker">
     <div class="ticker-content">
-        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية والعصرية.. سارعوا بحجز أماكنكم! | 🏆 شهادات معتمدة | 🍰 طلبيات الأعراس متوفرة
+        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية و العصرية .. سارعوا بحجز أماكنكم! | 🏆 شهادات وطنية معتمدة تمكنكم من فتح مشاريعكم الخاصة | 🍰 طلبيات الأعراس والمناسبات متوفرة حالياً
     </div>
 </div>
 
 <div id="backToTop"><i class="fas fa-chevron-up"></i></div>
 
-<div class="cart-floating-btn" onclick="toggleCart()">
-    <i class="fas fa-shopping-basket fa-lg"></i>
-    <div class="cart-count" id="cartCount">0</div>
-</div>
-
 <div class="main-wrapper">
     <div class="container">
         <div class="header-section">
             <div class="cover-photo"></div>
-            <img src="images/amir.jpg" class="profile-img" alt="Amir School">
+            <img src="images/amir.jpg" class="profile-img" alt="Amir School" onerror="this.src='https://via.placeholder.com/130'">
         </div>
 
         <div class="school-info">
             <h1>مدرسة أمير للتكوين المحترف</h1>
-            <p id="schoolDesc" style="color:var(--muted); font-weight: 600; margin: 10px 0;"></p>
+            <p id="schoolDesc" style="color:var(--muted); margin-top: 5px; font-weight: 600; min-height: 24px;"></p>
+            <div id="shopStatus" class="status-badge">
+                <div class="status-main">
+                    <span id="statusDot" class="dot"></span>
+                    <span id="statusText">جاري التحقق...</span>
+                </div>
+            </div>
         </div>
 
-        <h3 style="color: var(--primary-dark); margin-top: 30px;">🍰 قائمة الحلويات والطلبيات</h3>
-        <div class="sweets-grid" id="sweetsGrid"></div>
-
-        <h3 style="color: var(--primary-dark); margin-top: 30px;"><i class="far fa-clock"></i> أوقات العمل</h3>
+        <h3 class="section-title"><i class="far fa-clock"></i> أوقات العمل</h3>
         <div class="hours-card">
             <table class="hours-table">
                 <tr>
-                    <td><i class="fas fa-calendar-day" style="color:var(--primary)"></i> السبت – الخميس</td>
-                    <td class="time-cell">09:00 AM - 05:00 PM</td>
+                    <td style="color:var(--primary)">السبت – الخميس</td>
+                    <td dir="ltr">09:00 AM - 05:00 PM</td>
                 </tr>
                 <tr>
-                    <td><i class="fas fa-heart" style="color:var(--primary)"></i> الجمعة</td>
-                    <td class="time-cell">02:00 PM - 05:00 PM</td>
+                    <td style="color:var(--primary)">الجمعة</td>
+                    <td dir="ltr">02:00 PM - 05:00 PM</td>
                 </tr>
             </table>
         </div>
 
-        <footer class="main-footer">
-            <span class="footer-logo">AMIR SCHOOL</span>
-            <p>مدرسة الرائدين في صناعة الحلويات والتكوين المحترف</p>
-            <div style="margin-top: 20px;">
-                <a href="#" style="color:white; margin: 0 10px;"><i class="fab fa-facebook fa-xl"></i></a>
-                <a href="#" style="color:white; margin: 0 10px;"><i class="fab fa-instagram fa-xl"></i></a>
-                <a href="#" style="color:white; margin: 0 10px;"><i class="fab fa-whatsapp fa-xl"></i></a>
+        <div class="links-container">
+            <a href="tel:+213699748196" class="link-btn"><i class="fa fa-phone"></i> 0699 74 81 96</a>
+            <a href="https://wa.me/213699748196" class="link-btn"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a href="https://www.facebook.com/amirformation" class="link-btn"><i class="fab fa-facebook"></i> فايسبوك</a>
+            <a href="https://www.tiktok.com/@chefsamahbradai" class="link-btn"><i class="fab fa-tiktok"></i> تيك توك</a>
+        </div>
+
+        <h3 class="section-title">المناسبات القادمة</h3>
+        <div class="countdown-container">
+            <div class="countdown-grid">
+                <div class="countdown-item"><span id="ramadan-days" class="cd-days">--</span><span>رمضان</span></div>
+                <div class="countdown-item"><span id="eid-days" class="cd-days">--</span><span>عيد الفطر</span></div>
             </div>
-        </footer>
+        </div>
+
+        <h3 class="section-title">قائمة الحلويات التقليدية</h3>
+        <div class="sweets-grid" id="sweetsGrid">
+            </div>
+
+        <h3 class="section-title">طلب تسعيرة مناسبة</h3>
+        <div class="order-form">
+            <div class="form-group">
+                <label>الاسم الكامل:</label>
+                <input type="text" id="custName" placeholder="أدخل اسمك">
+            </div>
+            <div class="form-group">
+                <label>نوع المناسبة:</label>
+                <select id="eventType">
+                    <option>عرس</option>
+                    <option>خطوبة</option>
+                    <option>ختان</option>
+                    <option>نجاح</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>تاريخ المناسبة:</label>
+                <input type="date" id="eventDate">
+            </div>
+            <div class="form-group">
+                <label>ملاحظات:</label>
+                <textarea id="orderNotes" placeholder="أي تفاصيل أخرى..."></textarea>
+            </div>
+            <button class="btn-send" onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
+        </div>
     </div>
 </div>
 
-<div id="cartModal" class="cart-modal">
+<div class="cart-floating-btn" onclick="toggleCart()">
+    <i class="fas fa-shopping-basket" style="font-size: 1.5rem;"></i>
+    <div class="cart-count" id="cartCount">0</div>
+</div>
+
+<div class="cart-modal" id="cartModal">
     <div class="cart-content">
-        <h3 style="text-align:right; color:var(--primary-dark);">🛒 سلة الطلبيات</h3>
+        <h3 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px;">سلة الطلبات</h3>
         <div id="cartItemsList"></div>
-
-        <div class="delivery-section">
-            <h4 style="font-size: 0.85rem; margin-bottom: 10px;"><i class="fas fa-truck"></i> حساب التوصيل (ولاية الشلف)</h4>
-            <div class="delivery-input-group">
-                <i class="fas fa-map-marker-alt"></i>
-                <input type="text" id="destinationInput" placeholder="اكتب بلديتك (مثلاً: سنجاس، الشلف)" oninput="searchLocation(this.value)">
-                <div id="searchSuggestions" class="search-dropdown"></div>
-            </div>
-
-            <div class="delivery-track">
-                <i class="fas fa-motorcycle moto-icon" id="motoIcon"></i>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: bold;">
-                <span>أولاد محمد</span>
-                <span id="targetLabel">الوجهة</span>
-            </div>
-
-            <div style="display:flex; justify-content: space-between; margin-top:10px; background:white; padding:8px; border-radius:10px;">
-                <span style="font-size:0.8rem;">المسافة: <b id="distVal">0 كم</b></span>
-                <span style="font-size:0.8rem;">التوصيل: <b id="deliveryCostText">0 دج</b></span>
-            </div>
-        </div>
-
-        <div style="border-top: 2px solid #eee; padding-top: 10px;">
-            <div style="display: flex; justify-content: space-between; font-weight: bold;">
-                <span>الإجمالي النهائي:</span>
-                <span id="totalWithDelivery" style="color:var(--success); font-size: 1.2rem;">0 دج</span>
-            </div>
-        </div>
-
-        <button class="add-to-cart-btn" style="background:var(--success); padding: 15px; margin-top: 15px;" onclick="finalizeOrder()">
-            <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
-        </button>
-        <button onclick="toggleCart()" style="background:#eee; color:#333; border:none; padding:10px; border-radius:10px; margin-top:8px; cursor:pointer; width:100%;">إغلاق</button>
+        <div style="font-weight: bold; font-size: 1.2rem; margin: 10px 0;">الإجمالي: <span id="cartTotal">0</span> دج</div>
+        <button class="btn-send" onclick="toggleCart()">إغلاق ومتابعة</button>
     </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<footer class="main-footer">
+    <div class="footer-logo">مدرسة أمير</div>
+    <p>© 2024 جميع الحقوق محفوظة</p>
+</footer>
+
 <script>
-    // 1. البيانات المحدثة
-const sweets = [
-    { id: 1, name: "تشارك مسكّر", price: 70, img: "images/tcharakmsakar.jpg" },
-    { id: 2, name: "تشارك العريان", price: 70, img: "images/tcharakarian.jpg" },
-    { id: 3, name: "عرايش", price: 90, img: "images/araiech.jpg" },
-    { id: 4, name: "كعيكعات", price: 80, img: "images/kaikat.jpg" },
-    { id: 5, name: "مقروض زمان", price: 70, img: "images/maqrout.jpg" },
-    { id: 6, name: "مقروض اللوز", price: 100, img: "images/maqroutlouz.jpg" },
-    { id: 7, name: "كفتة", price: 200, img: "images/kefta.jpg" },
-    { id: 8, name: "دزيريات", price: 100, img: "images/dziriyat.jpg" },
-    { id: 9, name: "بقلاوة", price: 80, img: "images/baklawa.jpg" },
-    { id: 10, name: "بقلاوة تركية", price: 80, img: "images/turkish.jpg" },
-    { id: 11, name: "قنيدلات", price: 80, img: "images/qnidlet.jpg" },
-    { id: 12, name: "مشوك الباي", price: 200, img: "images/mcheweklouz.jpg" },
-    { id: 13, name: "الفاكهة", price: 200, img: "images/fruits.jpg" },
-    { id: 14, name: "صابلي المعجون", price: 40, img: "images/sabli.jpg" },
-    { id: 15, name: "مشوك", price: 60, img: "images/mchewek.jpg" },
-    { id: 16, name: "جلجلانية", price: 70, img: "images/djeljlania.jpg" },
-    { id: 17, name: "مخبز", price: 120, img: "images/mkhabez.jpg" },
-    { id: 18, name: "كعك النقاش", price: 70, img: "images/naqach.jpg" },
-    { id: 19, name: "سنيكرز", price: 80, img: "images/snickers.jpg" },
-    { id: 20, name: "قلوب الشكولاطة", price: 80, img: "images/chikoula.jpg" },
-    { id: 21, name: "بنيون", price: 80, img: "images/bniwen.jpg" },
-    { id: 22, name: "طابع زمان", price: 30, img: "images/tabaa.jpg" },
-    { id: 23, name: "طابع الطلية", price: 40, img: "images/tabaatalia.jpg" },
-    { id: 24, name: "غريبية", price: 50, img: "images/ghriba.jpg" }
-];
+    // 1. البيانات
+    const sweets = [
+        { id: 1, name: "تشارك مسكّر", price: 70, img: "images/tcharakmsakar.jpg" },
+        { id: 2, name: "تشارك العريان", price: 70, img: "images/tcharakarian.jpg" },
+        { id: 3, name: "عرايش", price: 90, img: "images/araiech.jpg" },
+        { id: 4, name: "كعيكعات", price: 80, img: "images/kaikat.jpg" },
+        { id: 5, name: "مقروض زمان", price: 70, img: "images/maqrout.jpg" },
+        { id: 6, name: "مقروض اللوز", price: 100, img: "images/maqroutlouz.jpg" },
+        { id: 7, name: "كفتة", price: 200, img: "images/kefta.jpg" },
+        { id: 8, name: "دزيريات", price: 100, img: "images/dziriyat.jpg" },
+        { id: 9, name: "بقلاوة", price: 80, img: "images/baklawa.jpg" },
+        { id: 10, name: "بقلاوة تركية", price: 80, img: "images/turkish.jpg" },
+        { id: 11, name: "قنيدلات", price: 80, img: "images/qnidlet.jpg" },
+        { id: 12, name: "مشوك الباي", price: 200, img: "images/mcheweklouz.jpg" },
+        { id: 13, name: "الفاكهة", price: 200, img: "images/fruits.jpg" },
+        { id: 14, name: "صابلي المعجون", price: 40, img: "images/sabli.jpg" },
+        { id: 15, name: "مشوك", price: 60, img: "images/mchewek.jpg" },
+        { id: 16, name: "جلجلانية", price: 70, img: "images/djeljlania.jpg" },
+        { id: 17, name: "مخبز", price: 120, img: "images/mkhabez.jpg" },
+        { id: 18, name: "كعك النقاش", price: 70, img: "images/naqach.jpg" },
+        { id: 19, name: "سنيكرز", price: 80, img: "images/snickers.jpg" },
+        { id: 20, name: "قلوب الشكولاطة", price: 80, img: "images/chikoula.jpg" },
+        { id: 21, name: "بنيون", price: 80, img: "images/bniwen.jpg" },
+        { id: 22, name: "طابع زمان", price: 30, img: "images/tabaa.jpg" },
+        { id: 23, name: "طابع الطلية", price: 40, img: "images/tabaatalia.jpg" },
+        { id: 24, name: "غريبية", price: 50, img: "images/ghriba.jpg" }
+    ];
 
-let cart = [];
-let deliveryCost = 0;
-const origin = { lat: 36.1622, lng: 1.3417 }; // إحداثيات أولاد محمد
+    let cart = [];
 
-// 2. عرض المنتجات في الشبكة
-function renderSweets() {
-    const grid = document.getElementById('sweetsGrid');
-    if (!grid) return;
-    grid.innerHTML = sweets.map(s => `
-        <div class="sweet-card">
-            <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150?text=Amir+School'">
-            <div style="font-weight:bold; margin:8px 0; font-size:0.9rem;">${s.name}</div>
-            <div style="color:var(--primary-dark); font-weight:800;">${s.price} دج</div>
-            <button class="add-to-cart-btn" onclick="addToCart(${s.id})">أضف للطلب</button>
-        </div>
-    `).join('');
-}
-
-// 3. إدارة السلة (الحد الأدنى 50 حبة عند الإضافة الأولى)
-function addToCart(id) {
-    const item = sweets.find(s => s.id === id);
-    const inCart = cart.find(c => c.id === id);
-    
-    if (inCart) {
-        inCart.qty += 10; // زيادة بـ 10 عند تكرار الضغط
-    } else {
-        cart.push({ ...item, qty: 50 }); // أول إضافة تبدأ بـ 50 حبة
+    // 2. عرض الحلويات
+    function renderSweets() {
+        const grid = document.getElementById('sweetsGrid');
+        grid.innerHTML = sweets.map(s => `
+            <div class="sweet-card">
+                <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150'">
+                <div class="sweet-name">${s.name}</div>
+                <div class="sweet-price">${s.price} دج</div>
+                <button class="add-to-cart-btn" onclick="addToCart(${s.id})">أضف للسلة</button>
+            </div>
+        `).join('');
     }
-    
-    updateCartUI();
-    
-    // تأثير بصري بسيط على الزر
-    const btn = event.currentTarget;
-    const originalText = btn.innerText;
-    btn.innerText = "تمت الإضافة ✓";
-    btn.style.background = "var(--success)";
-    setTimeout(() => { 
-        btn.innerText = originalText;
-        btn.style.background = ""; 
-    }, 800);
-}
 
-function updateCartUI() {
-    const countEl = document.getElementById('cartCount');
-    if (countEl) countEl.innerText = cart.length; // عدد أنواع الحلويات في السلة
-    
-    const list = document.getElementById('cartItemsList');
-    if (!list) return;
+    // 3. وظائف السلة
+    function addToCart(id) {
+        const item = sweets.find(s => s.id === id);
+        const inCart = cart.find(c => c.id === id);
+        if (inCart) {
+            inCart.qty += 10;
+        } else {
+            cart.push({ ...item, qty: 50 });
+        }
+        updateCartUI();
+    }
 
-    if (cart.length === 0) {
-        list.innerHTML = `
-            <div style="text-align:center; padding:40px 20px;">
-                <i class="fas fa-shopping-basket" style="font-size:3rem; color:#eee;"></i>
-                <p style="color:#888; margin-top:10px;">السلة فارغة حالياً</p>
-            </div>`;
-    } else {
+    function updateCartUI() {
+        document.getElementById('cartCount').innerText = cart.length;
+        const list = document.getElementById('cartItemsList');
         list.innerHTML = cart.map(c => `
             <div class="cart-item-card">
-                <img src="${c.img}" class="item-img-mini" onerror="this.src='https://via.placeholder.com/50'">
-                <div style="flex:1; text-align:right; margin-right:10px;">
-                    <div style="font-weight:bold; font-size:0.85rem;">${c.name}</div>
-                    <div style="color:var(--primary); font-size:0.8rem;">${c.price} دج للقطعة</div>
-                </div>
-                <div style="display:flex; align-items:center; gap:5px; background:#f0f0f0; padding:5px; border-radius:10px;">
-                    <button onclick="changeQty(${c.id}, 10)" style="border:none; background:white; width:25px; border-radius:5px; cursor:pointer;">+</button>
-                    <span style="min-width:30px; text-align:center; font-weight:bold;">${c.qty}</span>
-                    <button onclick="changeQty(${c.id}, -10)" style="border:none; background:white; width:25px; border-radius:5px; cursor:pointer;">-</button>
-                </div>
+                <div style="flex:1"><b>${c.name}</b><br>${c.qty} حبة</div>
+                <div>${c.price * c.qty} دج</div>
+                <button onclick="removeFromCart(${c.id})" style="border:none; color:red; background:none;">✖</button>
             </div>
         `).join('');
-    }
-    calculateTotal();
-}
-
-function changeQty(id, delta) {
-    const item = cart.find(c => c.id === id);
-    if (!item) return;
-    item.qty = Math.max(10, item.qty + delta); // الحد الأدنى للتعديل 10 حبات
-    if (item.qty < 10) cart = cart.filter(c => c.id !== id);
-    updateCartUI();
-}
-
-function calculateTotal() {
-    const subtotal = cart.reduce((a, b) => a + (b.price * b.qty), 0);
-    const finalTotal = subtotal + deliveryCost;
-    const totalEl = document.getElementById('totalWithDelivery');
-    if (totalEl) totalEl.innerText = finalTotal.toLocaleString() + " دج";
-}
-
-// 4. نظام التوصيل المعتمد على الخريطة
-async function searchLocation(query) {
-    const dropdown = document.getElementById('searchSuggestions');
-    if (query.length < 3) { dropdown.style.display = 'none'; return; }
-    
-    try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}, Chlef, Algeria&limit=5`);
-        const data = await res.json();
-        dropdown.innerHTML = data.map(d => `
-            <div class="search-item" onclick="selectLoc(${d.lat}, ${d.lon}, '${d.display_name}')">${d.display_name}</div>
-        `).join('');
-        dropdown.style.display = 'block';
-    } catch (e) {}
-}
-
-function selectLoc(lat, lon, name) {
-    document.getElementById('destinationInput').value = name;
-    document.getElementById('searchSuggestions').style.display = 'none';
-    document.getElementById('targetLabel').innerText = name.split(',')[0];
-
-    fetch(`https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${lon},${lat}?overview=false`)
-        .then(r => r.json())
-        .then(data => {
-            const dist = data.routes[0].distance / 1000;
-            
-            if (dist > 50) {
-                alert("عذراً، التوصيل غير متوفر لمسافات أبعد من 50 كلم");
-                deliveryCost = 0;
-                return;
-            }
-
-            document.getElementById('distVal').innerText = dist.toFixed(1) + " كم";
-            
-            // التسعيرة: 150 دج + (50 دج لكل 3 كم)
-            deliveryCost = 150 + (Math.floor(dist / 3) * 50);
-            document.getElementById('deliveryCostText').innerText = deliveryCost + " دج";
-            
-            const move = Math.min((dist / 30) * 100, 92);
-            document.getElementById('motoIcon').style.right = move + "%";
-            calculateTotal();
-        });
-}
-
-// 5. إرسال الطلب النهائي
-function finalizeOrder() {
-    if (cart.length === 0) return alert("السلة فارغة!");
-    if (deliveryCost === 0 && document.getElementById('distVal').innerText === "0 كم") {
-        return alert("يرجى تحديد موقع التوصيل أولاً.");
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        document.getElementById('cartTotal').innerText = total;
     }
 
-    let msg = `*طلب جديد - مدرسة أمير*%0A%0A`;
-    cart.forEach(c => {
-        msg += `• *${c.name}*: ${c.qty} حبة (الإجمالي: ${c.price * c.qty} دج)%0A`;
-    });
-    
-    msg += `%0A--------------------------%0A`;
-    msg += `📍 *الوجهة:* ${document.getElementById('destinationInput').value}%0A`;
-    msg += `🛵 *التوصيل:* ${deliveryCost} دج%0A`;
-    msg += `💰 *الإجمالي النهائي:* ${document.getElementById('totalWithDelivery').innerText}`;
-    
-    window.open(`https://wa.me/213000000000?text=${msg}`); // ضع رقم هاتفك هنا
-}
+    function removeFromCart(id) {
+        cart = cart.filter(c => c.id !== id);
+        updateCartUI();
+    }
 
-    function typeEffect() {
-        const texts = ["نتعلم لنبدع.. نصنع لنتميز", "دورات احترافية في الحلويات", "طلبياتكم تصلكم أينما كنتم"];
-        let i = 0, j = 0, current = "", isDeleting = false;
-        const el = document.getElementById('schoolDesc');
+    function toggleCart() {
+        const modal = document.getElementById('cartModal');
+        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+    }
 
-        function loop() {
-            current = texts[i];
-            if (isDeleting) el.innerText = current.substring(0, j--);
-            else el.innerText = current.substring(0, j++);
+    // 4. إرسال الطلب
+    function sendToWhatsApp() {
+        const name = document.getElementById('custName').value;
+        const event = document.getElementById('eventType').value;
+        if (!name) return alert("يرجى إدخال اسمك");
 
-            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(loop, 2000); }
-            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % texts.length; setTimeout(loop, 500); }
-            else setTimeout(loop, 100);
+        let msg = `*طلب جديد من مدرسة أمير*%0A`;
+        msg += `👤 الاسم: ${name}%0A💍 المناسبة: ${event}%0A%0A`;
+        
+        if (cart.length > 0) {
+            msg += `*قائمة الحلويات المطلوبة:*%0A`;
+            cart.forEach(c => {
+                msg += `- ${c.name} (${c.qty} حبة)%0A`;
+            });
+            msg += `%0A💰 الإجمالي: ${document.getElementById('cartTotal').innerText} دج`;
+        } else {
+            msg += `_يرجى تزويدي بالأسعار للمناسبة المذكورة_`;
         }
-        loop();
+
+        window.open(`https://wa.me/213699748196?text=${msg}`);
+    }
+
+    // 5. تأثير الكتابة والحالة
+    function typeEffect() {
+        const text = "تكوين محترف.. حلويات تقليدية وعصرية.. طلبيات لكل المناسبات";
+        let i = 0;
+        const target = document.getElementById('schoolDesc');
+        function type() {
+            if (i < text.length) {
+                target.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 50);
+            }
+        }
+        type();
+    }
+
+    // 6. عداد الأيام
+    function updateCountdowns() {
+        const ramadan = new Date("March 1, 2025").getTime();
+        const eid = new Date("March 30, 2025").getTime();
+        const now = new Date().getTime();
+
+        document.getElementById('ramadan-days').innerText = Math.floor((ramadan - now) / (1000 * 60 * 60 * 24));
+        document.getElementById('eid-days').innerText = Math.floor((eid - now) / (1000 * 60 * 60 * 24));
     }
 
     window.onload = () => {
         renderSweets();
         typeEffect();
+        updateCountdowns();
+        
+        // زر العودة للأعلى
+        window.onscroll = () => {
+            document.getElementById('backToTop').style.display = (window.scrollY > 500) ? "flex" : "none";
+        };
+        document.getElementById('backToTop').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
     };
-
-    window.onscroll = () => {
-        document.getElementById('backToTop').style.display = (window.scrollY > 400) ? 'flex' : 'none';
-    };
-    document.getElementById('backToTop').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
 </script>
 
 </body>
-    
 </html>
