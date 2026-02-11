@@ -22,7 +22,6 @@
             --success: #2ed573;
             --danger: #ff4757;
             --star-color: #FFD700;
-            --glass-bg: rgba(255, 255, 255, 0.95);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,6 +31,7 @@
             background: var(--bg-gradient);
             min-height: 100vh;
             color: var(--text);
+            scroll-behavior: smooth;
         }
 
         /* شريط الأخبار */
@@ -44,18 +44,11 @@
             top: 0;
             z-index: 2000;
             font-size: 0.95rem;
-            font-weight: 600;
         }
-        .ticker-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 40s linear infinite; 
-        }
-        @keyframes ticker {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+        .ticker-content { display: inline-block; white-space: nowrap; animation: ticker 40s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
+        /* الأزرار العائمة */
         #backToTop {
             position: fixed; bottom: 30px; right: 20px; background: white;
             color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%;
@@ -63,74 +56,7 @@
             cursor: pointer; z-index: 4000; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 2px solid var(--primary-dark); transition: 0.3s;
         }
-        #backToTop:hover { transform: translateY(-5px); background: var(--primary-dark); color: white; }
 
-        .main-wrapper { display: flex; justify-content: center; padding: 20px 10px; }
-
-        .container {
-            background: rgba(255, 255, 255, 0.98);
-            width: 100%;
-            max-width: 900px;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
-            padding-bottom: 40px;
-        }
-
-        .header-section { position: relative; margin-bottom: 70px; }
-        .cover-photo {
-            width: 100%; height: 180px;
-            background: url('images/cover.jpg') center/cover no-repeat;
-            background-color: var(--primary);
-        }
-
-        .profile-img {
-            width: 130px; height: 130px; border-radius: 50%;
-            object-fit: cover; border: 5px solid #fff;
-            position: absolute; bottom: -65px; left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .status-badge {
-            display: inline-flex; flex-direction: column; align-items: center;
-            padding: 10px 20px; border-radius: 15px; margin-top: 15px;
-            font-weight: 700; font-size: 0.9rem;
-        }
-        .status-open { background: #e7fbf2; color: var(--success); border: 1px solid #c1f2dc; }
-        .status-closed { background: #fff1f2; color: var(--danger); border: 1px solid #ffd1d6; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 5px; }
-        .dot-open { background: var(--success); animation: pulse 1.5s infinite; }
-        .dot-closed { background: var(--danger); }
-
-        .links-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px; margin: 30px 20px;
-        }
-
-        .link-btn {
-            position: relative; padding: 15px; border-radius: 15px; background: #fff;
-            border: 1px solid #fce4ec; text-decoration: none; color: var(--text);
-            font-weight: 700; transition: 0.4s; display: flex; align-items: center; justify-content: center;
-        }
-        .link-btn i { position: absolute; right: 15px; color: var(--primary); }
-        .link-btn:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--secondary-bg); }
-
-        .section-title { margin: 40px 0 25px; color: var(--primary-dark); font-size: 1.4rem; }
-        .section-title::after { content: ''; width: 50px; height: 4px; background: var(--primary); display: block; margin: 8px auto; border-radius: 10px; }
-
-        /* الحلويات */
-        .sweets-grid { display: grid; gap: 15px; padding: 0 20px; grid-template-columns: repeat(2, 1fr); }
-        @media(min-width:650px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media(min-width:900px){ .sweets-grid { grid-template-columns: repeat(4, 1fr); } }
-        
-        .sweet-card { background: #fff; border-radius: 18px; padding: 12px; border: 1px solid #fce4ec; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .sweet-img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
-        .sweet-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; height: 40px; display: flex; align-items: center; justify-content: center; }
-        .sweet-price { color: var(--primary-dark); font-weight: 800; margin-bottom: 10px; }
-
-        /* السلة العائمة */
         .cart-floating-btn {
             position: fixed; bottom: 30px; left: 20px; background: linear-gradient(135deg, #ff6b81, #ff4757);
             color: white; width: 65px; height: 65px; border-radius: 50%; display: flex;
@@ -144,159 +70,145 @@
             border: 2px solid white; font-weight: bold;
         }
 
-        .add-to-cart-btn {
-            background: var(--primary); color: white; border: none; padding: 8px;
-            border-radius: 10px; cursor: pointer; font-weight: 600; width: 100%; transition: 0.3s;
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            width: 100%; max-width: 900px; margin: 20px auto;
+            border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); text-align: center; padding-bottom: 40px;
         }
-        .add-to-cart-btn:hover { background: var(--primary-dark); }
 
-        /* نافذة السلة */
+        /* عداد المناسبات العائم */
+        .countdown-container { 
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #ff8a9a 100%); 
+            color: white; margin: 20px; padding: 25px; border-radius: 20px; 
+        }
+        .countdown-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .countdown-item { 
+            background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
+            padding: 15px; border-radius: 15px; min-width: 140px; 
+            border-bottom: 4px solid white; animation: cardFloat 3s ease-in-out infinite;
+        }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .cd-days { font-size: 1.8rem; font-weight: 800; display: block; }
+
+        /* الحلويات */
+        .sweets-grid { display: grid; gap: 15px; padding: 20px; grid-template-columns: repeat(2, 1fr); }
+        @media(min-width:768px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        .sweet-card { background: #fff; border-radius: 18px; padding: 12px; border: 1px solid #fce4ec; transition: 0.3s; }
+        .sweet-img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; }
+        .add-to-cart-btn {
+            background: var(--primary); color: white; border: none; padding: 10px;
+            border-radius: 12px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px;
+            transition: all 0.3s;
+        }
+        .add-to-cart-btn.added { background: var(--success) !important; }
+
+        /* قسم التوصيل */
+        .delivery-section { background: #fdfdfd; margin: 20px; padding: 20px; border-radius: 20px; border: 1px dashed var(--primary); position: relative; }
+        .moto-track { height: 40px; background: #eee; border-radius: 20px; margin: 20px 0; position: relative; overflow: hidden; }
+        #motoIcon { position: absolute; right: 0; top: 5px; font-size: 1.5rem; color: var(--primary-dark); transition: 1s ease-in-out; }
+        .search-results { background: white; border: 1px solid #ddd; position: absolute; width: 100%; z-index: 100; display: none; text-align: right; }
+        .search-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; }
+
+        /* السلة */
         .cart-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 9999;
-            align-items: center; justify-content: center; padding: 15px;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 9999;
+            align-items: center; justify-content: center;
         }
         .cart-content {
-            background: white; width: 100%; max-width: 450px; padding: 25px;
-            border-radius: 25px; max-height: 80vh; display: flex; flex-direction: column;
+            background: white; width: 92%; max-width: 480px; padding: 25px;
+            border-radius: 30px; max-height: 85vh; display: flex; flex-direction: column;
         }
         #cartItemsList { flex: 1; overflow-y: auto; margin: 15px 0; }
         .cart-item-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
-        
-        /* تذييل الصفحة */
-        .main-footer { background: #2d3436; color: white; padding: 40px 15px; border-radius: 40px 40px 0 0; margin-top: 50px; }
-        .footer-logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(to right, #ff4757, #ff6b81); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .qty-ctrl { display: flex; align-items: center; gap: 10px; background: #f0f0f0; padding: 5px 10px; border-radius: 10px; }
+        .qty-btn { border: none; background: white; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-        /* أوقات العمل */
-        .hours-card { background: #fff5f7; margin: 20px auto; padding: 20px; border-radius: 20px; border: 1px solid #fce4ec; max-width: 92%; }
-        .hours-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
-        .hours-table td { padding: 12px; background: white; border-radius: 10px; font-weight: 700; }
-        
-        /* عداد المناسبات */
-        .countdown-container { background: var(--primary-dark); color: white; padding: 20px; border-radius: 20px; margin: 20px; }
-        .countdown-grid { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
-        .countdown-item { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; min-width: 100px; }
-        .cd-days { font-size: 1.5rem; font-weight: 800; display: block; }
+        /* الفوتر */
+        .main-footer { background: #2d3436; color: white; padding: 40px 20px; border-radius: 40px 40px 0 0; margin-top: 50px; }
+        .footer-logo { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: block; }
+        .designed-by { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.85rem; }
+        .highlight-primary { color: #f54c03; font-weight: bold; }
 
-        /* النموذج */
-        .order-form { text-align: right; padding: 20px; background: white; border-radius: 20px; border: 1px solid #fce4ec; margin: 20px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; color: var(--primary-dark); }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #eee; border-radius: 12px; font-family: 'Cairo'; }
-        .btn-send { width: 100%; background: var(--success); color: white; border: none; padding: 15px; border-radius: 15px; font-weight: 700; cursor: pointer; }
+        .section-title { margin: 30px 0 15px; color: var(--primary-dark); position: relative; }
+        .section-title::after { content: ''; width: 40px; height: 3px; background: var(--primary); display: block; margin: 5px auto; }
     </style>
 </head>
-
 <body>
 
 <div class="news-ticker">
     <div class="ticker-content">
-        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية و العصرية .. سارعوا بحجز أماكنكم! | 🏆 شهادات وطنية معتمدة تمكنكم من فتح مشاريعكم الخاصة | 🍰 طلبيات الأعراس والمناسبات متوفرة حالياً
+        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية و العصرية .. سارعوا بحجز أماكنكم! | 🍰 طلبيات الأعراس والمناسبات متوفرة حالياً مع خدمة التوصيل
     </div>
 </div>
 
-<div id="backToTop"><i class="fas fa-chevron-up"></i></div>
+<div id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
 
-<div class="main-wrapper">
-    <div class="container">
-        <div class="header-section">
-            <div class="cover-photo"></div>
-            <img src="images/amir.jpg" class="profile-img" alt="Amir School" onerror="this.src='https://via.placeholder.com/130'">
+<div class="container">
+    <div style="padding: 20px;">
+        <img src="images/amir.jpg" style="width:120px; height:120px; border-radius:50%; border:4px solid white; box-shadow: var(--shadow);" alt="Amir School">
+        <h1 style="margin-top:10px;">مدرسة أمير للتكوين المحترف</h1>
+        <p style="color:#666;">خياركم الأول للحلويات الراقية في الشلف</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 20px;">
+        <a href="tel:+213699748196" style="text-decoration:none; color:var(--text); background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fa fa-phone"></i> 0699748196</a>
+        <a href="https://wa.me/213699748196" style="text-decoration:none; color:#25D366; background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fab fa-whatsapp"></i> واتساب</a>
+        <a href="https://facebook.com/amirformation" style="text-decoration:none; color:#1877F2; background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fab fa-facebook"></i> فيسبوك</a>
+    </div>
+
+    <h3 class="section-title">عدّاد المناسبات</h3>
+    <div class="countdown-container">
+        <div class="countdown-grid">
+            <div class="countdown-item"><span id="ramadan-days" class="cd-days">--</span> لرمضان المبارك</div>
+            <div class="countdown-item"><span id="eid-days" class="cd-days">--</span> لعيد الفطر</div>
         </div>
+    </div>
 
-        <div class="school-info">
-            <h1>مدرسة أمير للتكوين المحترف</h1>
-            <p id="schoolDesc" style="color:var(--muted); margin-top: 5px; font-weight: 600; min-height: 24px;"></p>
-            <div id="shopStatus" class="status-badge">
-                <div class="status-main">
-                    <span id="statusDot" class="dot"></span>
-                    <span id="statusText">جاري التحقق...</span>
-                </div>
-            </div>
+    <h3 class="section-title">قائمة الحلويات</h3>
+    <div class="sweets-grid" id="sweetsGrid"></div>
+
+    <h3 class="section-title">حساب التوصيل (من أولاد محمد)</h3>
+    <div class="delivery-section">
+        <input type="text" id="destInput" placeholder="أدخل اسم منطقتك في الشلف..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" oninput="searchLoc(this.value)">
+        <div id="searchResults" class="search-results"></div>
+        <div class="moto-track">
+            <div id="motoIcon"><i class="fas fa-motorcycle"></i></div>
         </div>
-
-        <h3 class="section-title"><i class="far fa-clock"></i> أوقات العمل</h3>
-        <div class="hours-card">
-            <table class="hours-table">
-                <tr>
-                    <td style="color:var(--primary)">السبت – الخميس</td>
-                    <td dir="ltr">09:00 AM - 05:00 PM</td>
-                </tr>
-                <tr>
-                    <td style="color:var(--primary)">الجمعة</td>
-                    <td dir="ltr">02:00 PM - 05:00 PM</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="links-container">
-            <a href="tel:+213699748196" class="link-btn"><i class="fa fa-phone"></i> 0699 74 81 96</a>
-            <a href="https://wa.me/213699748196" class="link-btn"><i class="fab fa-whatsapp"></i> واتساب</a>
-            <a href="https://www.facebook.com/amirformation" class="link-btn"><i class="fab fa-facebook"></i> فايسبوك</a>
-            <a href="https://www.tiktok.com/@chefsamahbradai" class="link-btn"><i class="fab fa-tiktok"></i> تيك توك</a>
-        </div>
-
-        <h3 class="section-title">المناسبات القادمة</h3>
-        <div class="countdown-container">
-            <div class="countdown-grid">
-                <div class="countdown-item"><span id="ramadan-days" class="cd-days">--</span><span>رمضان</span></div>
-                <div class="countdown-item"><span id="eid-days" class="cd-days">--</span><span>عيد الفطر</span></div>
-            </div>
-        </div>
-
-        <h3 class="section-title">قائمة الحلويات التقليدية</h3>
-        <div class="sweets-grid" id="sweetsGrid">
-            </div>
-
-        <h3 class="section-title">طلب تسعيرة مناسبة</h3>
-        <div class="order-form">
-            <div class="form-group">
-                <label>الاسم الكامل:</label>
-                <input type="text" id="custName" placeholder="أدخل اسمك">
-            </div>
-            <div class="form-group">
-                <label>نوع المناسبة:</label>
-                <select id="eventType">
-                    <option>عرس</option>
-                    <option>خطوبة</option>
-                    <option>ختان</option>
-                    <option>نجاح</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>تاريخ المناسبة:</label>
-                <input type="date" id="eventDate">
-            </div>
-            <div class="form-group">
-                <label>ملاحظات:</label>
-                <textarea id="orderNotes" placeholder="أي تفاصيل أخرى..."></textarea>
-            </div>
-            <button class="btn-send" onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
-        </div>
+        <p id="distText">المسافة: 0 كم | التوصيل: 0 دج</p>
     </div>
 </div>
 
 <div class="cart-floating-btn" onclick="toggleCart()">
-    <i class="fas fa-shopping-basket" style="font-size: 1.5rem;"></i>
+    <i class="fas fa-shopping-basket"></i>
     <div class="cart-count" id="cartCount">0</div>
 </div>
 
 <div class="cart-modal" id="cartModal">
     <div class="cart-content">
-        <h3 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px;">سلة الطلبات</h3>
+        <h3 style="text-align:right;">سلة الطلبات</h3>
         <div id="cartItemsList"></div>
-        <div style="font-weight: bold; font-size: 1.2rem; margin: 10px 0;">الإجمالي: <span id="cartTotal">0</span> دج</div>
-        <button class="btn-send" onclick="toggleCart()">إغلاق ومتابعة</button>
+        <div style="border-top: 2px solid #eee; padding-top:15px; text-align:right;">
+            <div>المنتجات: <span id="subTotal">0</span> دج</div>
+            <div>التوصيل: <span id="deliveryCost">0</span> دج</div>
+            <div style="font-weight:bold; font-size:1.2rem; color:var(--primary-dark);">الإجمالي التقديري: <span id="finalTotal">0</span> دج</div>
+        </div>
+        <button onclick="sendOrder()" style="width:100%; padding:15px; background:var(--success); color:white; border:none; border-radius:15px; margin-top:10px; font-weight:bold; cursor:pointer;">تأكيد الطلب عبر واتساب</button>
+        <button onclick="toggleCart()" style="width:100%; padding:10px; background:#eee; border:none; border-radius:15px; margin-top:5px; cursor:pointer;">إغلاق</button>
     </div>
 </div>
 
 <footer class="main-footer">
-    <div class="footer-logo">مدرسة أمير</div>
-    <p>© 2024 جميع الحقوق محفوظة</p>
+    <span class="footer-logo">Amir School</span>
+    <p>مدرسة أمير للتكوين المحترف - الشلف، أولاد محمد</p>
+    <div class="designed-by">
+        تم التصميم بواسطة <a href="#" class="highlight-primary">Mohamed</a> <span class="heart-icon">❤️</span>
+    </div>
 </footer>
 
 <script>
-    // 1. البيانات
     const sweets = [
         { id: 1, name: "تشارك مسكّر", price: 70, img: "images/tcharakmsakar.jpg" },
         { id: 2, name: "تشارك العريان", price: 70, img: "images/tcharakarian.jpg" },
@@ -325,29 +237,39 @@
     ];
 
     let cart = [];
+    let dCost = 0;
+    const origin = { lat: 36.1622, lng: 1.3417 }; // أولاد محمد
 
-    // 2. عرض الحلويات
     function renderSweets() {
         const grid = document.getElementById('sweetsGrid');
         grid.innerHTML = sweets.map(s => `
             <div class="sweet-card">
                 <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150'">
-                <div class="sweet-name">${s.name}</div>
-                <div class="sweet-price">${s.price} دج</div>
-                <button class="add-to-cart-btn" onclick="addToCart(${s.id})">أضف للسلة</button>
+                <div style="font-weight:bold; margin:5px 0;">${s.name}</div>
+                <div style="color:var(--primary-dark); font-weight:bold;">${s.price} دج</div>
+                <button class="add-to-cart-btn" onclick="addToCart(event, ${s.id})">أضف للطلب</button>
             </div>
         `).join('');
     }
 
-    // 3. وظائف السلة
-    function addToCart(id) {
+    function addToCart(e, id) {
         const item = sweets.find(s => s.id === id);
         const inCart = cart.find(c => c.id === id);
-        if (inCart) {
-            inCart.qty += 10;
-        } else {
-            cart.push({ ...item, qty: 50 });
-        }
+        if(inCart) inCart.qty += 10;
+        else cart.push({...item, qty: 50});
+        
+        const btn = e.target;
+        btn.classList.add('added');
+        btn.innerText = "تمت الإضافة ✓";
+        setTimeout(() => { btn.classList.remove('added'); btn.innerText = "أضف للطلب"; }, 1000);
+        updateCartUI();
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(c => c.id === id);
+        if(!item) return;
+        item.qty = Math.max(10, item.qty + delta);
+        if(item.qty < 10) cart = cart.filter(c => c.id !== id);
         updateCartUI();
     }
 
@@ -356,82 +278,77 @@
         const list = document.getElementById('cartItemsList');
         list.innerHTML = cart.map(c => `
             <div class="cart-item-card">
-                <div style="flex:1"><b>${c.name}</b><br>${c.qty} حبة</div>
-                <div>${c.price * c.qty} دج</div>
-                <button onclick="removeFromCart(${c.id})" style="border:none; color:red; background:none;">✖</button>
+                <img src="${c.img}" style="width:40px; height:40px; border-radius:5px;" onerror="this.src='https://via.placeholder.com/40'">
+                <div style="flex:1; text-align:right;">
+                    <div style="font-size:0.8rem; font-weight:bold;">${c.name}</div>
+                    <div style="font-size:0.75rem; color:#666;">${c.price * c.qty} دج</div>
+                </div>
+                <div class="qty-ctrl">
+                    <button class="qty-btn" onclick="changeQty(${c.id}, 10)">+</button>
+                    <span>${c.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${c.id}, -10)">-</button>
+                </div>
             </div>
         `).join('');
-        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-        document.getElementById('cartTotal').innerText = total;
+        
+        const sub = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+        document.getElementById('subTotal').innerText = sub;
+        document.getElementById('deliveryCost').innerText = dCost;
+        document.getElementById('finalTotal').innerText = sub + dCost;
     }
 
-    function removeFromCart(id) {
-        cart = cart.filter(c => c.id !== id);
+    async function searchLoc(val) {
+        if(val.length < 3) return;
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${val}, Chlef, Algeria`);
+        const data = await res.json();
+        const results = document.getElementById('searchResults');
+        results.innerHTML = data.map(d => `<div class="search-item" onclick="calcDist(${d.lat}, ${d.lon}, '${d.display_name}')">${d.display_name}</div>`).join('');
+        results.style.display = 'block';
+    }
+
+    function calcDist(lat, lon, name) {
+        document.getElementById('destInput').value = name;
+        document.getElementById('searchResults').style.display = 'none';
+        
+        // حساب المسافة التقريبية
+        const R = 6371; 
+        const dLat = (lat - origin.lat) * Math.PI / 180;
+        const dLon = (lon - origin.lng) * Math.PI / 180;
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(origin.lat * Math.PI/180) * Math.cos(lat * Math.PI/180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const d = R * c;
+
+        dCost = Math.round(150 + (d * 15)); // تسعيرة أساسية 150 + 15دج للكلم
+        document.getElementById('distText').innerText = `المسافة التقريبية: ${d.toFixed(1)} كم | التوصيل: ${dCost} دج`;
+        document.getElementById('motoIcon').style.right = Math.min(d * 5, 90) + "%";
         updateCartUI();
     }
 
     function toggleCart() {
-        const modal = document.getElementById('cartModal');
-        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        const m = document.getElementById('cartModal');
+        m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // 4. إرسال الطلب
-    function sendToWhatsApp() {
-        const name = document.getElementById('custName').value;
-        const event = document.getElementById('eventType').value;
-        if (!name) return alert("يرجى إدخال اسمك");
-
-        let msg = `*طلب جديد من مدرسة أمير*%0A`;
-        msg += `👤 الاسم: ${name}%0A💍 المناسبة: ${event}%0A%0A`;
-        
-        if (cart.length > 0) {
-            msg += `*قائمة الحلويات المطلوبة:*%0A`;
-            cart.forEach(c => {
-                msg += `- ${c.name} (${c.qty} حبة)%0A`;
-            });
-            msg += `%0A💰 الإجمالي: ${document.getElementById('cartTotal').innerText} دج`;
-        } else {
-            msg += `_يرجى تزويدي بالأسعار للمناسبة المذكورة_`;
-        }
-
+    function sendOrder() {
+        if(cart.length === 0) return alert("السلة فارغة!");
+        let msg = `*طلب جديد - مدرسة أمير*%0A`;
+        cart.forEach(c => msg += `• ${c.name}: ${c.qty} حبة%0A`);
+        msg += `%0A📍 الموقع: ${document.getElementById('destInput').value}`;
+        msg += `%0A💰 الإجمالي التقديري: ${document.getElementById('finalTotal').innerText} دج`;
         window.open(`https://wa.me/213699748196?text=${msg}`);
-    }
-
-    // 5. تأثير الكتابة والحالة
-    function typeEffect() {
-        const text = "تكوين محترف.. حلويات تقليدية وعصرية.. طلبيات لكل المناسبات";
-        let i = 0;
-        const target = document.getElementById('schoolDesc');
-        function type() {
-            if (i < text.length) {
-                target.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 50);
-            }
-        }
-        type();
-    }
-
-    // 6. عداد الأيام
-    function updateCountdowns() {
-        const ramadan = new Date("March 1, 2025").getTime();
-        const eid = new Date("March 30, 2025").getTime();
-        const now = new Date().getTime();
-
-        document.getElementById('ramadan-days').innerText = Math.floor((ramadan - now) / (1000 * 60 * 60 * 24));
-        document.getElementById('eid-days').innerText = Math.floor((eid - now) / (1000 * 60 * 60 * 24));
     }
 
     window.onload = () => {
         renderSweets();
-        typeEffect();
-        updateCountdowns();
+        const ramadan = new Date("March 1, 2025").getTime();
+        const eid = new Date("March 30, 2025").getTime();
+        const now = new Date().getTime();
+        document.getElementById('ramadan-days').innerText = Math.floor((ramadan - now) / 86400000);
+        document.getElementById('eid-days').innerText = Math.floor((eid - now) / 86400000);
         
-        // زر العودة للأعلى
         window.onscroll = () => {
-            document.getElementById('backToTop').style.display = (window.scrollY > 500) ? "flex" : "none";
+            document.getElementById('backToTop').style.display = (window.scrollY > 400) ? 'flex' : 'none';
         };
-        document.getElementById('backToTop').onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
     };
 </script>
 
