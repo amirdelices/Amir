@@ -43,7 +43,6 @@
             position: sticky;
             top: 0;
             z-index: 2000;
-            font-size: 0.95rem;
         }
         .ticker-content { display: inline-block; white-space: nowrap; animation: ticker 40s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
@@ -54,15 +53,16 @@
             color: var(--primary-dark); width: 50px; height: 50px; border-radius: 50%;
             display: none; align-items: center; justify-content: center;
             cursor: pointer; z-index: 4000; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 2px solid var(--primary-dark); transition: 0.3s;
+            border: 2px solid var(--primary-dark);
         }
 
         .cart-floating-btn {
             position: fixed; bottom: 30px; left: 20px; background: linear-gradient(135deg, #ff6b81, #ff4757);
             color: white; width: 65px; height: 65px; border-radius: 50%; display: flex;
             align-items: center; justify-content: center; cursor: pointer; z-index: 5000;
-            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.4); border: 3px solid white; transition: 0.4s;
+            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.4); border: 3px solid white;
         }
+
         .cart-count {
             position: absolute; top: -5px; right: -5px; background: var(--success);
             color: white; font-size: 0.8rem; min-width: 25px; height: 25px;
@@ -77,108 +77,83 @@
             box-shadow: var(--shadow); text-align: center; padding-bottom: 40px;
         }
 
-        /* عداد المناسبات العائم */
-        .countdown-container { 
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #ff8a9a 100%); 
-            color: white; margin: 20px; padding: 25px; border-radius: 20px; 
-        }
-        .countdown-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        /* المناسبات العائمة */
         .countdown-item { 
             background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
             padding: 15px; border-radius: 15px; min-width: 140px; 
             border-bottom: 4px solid white; animation: cardFloat 3s ease-in-out infinite;
         }
         @keyframes cardFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        .cd-days { font-size: 1.8rem; font-weight: 800; display: block; }
 
-        /* الحلويات */
-        .sweets-grid { display: grid; gap: 15px; padding: 20px; grid-template-columns: repeat(2, 1fr); }
-        @media(min-width:768px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
-        
-        .sweet-card { background: #fff; border-radius: 18px; padding: 12px; border: 1px solid #fce4ec; transition: 0.3s; }
-        .sweet-img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; }
-        .add-to-cart-btn {
-            background: var(--primary); color: white; border: none; padding: 10px;
-            border-radius: 12px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px;
-            transition: all 0.3s;
-        }
-        .add-to-cart-btn.added { background: var(--success) !important; }
-
-        /* قسم التوصيل */
-        .delivery-section { background: #fdfdfd; margin: 20px; padding: 20px; border-radius: 20px; border: 1px dashed var(--primary); position: relative; }
-        .moto-track { height: 40px; background: #eee; border-radius: 20px; margin: 20px 0; position: relative; overflow: hidden; }
-        #motoIcon { position: absolute; right: 0; top: 5px; font-size: 1.5rem; color: var(--primary-dark); transition: 1s ease-in-out; }
-        .search-results { background: white; border: 1px solid #ddd; position: absolute; width: 100%; z-index: 100; display: none; text-align: right; }
-        .search-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; }
-
-        /* السلة */
+        /* السلة والمودال */
         .cart-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 9999;
             align-items: center; justify-content: center;
         }
         .cart-content {
-            background: white; width: 92%; max-width: 480px; padding: 25px;
-            border-radius: 30px; max-height: 85vh; display: flex; flex-direction: column;
+            background: white; width: 92%; max-width: 500px; padding: 25px;
+            border-radius: 30px; max-height: 90vh; display: flex; flex-direction: column;
         }
-        #cartItemsList { flex: 1; overflow-y: auto; margin: 15px 0; }
-        .cart-item-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
-        .qty-ctrl { display: flex; align-items: center; gap: 10px; background: #f0f0f0; padding: 5px 10px; border-radius: 10px; }
-        .qty-btn { border: none; background: white; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        #cartItemsList { flex: 1; overflow-y: auto; margin: 15px 0; padding-left: 5px; }
+
+        /* قسم التوصيل داخل السلة */
+        .delivery-box {
+            background: #fdf2f4; border: 1.5px dashed var(--primary);
+            border-radius: 15px; padding: 15px; margin-top: 10px; text-align: right;
+        }
+        .moto-track {
+            width: 100%; height: 4px; background: #ddd; border-radius: 10px;
+            margin: 25px 0 10px; position: relative;
+        }
+        #motoIcon {
+            position: absolute; right: 0; top: -15px; font-size: 1.4rem;
+            color: var(--primary-dark); transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .search-res {
+            position: absolute; background: white; width: 100%; z-index: 100;
+            border: 1px solid #eee; border-radius: 0 0 10px 10px; max-height: 150px; overflow-y: auto;
+        }
+        .res-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #f9f9f9; font-size: 0.9rem; }
+        .res-item:hover { background: #fff5f7; }
+
+        /* أزرار الإضافة للسلة */
+        .add-btn {
+            background: var(--primary); color: white; border: none; padding: 10px;
+            border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px;
+            font-weight: 600; transition: 0.3s;
+        }
+        .add-btn.success { background: var(--success) !important; }
+
+        .qty-btn { width: 30px; height: 30px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+
+        .sweets-grid { display: grid; gap: 15px; padding: 20px; grid-template-columns: repeat(2, 1fr); }
+        @media(min-width:768px){ .sweets-grid { grid-template-columns: repeat(3, 1fr); } }
 
         /* الفوتر */
-        .main-footer { background: #2d3436; color: white; padding: 40px 20px; border-radius: 40px 40px 0 0; margin-top: 50px; }
-        .footer-logo { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: block; }
-        .designed-by { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.85rem; }
-        .highlight-primary { color: #f54c03; font-weight: bold; }
-
-        .section-title { margin: 30px 0 15px; color: var(--primary-dark); position: relative; }
-        .section-title::after { content: ''; width: 40px; height: 3px; background: var(--primary); display: block; margin: 5px auto; }
+        .main-footer { background: #2d3436; color: white; padding: 30px 20px; border-radius: 40px 40px 0 0; margin-top: 40px; }
+        .highlight-primary { color: #f54c03; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
 
 <div class="news-ticker">
     <div class="ticker-content">
-        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية و العصرية .. سارعوا بحجز أماكنكم! | 🍰 طلبيات الأعراس والمناسبات متوفرة حالياً مع خدمة التوصيل
+        📢 التسجيلات مفتوحة لدورة الحلويات التقليدية .. سارعوا بحجز أماكنكم! | 🍰 طلبيات الأعراس متوفرة حالياً مع خدمة التوصيل الاحترافية
     </div>
 </div>
 
-<div id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
+<div id="backToTop"><i class="fas fa-chevron-up"></i></div>
 
 <div class="container">
     <div style="padding: 20px;">
-        <img src="images/amir.jpg" style="width:120px; height:120px; border-radius:50%; border:4px solid white; box-shadow: var(--shadow);" alt="Amir School">
+        <img src="images/amir.jpg" style="width:110px; height:110px; border-radius:50%; border:4px solid white; box-shadow: var(--shadow);" alt="Logo">
         <h1 style="margin-top:10px;">مدرسة أمير للتكوين المحترف</h1>
-        <p style="color:#666;">خياركم الأول للحلويات الراقية في الشلف</p>
+        <p style="color:#666;">جودة، إتقان، وإبداع في عالم الحلويات</p>
     </div>
 
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 20px;">
-        <a href="tel:+213699748196" style="text-decoration:none; color:var(--text); background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fa fa-phone"></i> 0699748196</a>
-        <a href="https://wa.me/213699748196" style="text-decoration:none; color:#25D366; background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fab fa-whatsapp"></i> واتساب</a>
-        <a href="https://facebook.com/amirformation" style="text-decoration:none; color:#1877F2; background:#fff; padding:10px 15px; border-radius:15px; border:1px solid #eee;"><i class="fab fa-facebook"></i> فيسبوك</a>
-    </div>
-
-    <h3 class="section-title">عدّاد المناسبات</h3>
-    <div class="countdown-container">
-        <div class="countdown-grid">
-            <div class="countdown-item"><span id="ramadan-days" class="cd-days">--</span> لرمضان المبارك</div>
-            <div class="countdown-item"><span id="eid-days" class="cd-days">--</span> لعيد الفطر</div>
-        </div>
-    </div>
-
-    <h3 class="section-title">قائمة الحلويات</h3>
+    <h3 style="color:var(--primary-dark); margin: 20px 0;">قائمة الحلويات (أقل كمية 50 حبة)</h3>
     <div class="sweets-grid" id="sweetsGrid"></div>
-
-    <h3 class="section-title">حساب التوصيل (من أولاد محمد)</h3>
-    <div class="delivery-section">
-        <input type="text" id="destInput" placeholder="أدخل اسم منطقتك في الشلف..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" oninput="searchLoc(this.value)">
-        <div id="searchResults" class="search-results"></div>
-        <div class="moto-track">
-            <div id="motoIcon"><i class="fas fa-motorcycle"></i></div>
-        </div>
-        <p id="distText">المسافة: 0 كم | التوصيل: 0 دج</p>
-    </div>
 </div>
 
 <div class="cart-floating-btn" onclick="toggleCart()">
@@ -188,140 +163,162 @@
 
 <div class="cart-modal" id="cartModal">
     <div class="cart-content">
-        <h3 style="text-align:right;">سلة الطلبات</h3>
-        <div id="cartItemsList"></div>
-        <div style="border-top: 2px solid #eee; padding-top:15px; text-align:right;">
-            <div>المنتجات: <span id="subTotal">0</span> دج</div>
-            <div>التوصيل: <span id="deliveryCost">0</span> دج</div>
-            <div style="font-weight:bold; font-size:1.2rem; color:var(--primary-dark);">الإجمالي التقديري: <span id="finalTotal">0</span> دج</div>
+        <h3 style="text-align:right; border-bottom: 2px solid #eee; padding-bottom:10px;">🛒 سلة الطلبات</h3>
+        
+        <div id="cartItemsList">
+            </div>
+
+        <div class="delivery-box">
+            <label style="font-weight:bold; font-size:0.9rem;">📍 مكان التوصيل (انطلاقاً من أولاد محمد):</label>
+            <div style="position:relative; margin-top:8px;">
+                <input type="text" id="locInput" placeholder="أدخل منطقتك في الشلف (مثال: الشرفة، حي بن سونة...)" 
+                       style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" oninput="searchLocation(this.value)">
+                <div id="searchResults" class="search-res"></div>
+            </div>
+
+            <div class="moto-track">
+                <div id="motoIcon"><i class="fas fa-motorcycle"></i></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:bold;">
+                <span id="distText">المسافة: 0 كم</span>
+                <span id="deliveryPrice">التوصيل: 0 دج</span>
+            </div>
         </div>
-        <button onclick="sendOrder()" style="width:100%; padding:15px; background:var(--success); color:white; border:none; border-radius:15px; margin-top:10px; font-weight:bold; cursor:pointer;">تأكيد الطلب عبر واتساب</button>
-        <button onclick="toggleCart()" style="width:100%; padding:10px; background:#eee; border:none; border-radius:15px; margin-top:5px; cursor:pointer;">إغلاق</button>
+
+        <div style="margin-top:15px; text-align:right; background:#f9f9f9; padding:15px; border-radius:15px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <span>مجموع الحلويات:</span>
+                <span id="subTotal">0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--primary-dark); font-size:1.2rem; border-top:1px solid #ddd; pt-2;">
+                <span>الإجمالي التقديري:</span>
+                <span><span id="finalTotal">0</span> دج</span>
+            </div>
+        </div>
+
+        <button onclick="sendOrder()" style="width:100%; padding:15px; background:var(--success); color:white; border:none; border-radius:15px; margin-top:15px; font-weight:bold; cursor:pointer;">إرسال الطلب عبر واتساب</button>
+        <button onclick="toggleCart()" style="width:100%; padding:10px; background:#eee; border:none; border-radius:15px; margin-top:8px; cursor:pointer;">إغلاق</button>
     </div>
 </div>
 
 <footer class="main-footer">
-    <span class="footer-logo">Amir School</span>
     <p>مدرسة أمير للتكوين المحترف - الشلف، أولاد محمد</p>
-    <div class="designed-by">
-        تم التصميم بواسطة <a href="#" class="highlight-primary">Mohamed</a> <span class="heart-icon">❤️</span>
+    <div style="margin-top:15px; font-size:0.85rem; opacity:0.8;">
+        تم التصميم بواسطة <a href="#" class="highlight-primary">Mohamed</a> ❤️
     </div>
 </footer>
 
 <script>
     const sweets = [
-        { id: 1, name: "تشارك مسكّر", price: 70, img: "images/tcharakmsakar.jpg" },
-        { id: 2, name: "تشارك العريان", price: 70, img: "images/tcharakarian.jpg" },
-        { id: 3, name: "عرايش", price: 90, img: "images/araiech.jpg" },
-        { id: 4, name: "كعيكعات", price: 80, img: "images/kaikat.jpg" },
-        { id: 5, name: "مقروض زمان", price: 70, img: "images/maqrout.jpg" },
-        { id: 6, name: "مقروض اللوز", price: 100, img: "images/maqroutlouz.jpg" },
-        { id: 7, name: "كفتة", price: 200, img: "images/kefta.jpg" },
-        { id: 8, name: "دزيريات", price: 100, img: "images/dziriyat.jpg" },
-        { id: 9, name: "بقلاوة", price: 80, img: "images/baklawa.jpg" },
-        { id: 10, name: "بقلاوة تركية", price: 80, img: "images/turkish.jpg" },
-        { id: 11, name: "قنيدلات", price: 80, img: "images/qnidlet.jpg" },
-        { id: 12, name: "مشوك الباي", price: 200, img: "images/mcheweklouz.jpg" },
-        { id: 13, name: "الفاكهة", price: 200, img: "images/fruits.jpg" },
-        { id: 14, name: "صابلي المعجون", price: 40, img: "images/sabli.jpg" },
-        { id: 15, name: "مشوك", price: 60, img: "images/mchewek.jpg" },
-        { id: 16, name: "جلجلانية", price: 70, img: "images/djeljlania.jpg" },
-        { id: 17, name: "مخبز", price: 120, img: "images/mkhabez.jpg" },
-        { id: 18, name: "كعك النقاش", price: 70, img: "images/naqach.jpg" },
-        { id: 19, name: "سنيكرز", price: 80, img: "images/snickers.jpg" },
-        { id: 20, name: "قلوب الشكولاطة", price: 80, img: "images/chikoula.jpg" },
-        { id: 21, name: "بنيون", price: 80, img: "images/bniwen.jpg" },
-        { id: 22, name: "طابع زمان", price: 30, img: "images/tabaa.jpg" },
-        { id: 23, name: "طابع الطلية", price: 40, img: "images/tabaatalia.jpg" },
-        { id: 24, name: "غريبية", price: 50, img: "images/ghriba.jpg" }
+        { id: 1, name: "تشارك مسكّر", price: 70 },
+        { id: 2, name: "عرايش ملكي", price: 90 },
+        { id: 3, name: "كعيكعات", price: 80 },
+        { id: 4, name: "مقروض اللوز", price: 100 },
+        { id: 5, name: "مخبز", price: 120 },
+        { id: 6, name: "سنيكرز", price: 80 }
     ];
 
     let cart = [];
-    let dCost = 0;
-    const origin = { lat: 36.1622, lng: 1.3417 }; // أولاد محمد
+    let deliveryCost = 0;
+    const origin = { lat: 36.1622, lng: 1.3417 }; // إحداثيات أولاد محمد
 
     function renderSweets() {
         const grid = document.getElementById('sweetsGrid');
         grid.innerHTML = sweets.map(s => `
-            <div class="sweet-card">
-                <img src="${s.img}" class="sweet-img" onerror="this.src='https://via.placeholder.com/150'">
-                <div style="font-weight:bold; margin:5px 0;">${s.name}</div>
-                <div style="color:var(--primary-dark); font-weight:bold;">${s.price} دج</div>
-                <button class="add-to-cart-btn" onclick="addToCart(event, ${s.id})">أضف للطلب</button>
+            <div style="background:#fff; border:1px solid #eee; padding:15px; border-radius:20px;">
+                <div style="width:100%; height:100px; background:#fafafa; border-radius:15px; margin-bottom:10px; display:flex; align-items:center; justify-content:center;">🖼️</div>
+                <div style="font-weight:bold;">${s.name}</div>
+                <div style="color:var(--primary-dark); font-weight:bold; margin:5px 0;">${s.price} دج</div>
+                <button class="add-btn" id="btn-${s.id}" onclick="addToCart(this, ${s.id})">أضف للسلة</button>
             </div>
         `).join('');
     }
 
-    function addToCart(e, id) {
-        const item = sweets.find(s => s.id === id);
-        const inCart = cart.find(c => c.id === id);
-        if(inCart) inCart.qty += 10;
-        else cart.push({...item, qty: 50});
-        
-        const btn = e.target;
-        btn.classList.add('added');
-        btn.innerText = "تمت الإضافة ✓";
-        setTimeout(() => { btn.classList.remove('added'); btn.innerText = "أضف للطلب"; }, 1000);
-        updateCartUI();
+    function addToCart(btn, id) {
+        const sweet = sweets.find(s => s.id === id);
+        const inCart = cart.find(item => item.id === id);
+
+        if (inCart) {
+            inCart.qty += 10;
+        } else {
+            cart.push({ ...sweet, qty: 50 });
+        }
+
+        btn.classList.add('success');
+        btn.innerHTML = "تمت الإضافة ✓";
+        setTimeout(() => {
+            btn.classList.remove('success');
+            btn.innerHTML = "أضف للسلة";
+        }, 800);
+
+        updateUI();
     }
 
     function changeQty(id, delta) {
-        const item = cart.find(c => c.id === id);
-        if(!item) return;
-        item.qty = Math.max(10, item.qty + delta);
-        if(item.qty < 10) cart = cart.filter(c => c.id !== id);
-        updateCartUI();
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.qty = Math.max(10, item.qty + delta);
+            if (item.qty < 10) cart = cart.filter(i => i.id !== id);
+        }
+        updateUI();
     }
 
-    function updateCartUI() {
+    function updateUI() {
         document.getElementById('cartCount').innerText = cart.length;
         const list = document.getElementById('cartItemsList');
-        list.innerHTML = cart.map(c => `
-            <div class="cart-item-card">
-                <img src="${c.img}" style="width:40px; height:40px; border-radius:5px;" onerror="this.src='https://via.placeholder.com/40'">
-                <div style="flex:1; text-align:right;">
-                    <div style="font-size:0.8rem; font-weight:bold;">${c.name}</div>
-                    <div style="font-size:0.75rem; color:#666;">${c.price * c.qty} دج</div>
+        
+        list.innerHTML = cart.map(item => `
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#f9f9f9; padding:10px; border-radius:12px; margin-bottom:8px;">
+                <div style="text-align:right;">
+                    <div style="font-weight:bold; font-size:0.9rem;">${item.name}</div>
+                    <div style="font-size:0.8rem; color:var(--primary-dark);">${item.price * item.qty} دج</div>
                 </div>
-                <div class="qty-ctrl">
-                    <button class="qty-btn" onclick="changeQty(${c.id}, 10)">+</button>
-                    <span>${c.qty}</span>
-                    <button class="qty-btn" onclick="changeQty(${c.id}, -10)">-</button>
+                <div style="display:flex; align-items:center; gap:10px; background:white; padding:5px; border-radius:8px;">
+                    <button class="qty-btn" onclick="changeQty(${item.id}, 10)">+</button>
+                    <span style="font-weight:bold;">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${item.id}, -10)">-</button>
                 </div>
             </div>
         `).join('');
-        
-        const sub = cart.reduce((a, b) => a + (b.price * b.qty), 0);
-        document.getElementById('subTotal').innerText = sub;
-        document.getElementById('deliveryCost').innerText = dCost;
-        document.getElementById('finalTotal').innerText = sub + dCost;
+
+        const sub = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+        document.getElementById('subTotal').innerText = sub + " دج";
+        document.getElementById('deliveryPrice').innerText = "التوصيل: " + deliveryCost + " دج";
+        document.getElementById('finalTotal').innerText = sub + deliveryCost;
     }
 
-    async function searchLoc(val) {
-        if(val.length < 3) return;
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${val}, Chlef, Algeria`);
+    // وظيفة البحث عن الموقع وحساب التوصيل
+    async function searchLocation(query) {
+        if (query.length < 3) return;
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}, Chlef, Algeria`);
         const data = await res.json();
-        const results = document.getElementById('searchResults');
-        results.innerHTML = data.map(d => `<div class="search-item" onclick="calcDist(${d.lat}, ${d.lon}, '${d.display_name}')">${d.display_name}</div>`).join('');
-        results.style.display = 'block';
+        const resultsBox = document.getElementById('searchResults');
+        resultsBox.innerHTML = data.map(loc => `
+            <div class="res-item" onclick="selectLocation(${loc.lat}, ${loc.lon}, '${loc.display_name}')">${loc.display_name}</div>
+        `).join('');
     }
 
-    function calcDist(lat, lon, name) {
-        document.getElementById('destInput').value = name;
-        document.getElementById('searchResults').style.display = 'none';
+    function selectLocation(lat, lon, name) {
+        document.getElementById('locInput').value = name;
+        document.getElementById('searchResults').innerHTML = "";
         
-        // حساب المسافة التقريبية
-        const R = 6371; 
+        // حساب المسافة (Haversine formula)
+        const R = 6371;
         const dLat = (lat - origin.lat) * Math.PI / 180;
         const dLon = (lon - origin.lng) * Math.PI / 180;
         const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(origin.lat * Math.PI/180) * Math.cos(lat * Math.PI/180) * Math.sin(dLon/2) * Math.sin(dLon/2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        const d = R * c;
+        const dist = R * c;
 
-        dCost = Math.round(150 + (d * 15)); // تسعيرة أساسية 150 + 15دج للكلم
-        document.getElementById('distText').innerText = `المسافة التقريبية: ${d.toFixed(1)} كم | التوصيل: ${dCost} دج`;
-        document.getElementById('motoIcon').style.right = Math.min(d * 5, 90) + "%";
-        updateCartUI();
+        // حساب السعر: 150 دج ثابت + 20 دج لكل كيلومتر
+        deliveryCost = Math.round(150 + (dist * 20));
+        document.getElementById('distText').innerText = `المسافة: ${dist.toFixed(1)} كم`;
+        
+        // تحريك الدراجة
+        const movePercent = Math.min(dist * 5, 90); 
+        document.getElementById('motoIcon').style.right = movePercent + "%";
+        
+        updateUI();
     }
 
     function toggleCart() {
@@ -330,26 +327,29 @@
     }
 
     function sendOrder() {
-        if(cart.length === 0) return alert("السلة فارغة!");
-        let msg = `*طلب جديد - مدرسة أمير*%0A`;
-        cart.forEach(c => msg += `• ${c.name}: ${c.qty} حبة%0A`);
-        msg += `%0A📍 الموقع: ${document.getElementById('destInput').value}`;
-        msg += `%0A💰 الإجمالي التقديري: ${document.getElementById('finalTotal').innerText} دج`;
-        window.open(`https://wa.me/213699748196?text=${msg}`);
+        if (cart.length === 0) return alert("السلة فارغة!");
+        let message = `*طلب جديد من مدرسة أمير*%0A%0A`;
+        cart.forEach(item => {
+            message += `• ${item.name}: ${item.qty} حبة (${item.price * item.qty} دج)%0A`;
+        });
+        message += `%0A📍 *الموقع:* ${document.getElementById('locInput').value}`;
+        message += `%0A🚚 *التوصيل:* ${deliveryCost} دج`;
+        message += `%0A💰 *الإجمالي التقديري:* ${document.getElementById('finalTotal').innerText} دج`;
+        
+        window.open(`https://wa.me/213699748196?text=${message}`);
     }
 
-    window.onload = () => {
-        renderSweets();
-        const ramadan = new Date("March 1, 2025").getTime();
-        const eid = new Date("March 30, 2025").getTime();
-        const now = new Date().getTime();
-        document.getElementById('ramadan-days').innerText = Math.floor((ramadan - now) / 86400000);
-        document.getElementById('eid-days').innerText = Math.floor((eid - now) / 86400000);
-        
-        window.onscroll = () => {
-            document.getElementById('backToTop').style.display = (window.scrollY > 400) ? 'flex' : 'none';
-        };
+    window.onload = renderSweets;
+
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            btn.style.display = "flex";
+        } else {
+            btn.style.display = "none";
+        }
     };
+    document.getElementById("backToTop").onclick = () => window.scrollTo({top:0, behavior:'smooth'});
 </script>
 
 </body>
