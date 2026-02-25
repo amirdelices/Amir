@@ -1246,24 +1246,24 @@ function updateShopStatus() {
 }
 
 function updateCountdowns() {
-    // تحديد التواريخ المطلوبة لعام 2026
-    const eidFitrDate = new Date("March 21, 2026 00:00:00").getTime();
-    const eidAdhaDate = new Date("May 27, 2026 00:00:00").getTime();
+    // تحديد المواعيد لعام 2026 بتنسيق مضمون
+    const eidFitrDate = new Date("2026-03-21T00:00:00").getTime();
+    const eidAdhaDate = new Date("2026-05-27T00:00:00").getTime();
     const now = new Date().getTime();
 
     const setDays = (id, target) => {
         const el = document.getElementById(id);
         if (el) {
             const diff = target - now;
-            // حساب الأيام (استخدام Math.ceil لضمان حساب اليوم الحالي)
+            // استخدام Math.ceil لضمان حساب اليوم الحالي
             const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
             
-            // إذا كان التاريخ قد مرّ، يظهر 0، وإلا يظهر عدد الأيام
-            el.innerText = days > 0 ? days : "0";
+            // إذا كان التاريخ قد مرّ، يظهر 0، وإلا يظهر عدد الأيام المتبقية
+            el.innerText = (days > 0) ? days : "0";
         }
     };
 
-    // استدعاء الدالة للمعرفات الجديدة
+    // ربط القيم بالـ IDs الجديدة التي وضعناها في الـ HTML
     setDays("eid-fitr-days", eidFitrDate);
     setDays("eid-adha-days", eidAdhaDate);
 }
