@@ -917,19 +917,19 @@
         </div>
 
         <h3 class="section-title">عدّاد المناسبات القادمة</h3>
-        <div class="countdown-container">
-            <p style="font-weight: 700; margin-bottom: 15px;">⏳ لا تؤجلي للحظة الأخيرة… احجزي طلبيتك الآن!</p>
-            <div class="countdown-grid">
-                <div class="countdown-item">
-                    <span id="ramadan-days" class="cd-days">--</span>
-                    <span class="cd-label">لشهر رمضان المبارك</span>
-                </div>
-                <div class="countdown-item">
-                    <span id="eid-days" class="cd-days">--</span>
-                    <span class="cd-label">لعيد الفطر السعيد</span>
-                </div>
-            </div>
+<div class="countdown-container">
+    <p style="font-weight: 700; margin-bottom: 15px;">⏳ لا تؤجلي للحظة الأخيرة… احجزي طلبيتك الآن!</p>
+    <div class="countdown-grid">
+        <div class="countdown-item">
+            <span id="eid-fitr-days" class="cd-days">--</span>
+            <span class="cd-label">لعيد الفطر السعيد</span>
         </div>
+        <div class="countdown-item">
+            <span id="eid-adha-days" class="cd-days">--</span>
+            <span class="cd-label">لعيد الأضحى المبارك</span>
+        </div>
+    </div>
+</div>
 
     
         <section class="quote-section">
@@ -1246,21 +1246,26 @@ function updateShopStatus() {
 }
 
 function updateCountdowns() {
-    const ramadanDate = new Date("February 18, 2026 00:00:00").getTime();
-    const eidDate = new Date("March 20, 2026 00:00:00").getTime();
+    // تحديد المواعيد لعام 2026 بتنسيق مضمون
+    const eidFitrDate = new Date("2026-03-21T00:00:00").getTime();
+    const eidAdhaDate = new Date("2026-05-27T00:00:00").getTime();
     const now = new Date().getTime();
 
     const setDays = (id, target) => {
         const el = document.getElementById(id);
         if (el) {
             const diff = target - now;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            el.innerText = days > 0 ? days : "0";
+            // استخدام Math.ceil لضمان حساب اليوم الحالي
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            
+            // إذا كان التاريخ قد مرّ، يظهر 0، وإلا يظهر عدد الأيام المتبقية
+            el.innerText = (days > 0) ? days : "0";
         }
     };
 
-    setDays("ramadan-days", ramadanDate);
-    setDays("eid-days", eidDate);
+    // ربط القيم بالـ IDs الجديدة التي وضعناها في الـ HTML
+    setDays("eid-fitr-days", eidFitrDate);
+    setDays("eid-adha-days", eidAdhaDate);
 }
 
 function finalizeOrder() {
@@ -1269,28 +1274,32 @@ function finalizeOrder() {
         return; 
     }
 
-    // رأس الرسالة بشكل أنيق
-    let message = `*🌟 طلب جديد - Amir Délices 🌟*%0A`;
-    message += `-----------------------------------%0A`;
-    message += `📦 *تفاصيل الطلبية:*%0A%0A`;
+    // 1. بناء نص الرسالة بشكل طبيعي (استخدم \n للسطر الجديد هنا)
+    let message = `*🌟 طلب جديد - Amir Délices 🌟*\n`;
+    message += `-----------------------------------\n`;
+    message += `📦 *تفاصيل الطلبية:*\n\n`;
 
-    // قائمة المنتجات مع تنسيق الرموز
+    // قائمة المنتجات
     cart.forEach(item => {
-        message += `🔸 *${item.name}* %0A   🔹 الكمية: ${item.qty} حبة%0A`;
+        message += `🔸 *${item.name}*\n🔹 الكمية: ${item.qty} حبة\n`;
     });
 
     // المجموع التقديري
     const total = document.getElementById("totalPrice").innerText;
-    message += `%0A-----------------------------------%0A`;
-    message += `💰 *المجموع التقديري:* ${total}%0A`;
-    message += `-----------------------------------%0A`;
+    message += `\n-----------------------------------\n`;
+    message += `💰 *المجموع التقديري:* ${total}\n`;
+    message += `-----------------------------------\n`;
 
     // تذييل الرسالة
-    message += `✨ *شكراً لاختياركم حلوياتنا!*%0A`;
+    message += `✨ *شكراً لاختياركم حلوياتنا!*\n`;
     message += `📍 تم الطلب عبر الموقع الرسمي.`;
 
-    // فتح واتساب
-    window.open(`https://wa.me/213699748196?text=${message}`, '_blank');
+    // 2. الجزء الأهم: ترميز الرسالة بالكامل لتظهر الإيموجي والعربية بشكل سليم
+    const encodedMessage = encodeURIComponent(message);
+
+    // 3. فتح واتساب بالرابط المرمز
+    const whatsappUrl = `https://wa.me/213699748196?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 function sendToWhatsApp() {
