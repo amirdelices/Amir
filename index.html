@@ -1274,28 +1274,32 @@ function finalizeOrder() {
         return; 
     }
 
-    // رأس الرسالة بشكل أنيق
-    let message = `*🌟 طلب جديد - Amir Délices 🌟*%0A`;
-    message += `-----------------------------------%0A`;
-    message += `📦 *تفاصيل الطلبية:*%0A%0A`;
+    // 1. بناء نص الرسالة بشكل طبيعي (استخدم \n للسطر الجديد هنا)
+    let message = `*🌟 طلب جديد - Amir Délices 🌟*\n`;
+    message += `-----------------------------------\n`;
+    message += `📦 *تفاصيل الطلبية:*\n\n`;
 
-    // قائمة المنتجات مع تنسيق الرموز
+    // قائمة المنتجات
     cart.forEach(item => {
-        message += `🔸 *${item.name}* %0A   🔹 الكمية: ${item.qty} حبة%0A`;
+        message += `🔸 *${item.name}*\n🔹 الكمية: ${item.qty} حبة\n`;
     });
 
     // المجموع التقديري
     const total = document.getElementById("totalPrice").innerText;
-    message += `%0A-----------------------------------%0A`;
-    message += `💰 *المجموع التقديري:* ${total}%0A`;
-    message += `-----------------------------------%0A`;
+    message += `\n-----------------------------------\n`;
+    message += `💰 *المجموع التقديري:* ${total}\n`;
+    message += `-----------------------------------\n`;
 
     // تذييل الرسالة
-    message += `✨ *شكراً لاختياركم حلوياتنا!*%0A`;
+    message += `✨ *شكراً لاختياركم حلوياتنا!*\n`;
     message += `📍 تم الطلب عبر الموقع الرسمي.`;
 
-    // فتح واتساب
-    window.open(`https://wa.me/213699748196?text=${message}`, '_blank');
+    // 2. الجزء الأهم: ترميز الرسالة بالكامل لتظهر الإيموجي والعربية بشكل سليم
+    const encodedMessage = encodeURIComponent(message);
+
+    // 3. فتح واتساب بالرابط المرمز
+    const whatsappUrl = `https://wa.me/213699748196?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 function sendToWhatsApp() {
