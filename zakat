@@ -3,253 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة زكاة الفطر | برادعي عبدالرحمن</title>
+    <title>حاسبة زكاة الفطر | برادعي عبدالرحمن</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #1b4332;
             --secondary-color: #d4af37;
-            --bg-color: #f0f2f0;
-            --sidebar-bg: #ffffff;
+            --bg-color: #f4f7f6;
             --white: #ffffff;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-color);
-            margin: 0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; min-height: 100vh;
         }
 
         header {
             background: var(--primary-color);
             color: var(--white);
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .main-wrapper {
             display: flex;
-            flex: 1;
             max-width: 1200px;
             margin: 20px auto;
             width: 95%;
             gap: 20px;
+            flex-wrap: wrap; /* لضمان التوافق مع الجوال */
         }
 
-        /* التبويبات الجانبية */
+        /* القائمة الجانبية */
         .sidebar {
-            width: 250px;
-            background: var(--sidebar-bg);
+            flex: 1;
+            min-width: 250px;
+            background: var(--white);
             border-radius: 15px;
-            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             height: fit-content;
-            position: sticky;
-            top: 20px;
         }
 
         .tab-btn {
-            width: 100%;
-            padding: 15px 20px;
-            border: none;
-            background: none;
-            text-align: right;
-            font-family: 'Tajawal';
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 1px solid #eee;
-            transition: 0.3s;
-            display: block;
-            color: #555;
+            width: 100%; padding: 15px; border: none; background: none;
+            text-align: right; font-family: 'Tajawal'; font-size: 1rem;
+            cursor: pointer; border-bottom: 1px solid #eee; transition: 0.3s;
         }
 
-        .tab-btn:hover { background: #f9f9f9; color: var(--primary-color); }
         .tab-btn.active {
-            background: var(--primary-color);
-            color: var(--white);
+            background: var(--primary-color); color: var(--white);
             border-right: 5px solid var(--secondary-color);
         }
 
-        .content-area { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-
-        .hadith-top {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border-right: 6px solid var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .hadith-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .calculator-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .input-group { margin-bottom: 25px; text-align: center; }
-        .input-group input {
-            width: 80px; padding: 10px; border-radius: 8px; border: 2px solid #ddd;
-            text-align: center; font-size: 1.2rem; font-weight: bold;
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .member-box {
-            background: #f8faf9;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-        }
-
-        select {
-            width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px;
-            font-family: 'Tajawal'; border: 1px solid #ccc;
-        }
-
-        .results-summary {
-            background: #fdfbf4;
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid var(--secondary-color);
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .weight-label { font-weight: 800; color: var(--primary-color); }
-
-        .print-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Tajawal';
-            font-weight: bold;
-            margin-top: 20px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .print-btn:hover { background: #122b20; }
+        /* المحتوى */
+        .content-area { flex: 3; min-width: 300px; }
 
         .tab-content {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: none;
+            background: var(--white); padding: 30px;
+            border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: none; /* مخفي افتراضياً */
         }
 
-        .tab-content.active { display: block; }
+        .tab-content.active { display: block; } /* يظهر فقط النشط */
+
+        /* الحديث والحاسبة */
+        .hadith-box {
+            background: #fdfbf4; border-right: 6px solid var(--secondary-color);
+            padding: 20px; margin-bottom: 20px; text-align: center; border-radius: 10px;
+        }
+
+        .calculator-card { border: 1px solid #e0e0e0; padding: 20px; border-radius: 15px; }
+
+        .members-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px; margin: 20px 0;
+        }
+
+        .member-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
+
+        select { width: 100%; padding: 8px; margin-top: 5px; font-family: 'Tajawal'; }
+
+        .results-summary {
+            background: #f0f4f2; padding: 20px; border-radius: 10px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ddd; }
+
+        .print-btn {
+            background: var(--secondary-color); color: #000; border: none;
+            padding: 12px; width: 100%; border-radius: 8px; font-weight: bold;
+            cursor: pointer; margin-top: 15px; font-family: 'Tajawal';
+        }
 
         footer {
-            text-align: center;
-            padding: 30px;
-            background: #f1f1f1;
-            margin-top: auto;
-            border-top: 1px solid #ddd;
-            font-weight: bold;
+            text-align: center; padding: 20px; background: #eee;
+            margin-top: auto; font-weight: bold;
         }
 
-        /* إعدادات الطباعة */
+        /* التنسيق عند الطباعة */
         @media print {
-            body * { visibility: hidden; }
-            #results-print-area, #results-print-area * { visibility: visible; }
-            #results-print-area {
-                position: absolute;
-                left: 0; top: 0; width: 100%;
-                padding: 20px;
-                border: none !important;
-            }
-            .print-btn, .sidebar, header, .input-group, .members-grid, .hadith-top { display: none !important; }
-            .summary-title-print { visibility: visible; display: block !important; text-align: center; margin-bottom: 20px; }
+            .sidebar, header, .print-btn, .input-group, .members-grid, .hadith-box { display: none !important; }
+            .tab-content { display: none !important; }
+            #calc-tab.active { display: block !important; }
+            .results-summary { border: none; width: 100%; }
+            body { background: white; }
         }
-
-        .summary-title-print { display: none; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>بوابة زكاة الفطر</h1>
+    <h1>بوابة زكاة الفطر الإلكترونية</h1>
 </header>
 
 <div class="main-wrapper">
-    <nav class="sidebar">
+    <div class="sidebar">
         <button class="tab-btn active" onclick="openTab(event, 'calc-tab')">🧮 حاسبة المقادير</button>
-        <button class="tab-btn" onclick="openTab(event, 'intro')">1. مفهوم الزكاة</button>
-        <button class="tab-btn" onclick="openTab(event, 'wisdom')">2. الحكمة منها</button>
-        <button class="tab-btn" onclick="openTab(event, 'ruling')">3. الحكم والوجوب</button>
-        <button class="tab-btn" onclick="openTab(event, 'amount')">4. المقدار والجنس</button>
-        <button class="tab-btn" onclick="openTab(event, 'time')">5. وقت الإخراج</button>
-        <button class="tab-btn" onclick="openTab(event, 'recipients')">6. لمن تعطى؟</button>
-        <button class="tab-btn" onclick="openTab(event, 'stories')">7. قصص من السيرة</button>
-    </nav>
+        <button class="tab-btn" onclick="openTab(event, 'info1')">1. مفهوم الزكاة</button>
+        <button class="tab-btn" onclick="openTab(event, 'info2')">2. الحكمة منها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info3')">3. الحكم والوجوب</button>
+        <button class="tab-btn" onclick="openTab(event, 'info4')">4. مقدارها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info5')">5. وقت الإخراج</button>
+        <button class="tab-btn" onclick="openTab(event, 'info6')">6. لمن تعطى؟</button>
+        <button class="tab-btn" onclick="openTab(event, 'info7')">7. قصص وعبر</button>
+    </div>
 
-    <main class="content-area">
+    <div class="content-area">
         <div id="calc-tab" class="tab-content active">
-            <div class="hadith-top">
-                <p class="hadith-text">"فَرَضَ رَسُولُ اللَّهِ صلى الله عليه وسلم زَكَاةَ الْفِطْرِ طُهْرَةً لِلصَّائِمِ مِنَ اللَّغْوِ وَالرَّفَثِ وَطُعْمَةً لِلْمَسَاكِينِ"</p>
-                <small>[أخرجه أبو داود]</small>
+            <div class="hadith-box">
+                <p><strong>حديث نبوي:</strong> "فَرَضَ رَسُولُ اللَّهِ ﷺ زَكَاةَ الْفِطْرِ طُهْرَةً لِلصَّائِمِ مِنَ اللَّغْوِ وَالرَّفَثِ وَطُعْمَةً لِلْمَسَاكِينِ"</p>
             </div>
-
+            
             <div class="calculator-card">
+                <h3>🧮 حاسبة الزكاة المخصصة</h3>
                 <div class="input-group">
-                    <label>عدد أفراد الأسرة:</label>
-                    <input type="number" id="numPeople" value="1" min="1" oninput="renderMembers()">
+                    <label>عدد أفراد الأسرة: </label>
+                    <input type="number" id="numMembers" value="1" min="1" oninput="initCalculator()" style="width: 60px; padding: 5px;">
                 </div>
 
                 <div id="membersGrid" class="members-grid"></div>
 
-                <div class="results-summary" id="results-print-area">
-                    <h2 class="summary-title-print">قائمة مقادير زكاة الفطر</h2>
-                    <h3 style="margin-top:0; text-align: center;">📊 إجمالي المقادير المطلوبة</h3>
-                    <div id="totalDisplay"></div>
-                    <p style="font-size: 0.8rem; text-align: center; color: #666; margin-top: 15px;">طُورت بواسطة برادعي عبدالرحمن</p>
+                <div class="results-summary">
+                    <h4 style="text-align: center; margin-top: 0;">📊 القائمة الإجمالية للإخراج</h4>
+                    <div id="totalsList"></div>
+                    <button class="print-btn" onclick="window.print()">🖨️ طباعة القائمة للتبضع</button>
                 </div>
-                
-                <button class="print-btn" onclick="window.print()">🖨️ طباعة القائمة</button>
             </div>
         </div>
 
-        <div id="intro" class="tab-content">
-            <h2>1. مفهوم زكاة الفطر</h2>
-            <p>زكاة الفطر هي عبادة مالية عظيمة، شرعها الله تعالى لتكون ختامًا لشهر رمضان المبارك. هي صدقة واجبة على كل مسلم، قادر عليها، تؤدى بمناسبة الفطر من رمضان.</p>
-        </div>
-        <div id="wisdom" class="tab-content"><h2>2. الحكمة من مشروعيتها</h2><p>لزكاة الفطر حِكم عظيمة تعود على الفرد والمجتمع: طُهرة للصائم وإغناء للفقراء.</p></div>
-        <div id="ruling" class="tab-content"><h2>3. الحكم والوجوب</h2><p>زكاة الفطر فريضة واجبة على كل مسلم، صغيراً كان أم كبيراً، ذكراً أم أنثى.</p></div>
-        <div id="amount" class="tab-content"><h2>4. مقدارها</h2><p>مقدار زكاة الفطر صاع واحد من الطعام، والصاع هو مكيال قديم يقدر بأربعة أمداد.</p></div>
-        <div id="time" class="tab-content"><h2>5. وقت إخراجها</h2><p>تجب بغروب شمس آخر يوم من رمضان، والأفضل إخراجها يوم العيد قبل الصلاة.</p></div>
-        <div id="recipients" class="tab-content"><h2>6. لمن تعطى؟</h2><p>المصرف الأساسي لزكاة الفطر هم الفقراء والمساكين.</p></div>
-        <div id="stories" class="tab-content"><h2>7. قصص من السيرة</h2><p>كان الصحابة رضي الله عنهم يحرصون على إخراجها في وقتها وبالأصناف المحددة شرعاً.</p></div>
-    </main>
+        <div id="info1" class="tab-content"><h2>مفهوم زكاة الفطر</h2><p>هي صدقة واجبة بمناسبة الفطر من رمضان طهرة للصائم ومواساة للفقير.</p></div>
+        <div id="info2" class="tab-content"><h2>الحكمة منها</h2><p>إغناء الفقراء عن السؤال يوم العيد وإدخال السرور عليهم.</p></div>
+        <div id="info3" class="tab-content"><h2>الحكم والوجوب</h2><p>فريضة على كل مسلم ملك قوت يومه وليلته فضل عن حاجته.</p></div>
+        <div id="info4" class="tab-content"><h2>مقدارها</h2><p>صاع من طعام (حوالي 2.5 إلى 3 كغ) حسب نوع الطعام.</p></div>
+        <div id="info5" class="tab-content"><h2>وقت الإخراج</h2><p>من غروب شمس آخر يوم في رمضان إلى ما قبل صلاة العيد.</p></div>
+        <div id="info6" class="tab-content"><h2>لمن تعطى؟</h2><p>للفقراء والمساكين من المسلمين.</p></div>
+        <div id="info7" class="tab-content"><h2>قصص من السيرة</h2><p>كان الصحابة يخرجونها قبل العيد بيوم أو يومين تحقيقاً للتكافل.</p></div>
+    </div>
 </div>
 
 <footer>
@@ -257,66 +170,62 @@
 </footer>
 
 <script>
-    const foodWeights = {
-        "daqiq": { name: "الدقيق (السميد)", weight: 2000 },
-        "wheat": { name: "القمح", weight: 2040 },
-        "farina": { name: "الفَرينة", weight: 1400 },
-        "couscous": { name: "الكسكس", weight: 1800 },
-        "hamza": { name: "الحمصة", weight: 2000 },
-        "dates": { name: "التمر", weight: 1800 },
-        "rice": { name: "الأرز", weight: 2300 },
-        "lentils": { name: "العدس", weight: 2100 },
-        "peas": { name: "الجلبانة (البازلاء)", weight: 2240 },
-        "chickpeas": { name: "الحمص", weight: 2000 },
-        "beans": { name: "اللوبيا", weight: 2060 },
-        "raisins": { name: "الزبيب", weight: 1640 }
+    const weights = {
+        "1": { name: "الدقيق (السميد)", w: 2000 },
+        "2": { name: "القمح", w: 2040 },
+        "3": { name: "الفَرينة", w: 1400 },
+        "4": { name: "الكسكس", w: 1800 },
+        "5": { name: "الحمصة", w: 2000 },
+        "6": { name: "التمر", w: 1800 },
+        "7": { name: "الأرز", w: 2300 },
+        "8": { name: "العدس", w: 2100 },
+        "9": { name: "الجلبانة (البازلاء)", w: 2240 },
+        "10": { name: "الحمص", w: 2000 },
+        "11": { name: "اللوبيا", w: 2060 },
+        "12": { name: "الزبيب", w: 1640 }
     };
 
-    function renderMembers() {
-        const count = document.getElementById('numPeople').value;
+    function initCalculator() {
+        const count = document.getElementById('numMembers').value;
         const grid = document.getElementById('membersGrid');
         grid.innerHTML = '';
-        if(count < 1) return;
+        if (count < 1) return;
 
         for (let i = 1; i <= count; i++) {
-            const div = document.createElement('div');
-            div.className = 'member-box';
             let options = '';
-            for (let key in foodWeights) {
-                options += `<option value="${key}">${foodWeights[key].name}</option>`;
+            for (let k in weights) {
+                options += `<option value="${k}">${weights[k].name}</option>`;
             }
-            div.innerHTML = `<label>👤 الفرد ${i}</label><select class="food-sel" onchange="calculate()">${options}</select>`;
-            grid.appendChild(div);
+            grid.innerHTML += `<div class="member-box">فرد ${i}: <select class="sel" onchange="calc()">${options}</select></div>`;
         }
-        calculate();
+        calc();
     }
 
-    function calculate() {
-        const selects = document.querySelectorAll('.food-sel');
-        const summary = {};
+    function calc() {
+        const selects = document.querySelectorAll('.sel');
+        const res = {};
         selects.forEach(s => {
-            const food = foodWeights[s.value];
-            summary[food.name] = (summary[food.name] || 0) + food.weight;
+            const item = weights[s.value];
+            res[item.name] = (res[item.name] || 0) + item.w;
         });
 
-        const display = document.getElementById('totalDisplay');
-        display.innerHTML = '';
-        for (let name in summary) {
-            const kg = (summary[name] / 1000).toFixed(2);
-            display.innerHTML += `<div class="summary-row"><span>${name}</span><span class="weight-label">${kg} كغ</span></div>`;
+        const list = document.getElementById('totalsList');
+        list.innerHTML = '';
+        for (let n in res) {
+            list.innerHTML += `<div class="summary-row"><span>${n}</span><b>${(res[n]/1000).toFixed(2)} كغ</b></div>`;
         }
     }
 
-    function openTab(evt, tabName) {
+    function openTab(evt, name) {
         const contents = document.getElementsByClassName("tab-content");
         for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-        const buttons = document.getElementsByClassName("tab-btn");
-        for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
-        document.getElementById(tabName).classList.add("active");
+        const btns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+        document.getElementById(name).classList.add("active");
         evt.currentTarget.classList.add("active");
     }
 
-    window.onload = renderMembers;
+    window.onload = initCalculator;
 </script>
 
 </body>
