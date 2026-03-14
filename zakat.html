@@ -4,262 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة زكاة الفطر | برادعي عبدالرحمن</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1b4332;
-            --secondary-color: #d4af37;
-            --bg-color: #f0f2f0;
-            --sidebar-bg: #ffffff;
+            --primary: #1b4332;
+            --accent: #d4af37;
+            --hadith-color: #2d6a4f;
+            --bg: #f4f7f6;
             --white: #ffffff;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: var(--bg);
+            margin: 0; color: #333;
+            display: flex; flex-direction: column; min-height: 100vh;
         }
 
         header {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, var(--primary), #081c15);
+            color: var(--white); padding: 25px; text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .main-wrapper {
-            display: flex;
-            flex: 1;
-            max-width: 1200px;
-            margin: 20px auto;
-            width: 95%;
-            gap: 20px;
+        .main-container {
+            display: flex; max-width: 1200px; margin: 20px auto;
+            width: 95%; gap: 20px; flex-wrap: wrap;
         }
 
-        /* التبويبات الجانبية */
+        /* القائمة الجانبية */
         .sidebar {
-            width: 250px;
-            background: var(--sidebar-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            height: fit-content;
-            position: sticky;
-            top: 20px;
+            flex: 1; min-width: 260px; background: var(--white);
+            border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content; position: sticky; top: 10px; overflow: hidden;
         }
 
         .tab-btn {
-            width: 100%;
-            padding: 15px 20px;
-            border: none;
-            background: none;
-            text-align: right;
-            font-family: 'Tajawal';
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 1px solid #eee;
-            transition: 0.3s;
-            display: block;
-            color: #555;
+            width: 100%; padding: 15px 20px; border: none; background: none;
+            text-align: right; font-family: 'Tajawal'; font-size: 1rem;
+            font-weight: 600; cursor: pointer; border-bottom: 1px solid #f0f0f0;
+            transition: 0.3s; color: #555;
         }
 
-        .tab-btn:hover { background: #f9f9f9; color: var(--primary-color); }
         .tab-btn.active {
-            background: var(--primary-color);
-            color: var(--white);
-            border-right: 5px solid var(--secondary-color);
+            background: var(--primary); color: var(--white);
+            border-right: 6px solid var(--accent);
         }
 
-        .content-area { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-
-        .hadith-top {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border-right: 6px solid var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .hadith-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .calculator-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .input-group { margin-bottom: 25px; text-align: center; }
-        .input-group input {
-            width: 80px; padding: 10px; border-radius: 8px; border: 2px solid #ddd;
-            text-align: center; font-size: 1.2rem; font-weight: bold;
-        }
-
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .member-box {
-            background: #f8faf9;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-        }
-
-        select {
-            width: 100%; padding: 8px; margin-top: 10px; border-radius: 5px;
-            font-family: 'Tajawal'; border: 1px solid #ccc;
-        }
-
-        .results-summary {
-            background: #fdfbf4;
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid var(--secondary-color);
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .weight-label { font-weight: 800; color: var(--primary-color); }
-
-        .print-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Tajawal';
-            font-weight: bold;
-            margin-top: 20px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .print-btn:hover { background: #122b20; }
+        /* منطقة المحتوى */
+        .content-area { flex: 3; min-width: 320px; }
 
         .tab-content {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: none;
+            background: var(--white); padding: 30px; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: none;
+            line-height: 1.8; animation: fadeIn 0.4s ease;
         }
 
         .tab-content.active { display: block; }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #f1f1f1;
-            margin-top: auto;
-            border-top: 1px solid #ddd;
-            font-weight: bold;
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* تنسيق الأحاديث */
+        .hadith {
+            color: var(--hadith-color);
+            font-weight: 700;
+            display: inline;
         }
 
-        /* إعدادات الطباعة */
+        .hadith-box {
+            background: #f1f8f5; border-right: 5px solid var(--hadith-color);
+            padding: 15px; margin: 15px 0; border-radius: 5px;
+        }
+
+        /* الحاسبة */
+        .calculator-card {
+            border: 2px solid #eef2f0; padding: 20px; border-radius: 15px;
+        }
+
+        .members-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px; margin-bottom: 25px;
+        }
+
+        .person-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
+
+        select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Tajawal'; }
+
+        .summary-box {
+            background: var(--primary); color: white; padding: 25px;
+            border-radius: 15px; text-align: center;
+        }
+
+        .res-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        .btn-print {
+            background: var(--accent); color: #000; border: none; padding: 15px;
+            width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer;
+            margin-top: 15px; font-family: 'Tajawal'; font-size: 1.1rem;
+        }
+
+        footer { text-align: center; padding: 30px; background: #eee; font-weight: 800; margin-top: auto; color: var(--primary); }
+
         @media print {
-            body * { visibility: hidden; }
-            #results-print-area, #results-print-area * { visibility: visible; }
-            #results-print-area {
-                position: absolute;
-                left: 0; top: 0; width: 100%;
-                padding: 20px;
-                border: none !important;
-            }
-            .print-btn, .sidebar, header, .input-group, .members-grid, .hadith-top { display: none !important; }
-            .summary-title-print { visibility: visible; display: block !important; text-align: center; margin-bottom: 20px; }
+            .sidebar, header, .btn-print, .input-group, .members-grid { display: none !important; }
+            .tab-content { display: none !important; }
+            #calc-tab.active { display: block !important; }
+            .summary-box { background: white !important; color: black !important; border: 1px solid black; }
         }
-
-        .summary-title-print { display: none; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>بوابة زكاة الفطر</h1>
+    <h1>بوابة زكاة الفطر الشاملة</h1>
+    <p>إشراف وتطوير: برادعي عبدالرحمن</p>
 </header>
 
-<div class="main-wrapper">
+<div class="main-container">
     <nav class="sidebar">
         <button class="tab-btn active" onclick="openTab(event, 'calc-tab')">🧮 حاسبة المقادير</button>
-        <button class="tab-btn" onclick="openTab(event, 'intro')">1. مفهوم الزكاة</button>
-        <button class="tab-btn" onclick="openTab(event, 'wisdom')">2. الحكمة منها</button>
-        <button class="tab-btn" onclick="openTab(event, 'ruling')">3. الحكم والوجوب</button>
-        <button class="tab-btn" onclick="openTab(event, 'amount')">4. المقدار والجنس</button>
-        <button class="tab-btn" onclick="openTab(event, 'time')">5. وقت الإخراج</button>
-        <button class="tab-btn" onclick="openTab(event, 'recipients')">6. لمن تعطى؟</button>
-        <button class="tab-btn" onclick="openTab(event, 'stories')">7. قصص من السيرة</button>
+        <button class="tab-btn" onclick="openTab(event, 'info1')">📖 مشروعية الزكاة</button>
+        <button class="tab-btn" onclick="openTab(event, 'info2')">💡 الحكمة من مشروعيتها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info3')">⚖️ حكم زكاة الفطر</button>
+        <button class="tab-btn" onclick="openTab(event, 'info4')">⏰ وقت وجوب إخراجها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info5')">🌾 جنس الواجب وقدره</button>
     </nav>
 
-    <main class="content-area">
+    <div class="content-area">
         <div id="calc-tab" class="tab-content active">
-            <div class="hadith-top">
-                <p class="hadith-text"> "عَنِ ابْنِ عُمَرَ رضي الله عنهما: «أَنَّ رَسُولَ اللهِ صلى الله عليه وسلم: فَرَضَ زَكَاةَ الْفِطْرِ، صَاعًا مِنْ تَمْرٍ أَوْ صَاعًا مِنْ شَعِيرٍ، عَلَى كُلِّ حُرٍّ أَوْ عَبْدٍ، ذَكَرٍ أَوْ أُنْثَى، مِنَ الْمُسْلِمِينَ»"</p>
-                <small>[البخاري (١٥٠٤)]</small>
+            <div class="hadith-box">
+                <span class="hadith">"فرض رسول الله صلى الله عليه وسلم زكاة الفطر طُهرة للصائم من اللغو والرفث وطعمة للمساكين"</span>
             </div>
-
+            
             <div class="calculator-card">
-                <div class="input-group">
-                    <label>عدد أفراد الأسرة:</label>
-                    <input type="number" id="numPeople" value="1" min="1" oninput="renderMembers()">
+                <h3>🧮 الحاسبة المخصصة للأفراد</h3>
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <label>عدد أفراد الأسرة: </label>
+                    <input type="number" id="famSize" value="1" min="1" oninput="updateUI()" style="width: 70px; padding: 8px; font-size: 1.1rem; font-weight: bold;">
                 </div>
 
-                <div id="membersGrid" class="members-grid"></div>
+                <div id="membersContainer" class="members-grid"></div>
 
-                <div class="results-summary" id="results-print-area">
-                    <h2 class="summary-title-print">قائمة مقادير زكاة الفطر</h2>
-                    <h3 style="margin-top:0; text-align: center;">📊 إجمالي المقادير المطلوبة</h3>
-                    <div id="totalDisplay"></div>
-                    <p style="font-size: 0.8rem; text-align: center; color: #666; margin-top: 15px;">طُورت بواسطة برادعي عبدالرحمن</p>
+                <div class="summary-box">
+                    <h3 style="margin-top: 0;">📊 القائمة الإجمالية</h3>
+                    <div id="totalsDisplay"></div>
+                    <div style="font-size: 0.8rem; margin-top: 15px; opacity: 0.8;">بواسطة: برادعي عبدالرحمن</div>
                 </div>
-                
-                <button class="print-btn" onclick="window.print()">🖨️ طباعة القائمة</button>
+                <button class="btn-print" onclick="window.print()">🖨️ طباعة قائمة المقادير</button>
             </div>
         </div>
 
-        <div id="intro" class="tab-content">
-            <h2>1. مفهوم زكاة الفطر</h2>
-            <p>زكاة الفطر صدقة تجب بالفطر في رمضان، وأضيفت إلى الفطر لأنها سبب وجوبها، قال الحَافِظُ ابنُ حَجَر: " وأضيفت الصدقة للفطر لكونها تجب بالفطر من رمضان، وقال ابن قتيبة: ‌المراد ‌بصدقة ‌الفطر ‌صدقة ‌النفوس، مأخوذة من الفطرة التي هي أصل الخلقة، والأول أظهر". [ابن حجر العسقلاني، فتح الباري في شرح صحيح البخاري، ٣ / ٣٦٧].
-
-وهي واجبة على كل مسلم ذكر أو أنثى، صغير أو كبير، بالسنة والإجماع؛ عَنِ ابْنِ عُمَرَ رضي الله عنهما: «أَنَّ رَسُولَ اللهِ صلى الله عليه وسلم: فَرَضَ زَكَاةَ الْفِطْرِ، صَاعًا مِنْ تَمْرٍ أَوْ صَاعًا مِنْ شَعِيرٍ، عَلَى كُلِّ حُرٍّ أَوْ عَبْدٍ، ذَكَرٍ أَوْ أُنْثَى، مِنَ الْمُسْلِمِينَ». [البخاري (١٥٠٤)].
-
-وعنه أيضًا أنه قال: «فَرَضَ رَسُولُ اللهِ صلى الله عليه وسلم زَكَاةَ الْفِطْرِ، صَاعًا مِنْ تَمْرٍ أَوْ صَاعًا مِنْ شَعِيرٍ، عَلَى الْعَبْدِ وَالْحُرِّ، وَالذَّكَرِ وَالْأُنْثَى، وَالصَّغِيرِ وَالْكَبِيرِ مِنَ الْمُسْلِمِينَ، وَأَمَرَ بِهَا أَنْ تُؤَدَّى قَبْلَ خُرُوجِ النَّاسِ إِلَى الصَّلَاةِ»، [البخاري (١٥٠٣)]، والمراد هنا (صلاة العيد).
-
-وعن أبي سعيد الخدري رضي الله عنه قال: «‌كُنَّا ‌نُخْرِجُ ‌زَكَاةَ ‌الْفِطْرِ ‌صَاعًا مِنْ طَعَامٍ، أَوْ صَاعًا مِنْ شَعِيرٍ، أَوْ صَاعًا مِنْ تَمْرٍ، أَوْ صَاعًا مِنْ أَقِطٍ، أَوْ صَاعًا مِنْ زَبِيبٍ، وَذَلِكَ بِصَاعِ النَّبِيِّ صلى الله عليه وسلم». [مالك، الموطأ، ١/٢٨٤، رقم (٥٣)].
-
-ولها أسماء عدة وردت في نصوص شرعية، منها:
-
-صدقة الفطر [البخاري (١٤٤١)]، وزكاة الفطر [البخاري (١٤٣٣)، مسلم (٩٨٤)]، وزكاة رمضان [النسائي (٢٥٠٤)]، وصدقة رمضان [البخاري (١٤٤٠)]، الفطرة [النووي، تحرير ألفاظ التنبيه ص١١٦]، زكاة الرؤوس أو الرقاب أو الأبدان [رد المحتار على الدرر المختار (٢/٣٥٨)].].</p>
+        <div id="info1" class="tab-content">
+            <h2>مشروعية زكاة الفطر</h2>
+            <p>شرعت زكاة الفطر في السنة الثانية من الهجرة، وهي السَّنَّة نفسها التي فرض الله فيها صوم رمضان، ودليل مشروعيتها ثبت في السنة في أحاديث عدة، منها ما رواه أبو سعيد الخدري رضي الله عنه، قال: <span class="hadith">(كنا نخرج زكاة الفطر إذ كان فينا رسول الله صلى الله عليه وسلم صاعاً من طعام، أو صاعاً من تمر، أو صاعاً من شعير، أو صاعاً من أقط، أو صاعاً من زبيب)</span>، رواه مسلم.</p>
+            <p>ومنها خبر ابن عباس رضي الله عنهما، قال: <span class="hadith">(فرض رسول الله صلى الله عليه وسلم زكاة الفطر طُهرة للصائم من اللغو والرفث وطعمة للمساكين)</span> رواه أبو داود وغيره.</p>
         </div>
-        <div id="wisdom" class="tab-content"><h2>2. الحكمة من مشروعيتها</h2><p>لزكاة الفطر حِكم عظيمة تعود على الفرد والمجتمع: طُهرة للصائم وإغناء للفقراء.</p></div>
-        <div id="ruling" class="tab-content"><h2>3. الحكم والوجوب</h2><p>زكاة الفطر فريضة واجبة على كل مسلم، صغيراً كان أم كبيراً، ذكراً أم أنثى.</p></div>
-        <div id="amount" class="tab-content"><h2>4. مقدارها</h2><p>مقدار زكاة الفطر صاع واحد من الطعام، والصاع هو مكيال قديم يقدر بأربعة أمداد.</p></div>
-        <div id="time" class="tab-content"><h2>5. وقت إخراجها</h2><p>تجب بغروب شمس آخر يوم من رمضان، والأفضل إخراجها يوم العيد قبل الصلاة.</p></div>
-        <div id="recipients" class="tab-content"><h2>6. لمن تعطى؟</h2><p>المصرف الأساسي لزكاة الفطر هم الفقراء والمساكين.</p></div>
-        <div id="stories" class="tab-content"><h2>7. قصص من السيرة</h2><p>كان الصحابة رضي الله عنهم يحرصون على إخراجها في وقتها وبالأصناف المحددة شرعاً.</p></div>
-    </main>
+
+        <div id="info2" class="tab-content">
+            <h2>الحكمة من مشروعيتها</h2>
+            <p>وقد شرعت زكاة الفطر لحِكَمٍ عديدة منها: جبران نقص الصوم؛ فقد بين صلى الله عليه وسلم في حديث ابن عباس المتقدم أنها <span class="hadith">(طهرة للصائم من اللغو والرفث)</span>.</p>
+            <p>قال بعض أهل العلم: زكاة الفطر كسجدة السهو للصلاة، تجبر نقصان الصوم، كما يجبر سجود السهو نقصان الصلاة. ومنها إغناء الفقراء عن السؤال ففي الحديث السابق أنها: <span class="hadith">(طعمة للمساكين)</span>.</p>
+        </div>
+
+        <div id="info3" class="tab-content">
+            <h2>حكم زكاة الفطر</h2>
+            <p>تجب زكاة الفطر على كل مسلم، ذكر أو أنثى، صغير أو كبير، لحديث ابن عمر رضي الله عنهما: <span class="hadith">(فرض رسول الله صلى الله عليه وسلم زكاة الفطر من رمضان صاعاً من تمر، أو صاعاً من شعير على العبد والحر، والذكر والأنثى، والصغير والكبير من المسلمين)</span> متفق عليه.</p>
+            <p><strong>ويشترط لوجوبها:</strong> الإسلام، والقدرة عليها بأن يكون عنده يوم العيد وليلته قدر زائد عن قوته وقوت عياله.</p>
+        </div>
+
+        <div id="info4" class="tab-content">
+            <h2>وقت وجوب إخراجها</h2>
+            <p>تجب بغروب شمس ليلة عيد الفطر. والأفضل أن تُخْرَج صباح العيد قبل الصلاة؛ لقول أبي سعيد الخدري: <span class="hadith">(كنا نُخْرِجُ في عهد رسول الله صلى الله عليه وسلم يوم الفطر صاعاً من طعام)</span>.</p>
+            <p>ويجوز تقديمها قبل يوم العيد بيوم أو يومين. ولا يجوز تأخيرها عن صلاة العيد لقوله صلى الله عليه وسلم: <span class="hadith">(من أداها قبل الصلاة فهي زكاة مقبولة، ومن أداها بعد الصلاة فهي صدقة من الصدقات)</span>.</p>
+        </div>
+
+        <div id="info5" class="tab-content">
+            <h2>جنس الواجب وقدره</h2>
+            <p>من غالب قوت البلد؛ والقدر الواجب صاع من أي من هذه الأصناف، ويقدر بكيلوين وأربعين غراماً من البُرِّ (2040 غرام)، ومن غير البُرِّ بحسبه.</p>
+            <p>وتدفع صدقة الفطر للفقراء والمحتاجين، وهو اختيار شيخ الإسلام ابن تيمية رحمه لله.</p>
+        </div>
+    </div>
 </div>
 
 <footer>
@@ -267,66 +191,74 @@
 </footer>
 
 <script>
-    const foodWeights = {
-        "daqiq": { name: "الدقيق (السميد)", weight: 2000 },
-        "wheat": { name: "القمح", weight: 2040 },
-        "farina": { name: "الفَرينة", weight: 1400 },
-        "couscous": { name: "الكسكس", weight: 1800 },
-        "hamza": { name: "الحمصة", weight: 2000 },
-        "dates": { name: "التمر", weight: 1800 },
-        "rice": { name: "الأرز", weight: 2300 },
-        "lentils": { name: "العدس", weight: 2100 },
-        "peas": { name: "الجلبانة (البازلاء)", weight: 2240 },
-        "chickpeas": { name: "الحمص", weight: 2000 },
-        "beans": { name: "اللوبيا", weight: 2060 },
-        "raisins": { name: "الزبيب", weight: 1640 }
+    const foodData = {
+        "1": { name: "الدقيق (السميد)", w: 2000 },
+        "2": { name: "القمح", w: 2040 },
+        "3": { name: "الفَرينة", w: 1400 },
+        "4": { name: "الكسكس", w: 1800 },
+        "5": { name: "الحمصة", w: 2000 },
+        "6": { name: "التمر", w: 1800 },
+        "7": { name: "الأرز", w: 2300 },
+        "8": { name: "العدس", w: 2100 },
+        "9": { name: "الجلبانة (البازلاء)", w: 2240 },
+        "10": { name: "الحمص", w: 2000 },
+        "11": { name: "اللوبيا", w: 2060 },
+        "12": { name: "الزبيب", w: 1640 }
     };
 
-    function renderMembers() {
-        const count = document.getElementById('numPeople').value;
-        const grid = document.getElementById('membersGrid');
-        grid.innerHTML = '';
-        if(count < 1) return;
+    function updateUI() {
+        const count = document.getElementById('famSize').value;
+        const container = document.getElementById('membersContainer');
+        container.innerHTML = '';
+        if (count < 1) return;
 
         for (let i = 1; i <= count; i++) {
-            const div = document.createElement('div');
-            div.className = 'member-box';
             let options = '';
-            for (let key in foodWeights) {
-                options += `<option value="${key}">${foodWeights[key].name}</option>`;
+            for (let k in foodData) {
+                options += `<option value="${k}">${foodData[k].name}</option>`;
             }
-            div.innerHTML = `<label>👤 الفرد ${i}</label><select class="food-sel" onchange="calculate()">${options}</select>`;
-            grid.appendChild(div);
+            container.innerHTML += `
+                <div class="person-box">
+                    <strong>👤 فرد رقم ${i}</strong>
+                    <select class="f-sel" onchange="calculate()">
+                        ${options}
+                    </select>
+                </div>
+            `;
         }
         calculate();
     }
 
     function calculate() {
-        const selects = document.querySelectorAll('.food-sel');
+        const selects = document.querySelectorAll('.f-sel');
         const summary = {};
         selects.forEach(s => {
-            const food = foodWeights[s.value];
-            summary[food.name] = (summary[food.name] || 0) + food.weight;
+            const item = foodData[s.value];
+            summary[item.name] = (summary[item.name] || 0) + item.w;
         });
 
-        const display = document.getElementById('totalDisplay');
+        const display = document.getElementById('totalsDisplay');
         display.innerHTML = '';
         for (let name in summary) {
-            const kg = (summary[name] / 1000).toFixed(2);
-            display.innerHTML += `<div class="summary-row"><span>${name}</span><span class="weight-label">${kg} كغ</span></div>`;
+            display.innerHTML += `
+                <div class="res-row">
+                    <span>${name}</span>
+                    <span style="font-weight:800; color:var(--accent);">${(summary[name]/1000).toFixed(2)} كغ</span>
+                </div>
+            `;
         }
     }
 
     function openTab(evt, tabName) {
         const contents = document.getElementsByClassName("tab-content");
         for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-        const buttons = document.getElementsByClassName("tab-btn");
-        for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
+        const btns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
         document.getElementById(tabName).classList.add("active");
         evt.currentTarget.classList.add("active");
     }
 
-    window.onload = renderMembers;
+    window.onload = updateUI;
 </script>
 
 </body>
