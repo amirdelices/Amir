@@ -43,8 +43,10 @@
             width: 100%; padding: 15px 20px; border: none; background: none;
             text-align: right; font-family: 'Tajawal'; font-size: 1rem;
             font-weight: 600; cursor: pointer; border-bottom: 1px solid #f0f0f0;
-            transition: 0.3s; color: #555;
+            transition: all 0.3s ease; color: #555;
         }
+
+        .tab-btn:hover { background: #f9f9f9; color: var(--primary); }
 
         .tab-btn.active {
             background: var(--primary); color: var(--white);
@@ -57,12 +59,11 @@
         .tab-content {
             background: var(--white); padding: 30px; border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: none;
-            line-height: 1.8; animation: fadeIn 0.4s ease;
+            line-height: 1.8; opacity: 0; transform: translateY(10px);
+            transition: all 0.4s ease;
         }
 
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
 
         /* تنسيق الأحاديث */
         .hadith {
@@ -88,7 +89,8 @@
 
         .person-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; }
 
-        select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Tajawal'; }
+        select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Tajawal'; outline: none; }
+        select:focus { border-color: var(--primary); }
 
         .summary-box {
             background: var(--primary); color: white; padding: 25px;
@@ -100,16 +102,36 @@
         .btn-print {
             background: var(--accent); color: #000; border: none; padding: 15px;
             width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer;
-            margin-top: 15px; font-family: 'Tajawal'; font-size: 1.1rem;
+            margin-top: 15px; font-family: 'Tajawal'; font-size: 1.1rem; transition: 0.3s;
+        }
+        .btn-print:hover { background: #c29d2e; }
+
+        /* الفوتر الجديد */
+        footer {
+            text-align: center; padding: 30px; background: #1b4332;
+            color: white; margin-top: auto; border-top: 4px solid var(--accent);
+            font-weight: bold;
         }
 
-        footer { text-align: center; padding: 30px; background: #eee; font-weight: 800; margin-top: auto; color: var(--primary); }
+        .dev-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 800;
+            transition: 0.3s;
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        .dev-link:hover {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
 
         @media print {
-            .sidebar, header, .btn-print, .input-group, .members-grid { display: none !important; }
+            .sidebar, header, .btn-print, #famSize, label { display: none !important; }
             .tab-content { display: none !important; }
-            #calc-tab.active { display: block !important; }
-            .summary-box { background: white !important; color: black !important; border: 1px solid black; }
+            #calc-tab.active { display: block !important; width: 100%; }
+            .summary-box { background: white !important; color: black !important; border: 2px solid black; }
+            .res-row { border-bottom: 1px solid #000; }
         }
     </style>
 </head>
@@ -122,12 +144,12 @@
 
 <div class="main-container">
     <nav class="sidebar">
-        <button class="tab-btn active" onclick="openTab(event, 'calc-tab')">🧮 حاسبة المقادير</button>
-        <button class="tab-btn" onclick="openTab(event, 'info1')">📖 مشروعية الزكاة</button>
-        <button class="tab-btn" onclick="openTab(event, 'info2')">💡 الحكمة من مشروعيتها</button>
-        <button class="tab-btn" onclick="openTab(event, 'info3')">⚖️ حكم زكاة الفطر</button>
-        <button class="tab-btn" onclick="openTab(event, 'info4')">⏰ وقت وجوب إخراجها</button>
-        <button class="tab-btn" onclick="openTab(event, 'info5')">🌾 جنس الواجب وقدره</button>
+        <button class="tab-btn active" onclick="openTab(event, 'calc-tab')">حاسبة المقادير</button>
+        <button class="tab-btn" onclick="openTab(event, 'info1')">مشروعية الزكاة</button>
+        <button class="tab-btn" onclick="openTab(event, 'info2')">الحكمة من مشروعيتها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info3')">حكم زكاة الفطر</button>
+        <button class="tab-btn" onclick="openTab(event, 'info4')">وقت وجوب إخراجها</button>
+        <button class="tab-btn" onclick="openTab(event, 'info5')">جنس الواجب وقدره</button>
     </nav>
 
     <div class="content-area">
@@ -137,20 +159,20 @@
             </div>
             
             <div class="calculator-card">
-                <h3>🧮 الحاسبة المخصصة للأفراد</h3>
+                <h3>الحاسبة المخصصة للأفراد</h3>
                 <div style="margin-bottom: 20px; text-align: center;">
                     <label>عدد أفراد الأسرة: </label>
-                    <input type="number" id="famSize" value="1" min="1" oninput="updateUI()" style="width: 70px; padding: 8px; font-size: 1.1rem; font-weight: bold;">
+                    <input type="number" id="famSize" value="1" min="1" oninput="updateUI()" style="width: 70px; padding: 8px; font-size: 1.1rem; font-weight: bold; border-radius: 5px; border: 1px solid #ccc;">
                 </div>
 
                 <div id="membersContainer" class="members-grid"></div>
 
                 <div class="summary-box">
-                    <h3 style="margin-top: 0;">📊 القائمة الإجمالية</h3>
+                    <h3 style="margin-top: 0;">القائمة الإجمالية</h3>
                     <div id="totalsDisplay"></div>
                     <div style="font-size: 0.8rem; margin-top: 15px; opacity: 0.8;">بواسطة: برادعي عبدالرحمن</div>
                 </div>
-                <button class="btn-print" onclick="window.print()">🖨️ طباعة قائمة المقادير</button>
+                <button class="btn-print" onclick="window.print()">طباعة قائمة المقادير</button>
             </div>
         </div>
 
@@ -187,7 +209,10 @@
 </div>
 
 <footer>
-    صُمم وطُوِّر بواسطة: برادعي عبدالرحمن
+    صُمم وطُوِّر بواسطة: 
+    <a href="https://fennecvisionary.vercel.app/DevProfile.html" target="_blank" class="dev-link">
+        برادعي عبدالرحمن
+    </a>
 </footer>
 
 <script>
@@ -219,7 +244,7 @@
             }
             container.innerHTML += `
                 <div class="person-box">
-                    <strong>👤 فرد رقم ${i}</strong>
+                    <strong>فرد رقم ${i}</strong>
                     <select class="f-sel" onchange="calculate()">
                         ${options}
                     </select>
@@ -251,10 +276,19 @@
 
     function openTab(evt, tabName) {
         const contents = document.getElementsByClassName("tab-content");
-        for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+        for (let i = 0; i < contents.length; i++) {
+            contents[i].style.display = "none";
+            contents[i].classList.remove("active");
+        }
         const btns = document.getElementsByClassName("tab-btn");
-        for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
-        document.getElementById(tabName).classList.add("active");
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+        const activeContent = document.getElementById(tabName);
+        activeContent.style.display = "block";
+        setTimeout(() => {
+            activeContent.classList.add("active");
+        }, 10);
         evt.currentTarget.classList.add("active");
     }
 
