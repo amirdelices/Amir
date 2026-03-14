@@ -106,9 +106,20 @@
         }
         .btn-print:hover { background: #c29d2e; }
 .charity-card {
-            background: #fff; border: 2px solid var(--accent); padding: 20px;
-            margin: 20px auto; max-width: 1200px; width: 95%; border-radius: 15px; text-align: center;
-        }
+    background: #fff;
+    border: 2px solid var(--accent);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    width: 95%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* العنوان باللون الأخضر */
+.charity-card .charity-title {
+    color: var(--primary); /* اللون الأخضر */
+}
         /* الفوتر الجديد */
         footer {
             text-align: center; padding: 30px; background: #1b4332;
@@ -290,8 +301,19 @@
     </div>
 </div>
 <div class="charity-card">
-    <h4>💡 صدقة جارية</h4>
-    <p>"اللهم اجعل هذا العمل خالصاً لوجهك الكريم، وصدقة جارية لوالديّ."</p>
+    <h4 class="charity-title">🕊️ صدقة جارية</h4>
+
+    <!-- الآية -->
+    <p class="quran">
+        قال الله تعالى: ﴿رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا﴾
+    </p>
+
+    <!-- الدعاء -->
+    <p class="charity-prayer">
+        اللهم تقبّل هذا العمل صدقةً جارية عن والديّ، واجعل نوره في قبريهما، وارفع به درجاتهما في الجنة.
+    </p>
+
+    <div class="charity-ornament-bottom"></div>
 </div>
 <footer>
     صُمم وطُوِّر بواسطة: 
