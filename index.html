@@ -19,7 +19,7 @@
 .toast-notification{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--primary-gradient);color:#fff;padding:10px 22px;border-radius:12px;font-weight:700;font-size:.85rem;box-shadow:0 8px 25px rgba(255,71,87,.3);z-index:10000;opacity:0;transition:all .4s cubic-bezier(.68,-.55,.265,1.55);pointer-events:none}.toast-notification.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .main-wrapper{display:flex;justify-content:center;padding:20px 10px}.container{background:rgba(255,255,255,.98);width:100%;max-width:900px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);text-align:center;padding-bottom:40px}
 
-/* بروفايل وحالة المحل */
+/* بروفايل + أنيميشن حالة المتجر */
 .header-section{position:relative;margin-bottom:70px}.cover-photo{width:100%;height:200px;background:url('images/cover.jpg') center/cover no-repeat;background-color:var(--primary)}.cover-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(255,255,255,.98),transparent)}
 .profile-img-wrap{position:absolute;bottom:-65px;left:50%;transform:translateX(-50%);z-index:10;border-radius:50%}
 .profile-img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 8px 25px rgba(0,0,0,.1);transition:.3s}
@@ -32,17 +32,13 @@
 #schoolDesc::after{content:"|";animation:blink .7s infinite;color:var(--primary)}@keyframes blink{50%{opacity:0}}
 .status-badge{display:inline-flex;flex-direction:column;align-items:center;padding:10px 20px;border-radius:15px;margin-top:15px;font-weight:700;font-size:.9rem}.status-open{background:#e7fbf2;color:var(--success);border:1px solid #c1f2dc}.status-closed{background:#fff1f2;color:var(--danger);border:1px solid #ffd1d6}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:5px}.dot-open{background:var(--success);animation:pulse 1.5s infinite}.dot-closed{background:var(--danger)}
 
-/* الإحصائيات - سطر واحد في الهاتف */
 .stats-bar{display:flex;justify-content:center;gap:25px;margin:25px 20px;padding:18px;background:var(--secondary-bg);border-radius:20px;border:1px solid #fce4ec;flex-wrap:nowrap}.stat-item{text-align:center;min-width:0;flex:1}.stat-icon{font-size:1.3rem;color:var(--primary);margin-bottom:5px;display:block}.stat-number{font-size:1.6rem;font-weight:800;color:var(--primary-dark);display:block}.stat-label{font-size:.75rem;font-weight:600;color:var(--muted);margin-top:2px;white-space:nowrap}
-
-/* أوقات العمل والروابط */
 .links-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:30px 20px}.link-btn{position:relative;padding:15px;border-radius:15px;background:#fff;border:1px solid #fce4ec;text-decoration:none;color:var(--text);font-weight:700;transition:.3s;display:flex;align-items:center;justify-content:center}.link-btn i{position:absolute;right:15px;color:var(--primary);transition:.3s}.link-btn:hover{transform:translateY(-5px);background-color:var(--secondary-bg);border-color:var(--primary);box-shadow:0 10px 20px rgba(255,107,129,.15);color:var(--primary-dark)}.link-btn:hover i{transform:scale(1.25) rotate(-10deg);color:var(--primary-dark)}
 .section-title{margin:40px 0 25px;color:var(--primary-dark);font-size:1.4rem;font-weight:800}.section-title i{margin-left:8px;color:var(--primary-dark)}.section-title::after{content:'';width:50px;height:4px;background:var(--primary);display:block;margin:8px auto;border-radius:10px}
 .countdown-container{background:linear-gradient(135deg,var(--primary-dark) 0%,#ff8a9a 50%,#ff6b81 100%);color:#fff;margin:20px;padding:30px 25px;border-radius:20px;box-shadow:0 10px 25px rgba(255,71,87,.2);position:relative;overflow:hidden}.countdown-container::before{content:'';position:absolute;top:-50%;right:-30%;width:200px;height:200px;background:rgba(255,255,255,.08);border-radius:50%}.countdown-container::after{content:'';position:absolute;bottom:-40%;left:-20%;width:150px;height:150px;background:rgba(255,255,255,.05);border-radius:50%}.countdown-header{font-weight:800;margin-bottom:8px;font-size:1.05rem;position:relative;z-index:1}.countdown-subtext{font-size:.82rem;opacity:.9;margin-bottom:15px;font-weight:600;position:relative;z-index:1}.countdown-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:15px;position:relative;z-index:1}.countdown-item{background:rgba(255,255,255,.2);backdrop-filter:blur(5px);padding:15px;border-radius:15px;min-width:140px;border:1px solid rgba(255,255,255,.3);border-bottom:4px solid #fff;animation:cardFloat 3s ease-in-out infinite}@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.cd-days{font-size:2rem;font-weight:800;color:#fff;display:block}.cd-label{font-size:.85rem;font-weight:600;opacity:.95}.cd-label i{margin-left:4px}
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px}.feature-card{background:#fff;padding:20px;border-radius:20px;border:1px solid #fce4ec;transition:.3s;text-align:center}.feature-card:hover{border-color:var(--primary);background:var(--secondary-bg);transform:translateY(-5px)}.feature-card i{font-size:2.2rem;color:var(--primary);margin-bottom:12px;display:block}
 .packaging-banner{background:var(--secondary-bg);margin:20px;border-radius:20px;padding:25px;display:flex;align-items:center;gap:20px;border:2px dashed var(--primary);text-align:right}.packaging-icon{font-size:2.5rem;color:var(--primary)}
 .cert-section{margin:20px;padding:20px;background:#fff;border-radius:20px;border:1px solid #fce4ec}.cert-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:15px}.cert-badge{display:flex;flex-direction:column;align-items:center;gap:8px;padding:15px;background:var(--secondary-bg);border-radius:15px;border:1px solid #fce4ec;transition:.3s}.cert-badge:hover{transform:translateY(-3px);border-color:var(--primary)}.cert-badge i{font-size:1.8rem;color:var(--primary)}.cert-badge span{font-size:.75rem;font-weight:700;color:var(--text);text-align:center}
-
 .search-box{margin:15px 20px;position:relative}.search-box input{width:100%;padding:12px 20px 12px 42px;border:2px solid #fce4ec;border-radius:15px;font-family:'Cairo';font-size:.9rem;outline:none;background:var(--white);transition:.3s}.search-box input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,107,129,.1)}.search-box>i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--primary)}
 .sweets-grid{display:grid;gap:15px;padding:0 20px;grid-template-columns:repeat(2,1fr)}@media(min-width:650px){.sweets-grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:900px){.sweets-grid{grid-template-columns:repeat(4,1fr)}}.sweet-card{background:#fff;border-radius:18px;padding:10px;border:1px solid #fce4ec;transition:.3s}.sweet-card:hover{transform:translateY(-5px);border-color:var(--primary);box-shadow:var(--shadow)}.sweet-img{width:100%;height:110px;object-fit:cover;border-radius:12px;margin-bottom:10px}.sweet-name{font-weight:700;font-size:.85rem;min-height:40px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3}.sweet-price{font-size:.85rem;color:var(--primary-dark);background:#fff0f3;padding:4px 10px;border-radius:20px;font-weight:700;margin-bottom:8px}
 .add-to-cart-btn{background:var(--primary-gradient);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-weight:600;font-size:.9rem;font-family:'Cairo';display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.3s;box-shadow:0 4px 12px rgba(255,71,87,.15);width:100%;margin-top:12px}.add-to-cart-btn:hover{transform:translateY(-1.5px);box-shadow:0 6px 15px rgba(255,71,87,.25)}.add-to-cart-btn.added{background:var(--success)!important;box-shadow:0 4px 15px rgba(46,213,115,.3)!important;pointer-events:none}
@@ -61,17 +57,9 @@
 .cart-floating-btn{position:fixed;bottom:30px;left:20px;background:var(--primary-gradient);color:#fff;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5000;box-shadow:0 15px 35px rgba(255,71,87,.4);transition:.3s;border:3px solid #fff;font-size:1.2rem}.cart-floating-btn:hover{transform:translateY(-5px) scale(1.1)}.cart-count{position:absolute;top:-5px;right:-5px;background:var(--success-color);color:#fff;font-size:.8rem;min-width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;font-weight:bold}
 .cart-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:15px}.cart-content{background:var(--glass-bg);width:100%;max-width:500px;padding:22px;border-radius:25px;max-height:92vh;box-shadow:0 25px 50px rgba(0,0,0,.2);display:flex;flex-direction:column;animation:slideUp .4s ease;overflow:hidden}@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.cart-header{margin-bottom:12px;color:var(--primary-dark);font-size:1.1rem;font-weight:800}.cart-header i{margin-left:8px}.cart-scrollable{flex:1;overflow-y:auto;overflow-x:hidden;padding-right:5px}.cart-scrollable::-webkit-scrollbar{width:5px}.cart-scrollable::-webkit-scrollbar-track{background:#f1f1f1;border-radius:10px}.cart-scrollable::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}.cart-item-card{display:flex;align-items:center;gap:10px;padding:10px;background:#fdfdfd;border-radius:14px;margin-bottom:8px;border:1px solid #f0f0f0}.item-img-mini{width:50px;height:50px;border-radius:10px;object-fit:cover}.qty-wrapper{display:flex;align-items:center;background:#eee;border-radius:8px;padding:2px;gap:5px}.qty-btn-small{width:24px;height:24px;border-radius:6px;border:none;background:#fff;cursor:pointer;font-weight:bold;color:#ff4757;font-size:.85rem}.delete-item-btn{background:none;border:none;color:#ff4757;cursor:pointer;padding:4px;transition:.3s}.delete-item-btn:hover{transform:scale(1.2)}
 
-/* التوصيل GPS داخل السلة */
-.cart-delivery-section{margin-top:12px;padding:15px;background:var(--secondary-bg);border-radius:15px;border:1px solid #fce4ec}.cart-delivery-section h4{font-size:.88rem;color:var(--primary-dark);margin-bottom:10px;font-weight:700}.cart-delivery-section h4 i{margin-left:5px}
-.gps-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;margin-bottom:10px;border:1.5px dashed var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);font-family:'Cairo';font-weight:700;font-size:.85rem;cursor:pointer;transition:.3s}.gps-btn:hover{background:var(--secondary-bg);border-style:solid}.gps-btn.loading{opacity:.6;pointer-events:none}
-.cart-delivery-input-wrap{position:relative;margin-bottom:8px;display:none}
-.cart-delivery-input{width:100%;padding:11px 11px 11px 35px;border:1.5px solid #fce4ec;border-radius:12px;font-family:'Cairo';font-size:.85rem;outline:none;transition:.3s;background:#fff;color:var(--text);font-weight:600}
-.cart-delivery-input[readonly]{background:#f9f9f9;cursor:not-allowed}
-.cart-delivery-input-wrap>i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:.85rem}
-.cart-delivery-loading{display:none;text-align:center;padding:10px;font-size:.8rem;color:var(--muted)}.cart-delivery-loading.show{display:flex;align-items:center;justify-content:center;gap:8px}.cart-delivery-loading i{animation:spin 1s linear infinite;color:var(--primary)}
-.cart-delivery-result{display:none;margin-top:10px;padding:12px;background:linear-gradient(135deg,#e7fbf2,#f0fdf7);border-radius:12px;border:1px solid #c1f2dc}.cart-delivery-result.show{display:block;animation:slideUpSm .4s ease}.delivery-result-grid{display:flex;justify-content:space-around;align-items:center;gap:10px;margin:8px 0}.delivery-result-item{text-align:center}.delivery-result-item .dr-icon{font-size:1.2rem;margin-bottom:4px;display:block}.delivery-result-item .dr-value{font-size:1.1rem;font-weight:800;display:block}.delivery-result-item .dr-label{font-size:.7rem;color:var(--muted);font-weight:600}.delivery-result-name{font-size:.85rem;font-weight:700;color:var(--text);text-align:center;margin-bottom:5px}.delivery-result-name i{color:var(--success);margin-left:5px}.delivery-result-divider{width:1px;height:40px;background:#c1f2dc}.cart-delivery-remove{display:block;margin:8px auto 0;background:none;border:1px solid #ffd1d6;color:var(--danger);cursor:pointer;font-size:.78rem;font-weight:700;font-family:'Cairo';padding:5px 15px;border-radius:8px;transition:.3s}.cart-delivery-remove:hover{background:#fff1f2}@keyframes slideUpSm{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* المجاميع */
+/* التوصيل الذكي في السلة */
+.cart-delivery-section{margin-top:12px;padding:15px;background:var(--secondary-bg);border-radius:15px;border:1px solid #fce4ec}.cart-delivery-section h4{font-size:.88rem;color:var(--primary-dark);margin-bottom:10px;font-weight:700}.cart-delivery-section h4 i{margin-left:5px}.cart-delivery-input-wrap{position:relative;margin-bottom:8px}.cart-delivery-input{width:100%;padding:11px 11px 11px 35px;border:1.5px solid #fce4ec;border-radius:12px;font-family:'Cairo';font-size:.85rem;outline:none;transition:.3s}.cart-delivery-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,107,129,.1)}.cart-delivery-input-wrap>i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:.85rem}.cart-delivery-sugg{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #fce4ec;border-top:none;border-radius:0 0 12px 12px;max-height:180px;overflow-y:auto;display:none;z-index:50;box-shadow:0 10px 25px rgba(0,0,0,.1)}.cart-delivery-sugg.show{display:block}.cart-delivery-sugg::-webkit-scrollbar{width:4px}.cart-delivery-sugg::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}.sugg-item{padding:11px 14px;cursor:pointer;font-size:.83rem;font-weight:600;border-bottom:1px solid #f5f5f5;display:flex;justify-content:space-between;align-items:center;transition:.2s;gap:8px}.sugg-item:last-child{border-bottom:none}.sugg-item:hover{background:var(--secondary-bg);color:var(--primary-dark)}.sugg-item .sugg-name{display:flex;align-items:center;gap:6px;flex:1;min-width:0}.sugg-item .sugg-name span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sugg-item .sugg-name i{color:var(--primary);font-size:.75rem;flex-shrink:0}.sugg-item .sugg-info{display:flex;align-items:center;gap:8px;flex-shrink:0;font-size:.72rem;color:var(--muted)}.sugg-item .sugg-km{color:var(--primary-dark);font-weight:700}.sugg-item .sugg-price{color:var(--success);font-weight:700}
+.gps-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;margin-top:8px;border:1.5px dashed var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);font-family:'Cairo';font-weight:700;font-size:.82rem;cursor:pointer;transition:.3s}.gps-btn:hover{background:var(--secondary-bg);border-style:solid}.gps-btn.loading{opacity:.6;pointer-events:none}.cart-delivery-loading{display:none;text-align:center;padding:10px;font-size:.8rem;color:var(--muted)}.cart-delivery-loading.show{display:flex;align-items:center;justify-content:center;gap:8px}.cart-delivery-loading i{animation:spin 1s linear infinite;color:var(--primary)}.cart-delivery-result{display:none;margin-top:10px;padding:12px;background:linear-gradient(135deg,#e7fbf2,#f0fdf7);border-radius:12px;border:1px solid #c1f2dc}.cart-delivery-result.show{display:block;animation:slideUpSm .4s ease}.delivery-result-grid{display:flex;justify-content:space-around;align-items:center;gap:10px;margin:8px 0}.delivery-result-item{text-align:center}.delivery-result-item .dr-icon{font-size:1.2rem;margin-bottom:4px;display:block}.delivery-result-item .dr-value{font-size:1.1rem;font-weight:800;display:block}.delivery-result-item .dr-label{font-size:.7rem;color:var(--muted);font-weight:600}.delivery-result-name{font-size:.85rem;font-weight:700;color:var(--text);text-align:center;margin-bottom:5px}.delivery-result-name i{color:var(--success);margin-left:5px}.delivery-result-divider{width:1px;height:40px;background:#c1f2dc}.cart-delivery-remove{display:block;margin:8px auto 0;background:none;border:1px solid #ffd1d6;color:var(--danger);cursor:pointer;font-size:.78rem;font-weight:700;font-family:'Cairo';padding:5px 15px;border-radius:8px;transition:.3s}.cart-delivery-remove:hover{background:#fff1f2}@keyframes slideUpSm{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .cart-total{margin-top:10px;padding-top:8px;border-top:2px solid #eee}.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-weight:700;font-size:.85rem}.cart-total-row i{margin-left:4px}.cart-total-main{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:2px dashed #eee;margin-top:4px}.close-cart-btn{margin-top:6px;background:#eee;border:none;width:100%;padding:9px;border-radius:10px;cursor:pointer;font-family:'Cairo';font-weight:600;transition:.3s;font-size:.9rem}.close-cart-btn:hover{background:#ddd}
 .animate-on-scroll{opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s ease}.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
 
@@ -92,13 +80,6 @@
 </style>
 </head>
 <body>
-```
-
----
-
-### الجزء 2: (انسخ من هنا والصقه تحت الجزء الأول مباشرة لإنهاء الملف)
-
-```html
 <div class="preloader" id="preloader"><div class="preloader-spinner"></div><p class="preloader-text"><i class="fas fa-cookie-bite" style="margin-left:8px"></i>جاري تحميل مدرسة أمير...</p></div>
 <div class="progress-bar" id="progressBar" style="width:0%"></div>
 <div class="toast-notification" id="toastNotification"></div>
@@ -141,7 +122,14 @@
 <h3 class="section-title animate-on-scroll"><i class="far fa-clock"></i> أوقات العمل</h3>
 <div class="hours-card animate-on-scroll"><table class="hours-table"><tr><td><i class="fas fa-calendar-day"></i><span>السبت – الخميس</span></td><td class="time-cell"><div class="time-wrap"><span>17:00</span><span>مساءً</span></div><span class="dash">–</span><div class="time-wrap"><span>09:00</span><span>صباحاً</span></div></td></tr><tr><td><i class="fas fa-heart"></i><span>الجمعة</span></td><td class="time-cell"><div class="time-wrap"><span>17:00</span><span>مساءً</span></div><span class="dash">–</span><div class="time-wrap"><span>14:00</span><span>مساءً</span></div></td></tr></table><p class="working-status"><i class="fas fa-check-circle pulse-icon" style="margin-left:5px"></i> نحن جاهزون لاستقبال طلبياتكم</p></div>
 
-<div class="links-container animate-on-scroll"><a href="tel:+213699748196" class="link-btn"><i class="fa fa-phone"></i> 0699 74 81 96</a><a href="tel:+213660508949" class="link-btn"><i class="fa fa-phone"></i> 0660 50 89 49</a><a href="https://wa.me/213699748196" class="link-btn"><i class="fab fa-whatsapp"></i> واتساب</a><a href="https://www.facebook.com/amirformation" class="link-btn"><i class="fab fa-facebook"></i> فايسبوك</a><a href="https://www.tiktok.com/@chefsamahbradai" class="link-btn"><i class="fab fa-tiktok"></i> تيك توك</a><a href="#" class="link-btn"><i class="fa fa-location-dot"></i> أولاد محمد – الشلف</a></div>
+<div class="links-container animate-on-scroll">
+    <a href="tel:+213699748196" class="link-btn"><i class="fa fa-phone"></i> 0699 74 81 96</a>
+    <a href="tel:+213660508949" class="link-btn"><i class="fa fa-phone"></i> 0660 50 89 49</a>
+    <a href="https://wa.me/213699748196" class="link-btn"><i class="fab fa-whatsapp"></i> واتساب</a>
+    <a href="https://www.facebook.com/amirformation" class="link-btn"><i class="fab fa-facebook"></i> فايسبوك</a>
+    <a href="https://www.tiktok.com/@chefsamahbradai" class="link-btn"><i class="fab fa-tiktok"></i> تيك توك</a>
+    <a href="#" class="link-btn"><i class="fa fa-location-dot"></i> أولاد محمد – الشلف</a>
+</div>
 
 <h3 class="section-title animate-on-scroll"><i class="fas fa-hourglass-half"></i> عدّاد المناسبات</h3>
 <div class="countdown-container animate-on-scroll">
@@ -150,18 +138,21 @@
     <div class="countdown-grid"><div class="countdown-item"><span id="eid-fitr-days" class="cd-days">--</span><span class="cd-label"><i class="fas fa-moon"></i> عيد الفطر</span></div><div class="countdown-item"><span id="eid-adha-days" class="cd-days">--</span><span class="cd-label"><i class="fas fa-mosque"></i> عيد الأضحى</span></div></div>
 </div>
 
-<section id="quoteSection"><h3 class="section-title animate-on-scroll"><i class="fas fa-wand-magic-sparkles"></i> طلب تسعيرة</h3><div class="order-form animate-on-scroll">
-    <div class="form-grid">
-        <div class="form-group"><label><i class="fas fa-user"></i> الاسم:</label><input type="text" id="custName" placeholder="اسمك الكريم"></div>
-        <div class="form-group"><label><i class="fas fa-phone"></i> الهاتف:</label><input type="tel" id="custPhone" placeholder="0XXX XX XX XX" maxlength="13" oninput="formatPhone(this)" inputmode="numeric"></div>
-        <div class="form-group"><label><i class="fas fa-calendar-check"></i> المناسبة:</label><select id="eventType"><option value="عرس">عرس</option><option value="خطوبة">خطوبة</option><option value="ختان">ختان</option><option value="تخرج">تخرج</option><option value="عقيقة">عقيقة</option><option value="أخرى">أخرى</option></select></div>
-        <div class="form-group"><label><i class="fas fa-clock"></i> التاريخ:</label><input type="date" id="eventDate"></div>
-        <div class="form-group full-width"><label><i class="fas fa-users"></i> المدعوين:</label><select id="guestCount"><option>أقل من 50</option><option>50-100</option><option>100-200</option><option>200-500</option><option>أكثر من 500</option></select></div>
-        <div class="form-group full-width"><label><i class="fas fa-pen"></i> ملاحظات:</label><textarea id="orderNotes" rows="3" placeholder="تفاصيل إضافية..."></textarea></div>
+<section id="quoteSection">
+    <h3 class="section-title animate-on-scroll"><i class="fas fa-wand-magic-sparkles"></i> طلب تسعيرة</h3>
+    <div class="order-form animate-on-scroll">
+        <div class="form-grid">
+            <div class="form-group"><label><i class="fas fa-user"></i> الاسم:</label><input type="text" id="custName" placeholder="اسمك الكريم"></div>
+            <div class="form-group"><label><i class="fas fa-phone"></i> الهاتف:</label><input type="tel" id="custPhone" placeholder="0XXX XX XX XX" maxlength="13" oninput="formatPhone(this)" inputmode="numeric"></div>
+            <div class="form-group"><label><i class="fas fa-calendar-check"></i> المناسبة:</label><select id="eventType"><option value="عرس">عرس</option><option value="خطوبة">خطوبة</option><option value="ختان">ختان</option><option value="تخرج">تخرج</option><option value="عقيقة">عقيقة</option><option value="أخرى">أخرى</option></select></div>
+            <div class="form-group"><label><i class="fas fa-clock"></i> التاريخ:</label><input type="date" id="eventDate"></div>
+            <div class="form-group full-width"><label><i class="fas fa-users"></i> المدعوين:</label><select id="guestCount"><option>أقل من 50</option><option>50-100</option><option>100-200</option><option>200-500</option><option>أكثر من 500</option></select></div>
+            <div class="form-group full-width"><label><i class="fas fa-pen"></i> ملاحظات:</label><textarea id="orderNotes" rows="3" placeholder="تفاصيل إضافية..."></textarea></div>
+        </div>
+        <div style="font-size:.78rem;color:#666;margin:12px 0;background:#fff8f0;padding:8px;border-right:3px solid #f54c03;border-radius:8px"><i class="fas fa-clipboard-list" style="margin-left:4px;color:#f54c03"></i> محتوى السلة يُرفق تلقائياً.</div>
+        <button class="btn-send" onclick="sendToWhatsApp()"><i class="fab fa-whatsapp"></i> إرسال</button>
     </div>
-    <div style="font-size:.78rem;color:#666;margin:12px 0;background:#fff8f0;padding:8px;border-right:3px solid #f54c03;border-radius:8px"><i class="fas fa-clipboard-list" style="margin-left:4px;color:#f54c03"></i> محتوى السلة يُرفق تلقائياً.</div>
-    <button class="btn-send" onclick="sendToWhatsApp()"><i class="fab fa-whatsapp"></i> إرسال</button>
-</div></section>
+</section>
 
 <h3 class="section-title animate-on-scroll"><i class="fas fa-star"></i> لماذا مدرسة أمير؟</h3>
 <div class="features-grid animate-on-scroll"><div class="feature-card"><i class="fas fa-hands"></i><h4>صنع يدوي</h4></div><div class="feature-card"><i class="fas fa-cookie-bite"></i><h4>مكونات طبيعية</h4></div><div class="feature-card"><i class="fas fa-calendar-check"></i><h4>احترام المواعيد</h4></div></div>
@@ -205,12 +196,13 @@
         <div id="cartItemsList"></div>
         <div class="cart-delivery-section">
             <h4><i class="fas fa-motorcycle"></i> إضافة توصيل؟ <span style="font-size:.68rem;color:var(--muted);font-weight:400">(ولاية الشلف)</span></h4>
-            <button class="gps-btn" id="gpsBtn" onclick="useGPS()"><i class="fas fa-crosshairs"></i> تحديد بلديتي تلقائياً (GPS)</button>
-            <div class="cart-delivery-input-wrap" id="cartDeliveryInputWrap">
+            <div class="cart-delivery-input-wrap">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" class="cart-delivery-input" id="cartDeliveryInput" readonly placeholder="سيظهر اسم المنطقة هنا...">
+                <input type="text" class="cart-delivery-input" id="cartDeliveryInput" placeholder="اكتب اسم بلديتك أو حيّك..." autocomplete="off" oninput="onDeliveryInput()" onfocus="onDeliveryInput()">
+                <div class="cart-delivery-sugg" id="cartDeliverySugg"></div>
             </div>
-            <div class="cart-delivery-loading" id="cartDeliveryLoading"><i class="fas fa-spinner"></i><span>جاري تحديد موقعك بدقة...</span></div>
+            <button class="gps-btn" id="gpsBtn" onclick="useGPS()"><i class="fas fa-crosshairs"></i> حدد موقعي تلقائياً (GPS)</button>
+            <div class="cart-delivery-loading" id="cartDeliveryLoading"><i class="fas fa-spinner"></i><span>جاري البحث...</span></div>
             <div class="cart-delivery-result" id="cartDeliveryResult"></div>
         </div>
     </div>
@@ -226,20 +218,24 @@
 </div>
 
 <script>
-// إحداثيات مقر المدرسة (أولاد محمد - تقريبية من الرابط الخاص بك)
-var ORIGIN_LAT=36.1950, ORIGIN_LNG=1.3050, deliveryData=null;
+// إحداثيات مقر المدرسة (أولاد محمد - 5968+4V9)
+var ORIGIN_LAT=36.1950, ORIGIN_LNG=1.3050, deliveryData=null, searchTimeout=null;
 
-// دالة حساب المسافة
+// دالة حساب مسافة دقيقة مع مسار الطريق الفعلي تقريبياً بزيادة 30%
 function haversine(la1,lo1,la2,lo2){
-    var R=6371, dLa=(la2-la1)*Math.PI/180, dLo=(lo2-lo1)*Math.PI/180;
-    var a=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)*Math.sin(dLo/2);
-    return Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*1.3);
+    var R=6371, x=(la2-la1)*Math.PI/180, y=(lo2-lo1)*Math.PI/180, 
+    z=Math.sin(x/2)*Math.sin(x/2)+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(y/2)*Math.sin(y/2);
+    var dist = R*2*Math.atan2(Math.sqrt(z),Math.sqrt(1-z));
+    return parseFloat((dist * 1.3).toFixed(1)); // مسافة طرق
 }
 
+// دالة حساب السعر بدقة
 function calcPrice(km){
     if(km<=0) return 0;
     if(km<=3) return 150;
-    return 150+Math.ceil((km-3)/2)*50;
+    var extra = km - 3;
+    var price = 150 + (Math.ceil(extra / 2) * 50);
+    return price;
 }
 
 function formatPhone(input){
@@ -253,54 +249,107 @@ function formatPhone(input){
     input.value=f;
 }
 
-// GPS فقط (بدون كتابة) باستخدام OpenStreetMap المجاني
+// البحث عن الأماكن (مجاني وبدون حدود تقريباً)
+function onDeliveryInput(){
+    var v=document.getElementById('cartDeliveryInput').value.trim();
+    var s=document.getElementById('cartDeliverySugg');
+    var l=document.getElementById('cartDeliveryLoading');
+    
+    if(v.length===0){
+        s.classList.remove('show'); l.classList.remove('show');
+        if(deliveryData){
+            deliveryData=null; document.getElementById('cartDeliveryResult').classList.remove('show');
+            document.getElementById('deliveryTotalRow').style.display='none'; updateCartTotals();
+        }
+        return;
+    }
+    if(v.length<2){s.classList.remove('show');return}
+    clearTimeout(searchTimeout);
+    searchTimeout=setTimeout(function(){fetchPlaces(v)},600);
+}
+
+function fetchPlaces(q){
+    var s=document.getElementById('cartDeliverySugg'), l=document.getElementById('cartDeliveryLoading');
+    l.classList.add('show'); s.classList.remove('show');
+    
+    // استخدام خوادم Nominatim للبحث داخل ولاية الشلف
+    fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q+', Chlef, Algeria')+'&limit=8&addressdetails=1&accept-language=ar')
+    .then(function(r){return r.json()}).then(function(d){
+        l.classList.remove('show');
+        if(!d||!d.length){s.innerHTML='<div class="sugg-item" style="justify-content:center;cursor:default;color:var(--muted)"><i class="fas fa-search" style="color:#ddd;margin-left:6px"></i> لا توجد نتائج - جرب اسم آخر</div>';s.classList.add('show');return}
+        
+        // فلترة الشلف فقط
+        var f=d.filter(function(p){var a=+p.lat,b=+p.lon;return a>=35.5&&a<=36.8&&b>=0.5&&b<=2.5});
+        if(!f.length){s.innerHTML='<div class="sugg-item" style="justify-content:center;cursor:default;color:var(--muted)"><i class="fas fa-exclamation-circle" style="color:var(--primary);margin-left:6px"></i> المكان خارج ولاية الشلف</div>';s.classList.add('show');return}
+        
+        var seen={},u=[];
+        f.forEach(function(p){
+            var n=p.address.neighbourhood||p.address.suburb||p.address.village||p.address.town||p.address.city||p.display_name.split(',')[0];
+            if(!seen[n]){seen[n]=true;u.push({name:n, full:p})}
+        });
+        
+        s.innerHTML=u.map(function(item){
+            var p=item.full;
+            var la=+p.lat, bo=+p.lon, k=haversine(ORIGIN_LAT,ORIGIN_LNG,la,bo), pr=calcPrice(k);
+            var dt=""; if(p.address.county) dt=p.address.county.replace('دائرة ','');
+            return '<div class="sugg-item" onclick="pickPlace(\''+item.name.replace(/'/g,"\\'")+'\',\''+dt.replace(/'/g,"\\'")+'\','+k+','+pr+','+la+','+bo+')"><div class="sugg-name"><i class="fas fa-map-pin"></i><span>'+item.name+(dt?' <small style="color:var(--muted);font-weight:400">('+dt+')</small>':'')+'</span></div><div class="sugg-info"><span class="sugg-km"><i class="fas fa-route" style="margin-left:2px"></i>'+k+' كم</span><span class="sugg-price"><i class="fas fa-coins" style="margin-left:2px"></i>'+pr+' دج</span></div></div>';
+        }).join('');
+        s.classList.add('show');
+    }).catch(function(){l.classList.remove('show');s.innerHTML='<div class="sugg-item" style="justify-content:center;cursor:default;color:var(--danger)"><i class="fas fa-wifi" style="margin-left:6px"></i> تأكد من اتصالك بالإنترنت</div>';s.classList.add('show')});
+}
+
+function pickPlace(n,dt,k,pr,la,lo){
+    deliveryData={name:n,detail:dt,km:k,price:pr,lat:la||null,lon:lo||null};
+    document.getElementById('cartDeliveryInput').value=n;
+    document.getElementById('cartDeliverySugg').classList.remove('show');
+    var r=document.getElementById('cartDeliveryResult'),lnk='';
+    if(la&&lo)lnk='<a href="https://www.google.com/maps?q='+la+','+lo+'" target="_blank" style="color:var(--primary);font-size:.72rem;text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:4px"><i class="fas fa-external-link-alt"></i> عرض على الخريطة</a>';
+    r.innerHTML='<div class="delivery-result-name"><i class="fas fa-check-circle"></i> التوصيل إلى: '+n+'</div>'+(dt?'<div style="font-size:.72rem;color:var(--muted);text-align:center;margin-bottom:4px">'+dt+'</div>':'')+lnk+'<div class="delivery-result-grid"><div class="delivery-result-item"><span class="dr-icon" style="color:var(--primary)"><i class="fas fa-route"></i></span><span class="dr-value" style="color:var(--primary-dark)">'+k+' كم</span><span class="dr-label">المسافة</span></div><div class="delivery-result-divider"></div><div class="delivery-result-item"><span class="dr-icon" style="color:var(--success)"><i class="fas fa-coins"></i></span><span class="dr-value" style="color:var(--success)">'+pr+' دج</span><span class="dr-label">التوصيل</span></div></div><button class="cart-delivery-remove" onclick="removeDelivery()"><i class="fas fa-times" style="margin-left:4px"></i> إلغاء التوصيل</button>';
+    r.classList.add('show');document.getElementById('deliveryTotalRow').style.display='flex';updateCartTotals();
+    showToast('<i class="fas fa-motorcycle" style="margin-left:5px"></i> تم إضافة التوصيل');
+}
+
+function removeDelivery(){
+    deliveryData=null; document.getElementById('cartDeliveryInput').value='';
+    document.getElementById('cartDeliveryResult').classList.remove('show');
+    document.getElementById('deliveryTotalRow').style.display='none'; updateCartTotals();
+    showToast('<i class="fas fa-times-circle" style="margin-left:5px"></i> تم إلغاء التوصيل');
+}
+
+// التحديد بالـ GPS
 function useGPS(){
     var b=document.getElementById('gpsBtn'), l=document.getElementById('cartDeliveryLoading');
-    if(!navigator.geolocation){showToast('<i class="fas fa-exclamation-circle" style="margin-left:5px"></i> متصفحك لا يدعم تحديد الموقع');return}
+    if(!navigator.geolocation){showToast('<i class="fas fa-exclamation-circle" style="margin-left:5px"></i> متصفحك لا يدعم الـ GPS');return}
     b.classList.add('loading'); b.innerHTML='<i class="fas fa-spinner fa-spin" style="margin-left:5px"></i> جاري تحديد موقعك بدقة...'; l.classList.add('show');
     
     navigator.geolocation.getCurrentPosition(function(pos){
         var la=pos.coords.latitude, lo=pos.coords.longitude;
+        
+        // التأكد أنه في الشلف
         if(la<35.5||la>36.8||lo<0.5||lo>2.5){
             b.classList.remove('loading'); b.innerHTML='<i class="fas fa-crosshairs"></i> تحديد بلديتي تلقائياً (GPS)'; l.classList.remove('show');
-            showToast('<i class="fas fa-map-marker-alt" style="margin-left:5px"></i> عذراً، التوصيل داخل ولاية الشلف فقط'); return;
+            showToast('<i class="fas fa-map-marker-alt" style="margin-left:5px"></i> عذراً، التوصيل في الشلف فقط'); return;
         }
+        
         var k=haversine(ORIGIN_LAT,ORIGIN_LNG,la,lo), pr=calcPrice(k);
         
         fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat='+la+'&lon='+lo+'&accept-language=ar')
         .then(function(r){return r.json()}).then(function(d){
             l.classList.remove('show'); b.classList.remove('loading'); b.innerHTML='<i class="fas fa-crosshairs"></i> تحديث موقعي (GPS)';
-            var n='موقعي المحدد (GPS)', dt='';
-            if(d&&d.address){n=d.address.neighbourhood||d.address.suburb||d.address.village||d.address.town||d.address.city||n;if(d.address.road)dt=d.address.road}
-            document.getElementById('cartDeliveryInputWrap').style.display='block';
-            document.getElementById('cartDeliveryInput').value=n;
+            var n='موقعي الحالي (GPS)', dt='';
+            if(d&&d.address){
+                n=d.address.neighbourhood||d.address.suburb||d.address.village||d.address.town||d.address.city||n;
+                if(d.address.county) dt=d.address.county.replace('دائرة ','');
+            }
             pickPlace(n,dt,k,pr,la,lo);
         }).catch(function(){
             l.classList.remove('show'); b.classList.remove('loading'); b.innerHTML='<i class="fas fa-crosshairs"></i> تحديث موقعي (GPS)';
-            document.getElementById('cartDeliveryInputWrap').style.display='block';
-            document.getElementById('cartDeliveryInput').value='موقعي (GPS)'; pickPlace('موقعي (GPS)','',k,pr,la,lo);
+            pickPlace('موقعي المحدد بـ GPS','',k,pr,la,lo);
         });
     },function(e){
         b.classList.remove('loading'); b.innerHTML='<i class="fas fa-crosshairs"></i> تحديد بلديتي تلقائياً (GPS)'; l.classList.remove('show');
-        showToast('<i class="fas fa-location-crosshairs" style="margin-left:5px"></i> يرجى السماح بالوصول للموقع');
-    },{enableHighAccuracy:true,timeout:15000,maximumAge:0});
-}
-
-function pickPlace(n,dt,k,pr,la,lo){
-    deliveryData={name:n,detail:dt,km:k,price:pr,lat:la||null,lon:lo||null};
-    var r=document.getElementById('cartDeliveryResult'), lnk='';
-    if(la&&lo)lnk='<a href="https://www.google.com/maps?q='+la+','+lo+'" target="_blank" style="color:var(--primary);font-size:.72rem;text-decoration:none;display:inline-flex;align-items:center;gap:3px;margin-top:4px"><i class="fas fa-external-link-alt"></i> عرض على الخريطة</a>';
-    r.innerHTML='<div class="delivery-result-name"><i class="fas fa-check-circle"></i> التوصيل إلى: '+n+'</div>'+(dt?'<div style="font-size:.72rem;color:var(--muted);text-align:center;margin-bottom:4px">'+dt+'</div>':'')+lnk+'<div class="delivery-result-grid"><div class="delivery-result-item"><span class="dr-icon" style="color:var(--primary)"><i class="fas fa-route"></i></span><span class="dr-value" style="color:var(--primary-dark)">'+k+' كم</span><span class="dr-label">المسافة</span></div><div class="delivery-result-divider"></div><div class="delivery-result-item"><span class="dr-icon" style="color:var(--success)"><i class="fas fa-coins"></i></span><span class="dr-value" style="color:var(--success)">'+pr+' دج</span><span class="dr-label">التوصيل</span></div></div><button class="cart-delivery-remove" onclick="removeDelivery()"><i class="fas fa-times" style="margin-left:4px"></i> إلغاء التوصيل</button>';
-    r.classList.add('show'); document.getElementById('deliveryTotalRow').style.display='flex'; updateCartTotals();
-    showToast('<i class="fas fa-motorcycle" style="margin-left:5px"></i> تم تحديد موقعك وتحديث السعر');
-}
-
-function removeDelivery(){
-    deliveryData=null; document.getElementById('cartDeliveryInput').value=''; document.getElementById('cartDeliveryInputWrap').style.display='none';
-    document.getElementById('cartDeliveryResult').classList.remove('show');
-    document.getElementById('deliveryTotalRow').style.display='none'; updateCartTotals();
-    var b=document.getElementById('gpsBtn'); b.innerHTML='<i class="fas fa-crosshairs"></i> تحديد بلديتي تلقائياً (GPS)';
-    showToast('<i class="fas fa-times-circle" style="margin-left:5px"></i> تم إلغاء التوصيل');
+        showToast('<i class="fas fa-location-crosshairs" style="margin-left:5px"></i> يرجى السماح بتحديد الموقع');
+    },{enableHighAccuracy:true,timeout:10000,maximumAge:0});
 }
 
 var sweets=[{name:"تشارك مسكّر",price:"70 دج",img:"images/tcharakmsakar.jpg"},{name:"تشارك العريان",price:"70 دج",img:"images/tcharakarian.jpg"},{name:"عرايش",price:"90 دج",img:"images/araiech.jpg"},{name:"كعيكعات",price:"80 دج",img:"images/kaikat.jpg"},{name:"مقروض زمان",price:"70 دج",img:"images/maqrout.jpg"},{name:"مقروض اللوز",price:"100 دج",img:"images/maqroutlouz.jpg"},{name:"كفتة",price:"200 دج",img:"images/kefta.jpg"},{name:"دزيريات",price:"100 دج",img:"images/dziriyat.jpg"},{name:"بقالوة",price:"80 دج",img:"images/baklawa.jpg"},{name:"بقالوة تركية",price:"80 دج",img:"images/turkish.jpg"},{name:"قنيدلات",price:"80 دج",img:"images/qnidlet.jpg"},{name:"مشوك الباي",price:"200 دج",img:"images/mcheweklouz.jpg"},{name:"الفاكهة",price:"200 دج",img:"images/fruits.jpg"},{name:"صابلي المعجون",price:"40 دج",img:"images/sabli.jpg"},{name:"مشوك",price:"60 دج",img:"images/mchewek.jpg"},{name:"جلجلانية",price:"70 دج",img:"images/djeljlania.jpg"},{name:"مخبز",price:"120 دج",img:"images/mkhabez.jpg"},{name:"كعك النقاش",price:"70 دج",img:"images/naqach.jpg"},{name:"سنيكرز",price:"80 دج",img:"images/snickers.jpg"},{name:"قلوب الشكولاطة",price:"80 دج",img:"images/chikoula.jpg"},{name:"بنيون",price:"80 دج",img:"images/bniwen.jpg"},{name:"طابع زمان",price:"30 دج",img:"images/tabaa.jpg"},{name:"طابع الطلية",price:"40 دج",img:"images/tabaatalia.jpg"},{name:"غريبية",price:"50 دج",img:"images/ghriba.jpg"}];
@@ -417,6 +466,7 @@ window.addEventListener('scroll',function(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var c=document.getElementById('cartModal');if(c&&c.style.display==='flex')toggleCart()}});
 document.addEventListener('click',function(e){
     if(e.target.classList.contains('nav-link')||e.target.closest('.nav-link')){document.getElementById('navLinks').classList.remove('open');document.getElementById('menuIcon').className='fas fa-bars'}
+    if(!e.target.closest('.cart-delivery-input-wrap')){var s=document.getElementById('cartDeliverySugg');if(s)s.classList.remove('show')}
 });
 
 document.addEventListener('DOMContentLoaded',function(){
