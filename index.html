@@ -166,8 +166,173 @@
 .cart-total{margin-top:10px;padding-top:8px;border-top:2px solid #eee}.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-weight:700;font-size:.85rem}.cart-total-row i{margin-left:4px}.cart-total-main{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:2px dashed #eee;margin-top:4px}.close-cart-btn{margin-top:6px;background:#eee;border:none;width:100%;padding:9px;border-radius:10px;cursor:pointer;font-family:'Cairo';font-weight:600;transition:.3s;font-size:.9rem}.close-cart-btn:hover{background:#ddd}
 .animate-on-scroll{opacity:0;transform:translateY(25px);transition:opacity .5s ease,transform .5s ease}.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
 
-/* ===== التذييل ===== */
-.main-footer{margin-top:30px;background:#2d3436;color:#fff;padding:40px 15px 20px;border-radius:00px 00px 0 0;position:relative}.main-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--primary-gradient)}.footer-logo{font-family:'Cairo';font-size:2.5rem;font-weight:700;text-align:center;margin:18px 0;background:linear-gradient(to right,#ff4757 20%,#ff6b81 40%,#fff 50%,#ff6b81 60%,#ff4757 80%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite}@keyframes shine{to{background-position:200% center}}.footer-tagline{opacity:.8;margin-bottom:18px;transition:.3s;text-align:center}.footer-social{text-align:center;margin:15px 0}.footer-social a{width:45px;height:45px;background:rgba(255,255,255,.08);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;margin:0 8px;transition:var(--ts)}.footer-social a:hover{background:var(--primary);transform:translateY(-10px) rotate(360deg)}.footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:20px;padding-top:18px;text-align:center}.school-name{transition:.3s}.footer-bottom:hover .school-name{color:var(--primary)}.made-with{margin-top:10px;font-size:.75rem;opacity:.7}.heart-icon{color:#ff4757;display:inline-block}.footer-bottom:hover .heart-icon{animation:pulseHeart .8s infinite}@keyframes pulseHeart{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}.footer-bottom-info{text-align:center;padding:10px;background:#222}.designed-by{font-size:.85rem;color:#999}.designed-by a{text-decoration:none;color:inherit}.highlight-primary{color:#f54c03;font-weight:bold}
+.main-footer {
+    margin-top: 30px;
+    background: #2d3436;
+    color: white;
+    padding: 40px 15px 20px;
+    border-radius: 40px 40px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.footer-logo {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.5rem; /* حجم كبير وبارز */
+    font-weight: 700;
+    text-align: center;
+    margin: 18px 0;
+    
+    /* تدرج لوني وردي احترافي */
+    background: linear-gradient(to right, #ff4757 20%, #ff6b81 40%, #ffffff 50%, #ff6b81 60%, #ff4757 80%);
+    background-size: 200% auto;
+    
+    /* جعل التدرج يظهر داخل النص فقط */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* أنيميشن التلألؤ */
+    animation: shine 3s linear infinite;
+    
+    /* ظل خفيف لإعطاء عمق */
+    filter: drop-shadow(0 5px 15px rgba(255, 71, 87, 0.2));
+}
+
+/* حركة التلألؤ */
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* التجاوب مع الهاتف */
+@media (max-width: 768px) {
+    .footer-logo {
+        font-size: 1.2rem; /* تصغير الحجم ليناسب الموبايل */
+        margin: 15px 0;
+    }
+}
+.footer-tagline {
+    opacity: 0.8;
+    margin-bottom: 18px;
+    transition: 0.3s;
+}
+
+.main-footer:hover .footer-tagline {
+    opacity: 1;
+    color: var(--primary);
+}
+
+/* حركة أيقونات التواصل */
+.footer-social a {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    margin: 0 8px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.footer-social a:hover {
+    background: var(--primary);
+    transform: translateY(-10px) rotate(360deg);
+    box-shadow: 0 10px 20px rgba(255, 107, 129, 0.3);
+}
+
+/* منطقة الحقوق السفلى */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+    padding-top: 18px;
+}
+
+.school-name {
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.footer-bottom:hover .school-name {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(255, 107, 129, 0.4);
+}
+
+.made-with {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footer-bottom:hover .made-with {
+    opacity: 1;
+    letter-spacing: 1px;
+}
+
+/* حركة القلب النابض */
+.heart-icon {
+    color: #ff4757;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-bottom:hover .heart-icon {
+    animation: pulseHeart 0.8s infinite;
+}
+
+@keyframes pulseHeart {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+/* Container link styling */
+.designed-by a {
+    text-decoration: none;
+    color: inherit; /* Takes the color of the parent text */
+    transition: 0.3s;
+}
+/* التنسيق الأساسي للجزء السفلي */
+.designed-by {
+    margin-top: 20px;       /* ينزل قليلاً عن العناصر التي فوقه */
+    font-size: 0.9rem;      /* حجم الخط الأساسي للحاسوب */
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.designed-by a {
+    text-decoration: none;  /* إزالة السطر */
+    display: inline-block;  /* للسماح بحركات التحويل (Transform) */
+    transition: transform 0.3s ease; /* نعومة الحركة */
+}
+
+/* التنسيق الخاص باسمك */
+.highlight-primary {
+    color: #f54c03;         /* اللون البرتقالي المطلوب */
+    font-weight: bold;
+}
+
+/* تأثير الهوفر (عند تمرير الماوس) */
+.designed-by a:hover {
+    transform: translateY(3px); /* ينزل قليلاً تحت عند الهوفر */
+    opacity: 0.8;               /* شفافية خفيفة تعطي جمالية */
+}
+
+/* التجاوب مع الهاتف (Media Query) */
+@media (max-width: 768px) {
+    .designed-by {
+        font-size: 0.75rem;    /* يصغر حجم الخط في الهاتف */
+        margin-top: 15px;      /* تقليل المسافة قليلاً لتناسب الشاشات الصغيرة */
+    }
+    
+    .highlight-primary {
+        font-size: 0.75rem;     /* تصغير الاسم أكثر ليتناسب مع الهاتف */
+    }
+}
+
 
 /* ===== التجاوب (Mobile) ===== */
 @media(max-width:768px){
