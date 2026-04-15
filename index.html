@@ -565,53 +565,6 @@ function sendToWhatsApp(){
     showToast('<i class="fas fa-paper-plane" style="margin-left:5px"></i> تم الإرسال!');
 }
 
-var testimonials=[
-    {name:"أم ريتاج",text:".البقالوة تعكم شابة بزاف، تذوب في الفم يعطيك الصحة شاف",stars:5},
-    {name:"كريمة ب.",text:".درت فورماسيون والحمد لله راني نخدم من داري والطلبيات ما يحبسوش",stars:5},
-    {name:"سمية مهداوي",text:".أحسن مدرسة في الشلف، المعاملة روعة والتعليم بضمير",stars:5},
-    {name:"فاطمة الزهراء",text:".المقروض جاني مرمل ومعسل للقلب، ربي يبارك في رزقكم",stars:5},
-    {name:"فايزة أم أنس",text:".حمرتولي وجهي في عرس خويا، الضياف قاع سألو على الحلويات",stars:5},
-    {name:"نادية من الشلف",text:".طلبت للعرس وكانت الحلويات فوق الممتاز، الكل عجبو",stars:5}
-];
-
-function renderTestimonials(){
-    var l=document.getElementById("testimonialsList");if(!l)return;
-    var all=[];for(var r=0;r<6;r++)all=all.concat(testimonials);
-    var h='';
-    for(var i=0;i<all.length;i++){
-        var t=all[i],s='';for(var j=0;j<t.stars;j++)s+='<i class="fas fa-star"></i>';
-        h+='<div class="testimonial-card"><div class="testi-name"><i class="fas fa-user-circle" style="margin-left:4px"></i>'+t.name+'</div><div class="stars">'+s+'</div><p class="testi-text">"'+t.text+'"</p></div>';
-    }
-    l.innerHTML=h;
-}
-
-function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
-function toggleMobileMenu(){var n=document.getElementById('navLinks'),m=document.getElementById('menuIcon');n.classList.toggle('open');m.className=n.classList.contains('open')?'fas fa-times':'fas fa-bars'}
-
-var observer=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');if(en.target.classList.contains('stats-bar'))animateCounters();observer.unobserve(en.target)}})},{threshold:.1});
-
-window.addEventListener('scroll',function(){
-    var st=document.documentElement.scrollTop,sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-    if(sh>0)document.getElementById('progressBar').style.width=(st/sh*100)+'%';
-    var n=document.getElementById('mainNavbar');if(n){window.scrollY>50?n.classList.add('scrolled'):n.classList.remove('scrolled')}
-    var b=document.getElementById("backToTop");if(b)b.style.display=(document.body.scrollTop>500||document.documentElement.scrollTop>500)?"flex":"none";
-});
-
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){var c=document.getElementById('cartModal');if(c&&c.style.display==='flex')toggleCart()}});
-document.addEventListener('click',function(e){if(e.target.classList.contains('nav-link')||e.target.closest('.nav-link')){document.getElementById('navLinks').classList.remove('open');document.getElementById('menuIcon').className='fas fa-bars'}});
-
-document.addEventListener('DOMContentLoaded',function(){
-    setTimeout(hidePreloader,1000);
-    renderSweets();typeEffect();updateShopStatus();updateCountdowns();renderTestimonials();
-    document.getElementById("backToTop").onclick=scrollToTop;
-    document.getElementById("mobileMenuBtn").onclick=toggleMobileMenu;
-    document.querySelectorAll(".faq-question").forEach(function(q){
-        q.onclick=function(){document.querySelectorAll(".faq-item").forEach(function(it){if(it!==q.parentElement)it.classList.remove("active")});q.parentElement.classList.toggle("active")}
-    });
-    document.getElementById("year").innerText=new Date().getFullYear();
-    document.querySelectorAll('.animate-on-scroll').forEach(function(el){observer.observe(el)});
-    setInterval(updateShopStatus,60000);
-}
 // ===== بيانات الآراء الـ 6 =====
 var testimonials = [
     {name: "أم ريتاج", text: "البقالوة تعكم شابة بزاف، تذوب في الفم يعطيك الصحة شاف.", stars: 5},
@@ -643,6 +596,34 @@ function renderTestimonials() {
     }
     
     l.innerHTML = h;
+}
+
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+function toggleMobileMenu(){var n=document.getElementById('navLinks'),m=document.getElementById('menuIcon');n.classList.toggle('open');m.className=n.classList.contains('open')?'fas fa-times':'fas fa-bars'}
+
+var observer=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');if(en.target.classList.contains('stats-bar'))animateCounters();observer.unobserve(en.target)}})},{threshold:.1});
+
+window.addEventListener('scroll',function(){
+    var st=document.documentElement.scrollTop,sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    if(sh>0)document.getElementById('progressBar').style.width=(st/sh*100)+'%';
+    var n=document.getElementById('mainNavbar');if(n){window.scrollY>50?n.classList.add('scrolled'):n.classList.remove('scrolled')}
+    var b=document.getElementById("backToTop");if(b)b.style.display=(document.body.scrollTop>500||document.documentElement.scrollTop>500)?"flex":"none";
+});
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var c=document.getElementById('cartModal');if(c&&c.style.display==='flex')toggleCart()}});
+document.addEventListener('click',function(e){if(e.target.classList.contains('nav-link')||e.target.closest('.nav-link')){document.getElementById('navLinks').classList.remove('open');document.getElementById('menuIcon').className='fas fa-bars'}});
+
+document.addEventListener('DOMContentLoaded',function(){
+    setTimeout(hidePreloader,1000);
+    renderSweets();typeEffect();updateShopStatus();updateCountdowns();renderTestimonials();
+    document.getElementById("backToTop").onclick=scrollToTop;
+    document.getElementById("mobileMenuBtn").onclick=toggleMobileMenu;
+    document.querySelectorAll(".faq-question").forEach(function(q){
+        q.onclick=function(){document.querySelectorAll(".faq-item").forEach(function(it){if(it!==q.parentElement)it.classList.remove("active")});q.parentElement.classList.toggle("active")}
+    });
+    document.getElementById("year").innerText=new Date().getFullYear();
+    document.querySelectorAll('.animate-on-scroll').forEach(function(el){observer.observe(el)});
+    setInterval(updateShopStatus,60000);
 });
     
 window.onload=function(){setTimeout(hidePreloader,500)};
