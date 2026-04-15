@@ -533,7 +533,9 @@ function renderTestimonials() {
     
     l.innerHTML = h;
 }
-
+// استدعاء الدالة عند تحميل الصفحة
+renderTestimonials();
+    
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
 function toggleMobileMenu(){var n=document.getElementById('navLinks'),m=document.getElementById('menuIcon');n.classList.toggle('open');m.className=n.classList.contains('open')?'fas fa-times':'fas fa-bars'}
 
