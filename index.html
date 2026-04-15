@@ -65,11 +65,104 @@
 .sweets-grid{display:grid;gap:15px;padding:0 20px;grid-template-columns:repeat(2,1fr)}@media(min-width:650px){.sweets-grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:900px){.sweets-grid{grid-template-columns:repeat(4,1fr)}}.sweet-card{background:#fff;border-radius:18px;padding:10px;border:1px solid #fce4ec;transition:.3s}.sweet-card:hover{transform:translateY(-5px);border-color:var(--primary);box-shadow:var(--shadow)}.sweet-img{width:100%;height:110px;object-fit:cover;border-radius:12px;margin-bottom:10px}.sweet-name{font-weight:700;font-size:.85rem;min-height:40px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3}.sweet-price{font-size:.85rem;color:var(--primary-dark);background:#fff0f3;padding:4px 10px;border-radius:20px;font-weight:700;margin-bottom:8px}
 .add-to-cart-btn{background:var(--primary-gradient);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-weight:600;font-size:.9rem;font-family:'Cairo';display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.3s;box-shadow:0 4px 12px rgba(255,71,87,.15);width:100%;margin-top:12px}.add-to-cart-btn:hover{transform:translateY(-1.5px);box-shadow:0 6px 15px rgba(255,71,87,.25)}.add-to-cart-btn.added{background:var(--success)!important;box-shadow:0 4px 15px rgba(46,213,115,.3)!important;pointer-events:none}
 
-/* ===== الآراء المتصلة 6 آراء ===== */
-.testimonials-wrapper{overflow:hidden;margin:30px 20px;padding:20px 0;background:#fffafb;border-radius:20px;border:1px solid #fce4ec;position:relative}.testimonials-wrapper::before,.testimonials-wrapper::after{content:'';position:absolute;top:0;width:40px;height:100%;z-index:2;pointer-events:none}.testimonials-wrapper::before{right:0;background:linear-gradient(to left,#fffafb,transparent)}.testimonials-wrapper::after{left:0;background:linear-gradient(to right,#fffafb,transparent)}
-.testimonials-track{display:flex;gap:20px;width:max-content;animation:scrollT 30s linear infinite}.testimonials-track:hover{animation-play-state:paused}.testimonial-card{background:var(--white);padding:20px;border-radius:15px;width:280px;text-align:right;border-right:4px solid var(--primary);flex-shrink:0;transition:.3s}.testimonial-card:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.08)}.testi-name{font-weight:700;color:var(--primary);font-size:.95rem;margin-bottom:5px}.testi-name i{margin-left:5px}.stars{color:var(--star-color);font-size:.9rem;margin-bottom:8px}.testi-text{font-size:.9rem;color:var(--text);line-height:1.5;font-style:italic}
-@keyframes scrollT{0%{transform:translateX(0)}100%{transform:translateX(calc(-280px * 6 - 20px * 6))}}
+لجعل الآراء الـ 6 تدور في **حلقة لا نهائية (Infinite Loop)** وبسلاسة تامة (بدون أي انقطاع أو قفزة فجأة)، يجب استخدام معادلة رياضية دقيقة في الـ CSS (`calc(-50% - 10px)`) ومضاعفة المصفوفة مرة واحدة فقط في الجافاسكريبت.
 
+إليك التعديل الدقيق لحل هذه المشكلة بشكل نهائي واحترافي. 
+
+قم باستبدال الجزء الخاص بالآراء في كود **CSS** والجزء الخاص بالآراء في كود **JavaScript** كما يلي:
+
+### 1. التعديل في قسم CSS:
+ابحث في كود الـ `<style>` عن الكود الخاص بـ `/* ===== الآراء المتصلة 6 آراء ===== */` (أو ما يشابهه الخاص بالـ `testimonials`)، **واستبدله بالكامل بهذا الكود:**
+
+```css
+/* ===== الآراء (دوران لا نهائي سلس) ===== */
+.testimonials-wrapper {
+    overflow: hidden;
+    margin: 30px 20px;
+    padding: 20px 0;
+    background: #fffafb;
+    border-radius: 20px;
+    border: 1px solid #fce4ec;
+    position: relative;
+}
+/* تأثير التلاشي على الجوانب */
+.testimonials-wrapper::before, .testimonials-wrapper::after {
+    content: ''; position: absolute; top: 0; width: 40px; height: 100%; z-index: 2; pointer-events: none;
+}
+.testimonials-wrapper::before { right: 0; background: linear-gradient(to left, #fffafb, transparent); }
+.testimonials-wrapper::after { left: 0; background: linear-gradient(to right, #fffafb, transparent); }
+
+.testimonials-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    /* 30 ثانية مدة الدورة، يمكنك زيادتها لتبطيء الحركة */
+    animation: scrollTestimonials 30s linear infinite; 
+}
+.testimonials-track:hover {
+    animation-play-state: paused; /* التوقف عند وضع الماوس للقراءة */
+}
+.testimonial-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    width: 280px;
+    text-align: right;
+    border-right: 4px solid var(--primary);
+    flex-shrink: 0;
+    transition: 0.3s;
+}
+.testimonial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+.testi-name { font-weight: 700; color: var(--primary); font-size: .95rem; margin-bottom: 5px; }
+.testi-name i { margin-left: 5px; }
+.stars { color: var(--star-color); font-size: .9rem; margin-bottom: 8px; }
+.testi-text { font-size: .9rem; color: var(--text); line-height: 1.5; font-style: italic; }
+
+/* المعادلة الدقيقة: 50% من العرض الإجمالي + نصف الفراغ (10px) لضمان عدم وجود قفزة */
+@keyframes scrollTestimonials {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 10px)); }
+}
+
+
+### 2. التعديل في قسم JavaScript:
+في الأسفل، داخل تاج `<script>`، ابحث عن المصفوفة والدالة الخاصة بـ `testimonials` و `renderTestimonials`، **واستبدلها بالكامل بهذا الكود:**
+
+// ===== بيانات الآراء الـ 6 =====
+var testimonials = [
+    {name: "أم ريتاج", text: "البقالوة تعكم شابة بزاف، تذوب في الفم يعطيك الصحة شاف.", stars: 5},
+    {name: "كريمة ب.", text: "درت فورماسيون والحمد لله راني نخدم من داري والطلبيات ما يحبسوش.", stars: 5},
+    {name: "سمية مهداوي", text: "أحسن مدرسة في الشلف، المعاملة روعة والتعليم بضمير.", stars: 5},
+    {name: "فاطمة الزهراء", text: "المقروض جاني مرمل ومعسل للقلب، ربي يبارك في رزقكم.", stars: 5},
+    {name: "فايزة أم أنس", text: "حمرتولي وجهي في عرس خويا، الضياف قاع سألو على الحلويات.", stars: 5},
+    {name: "نادية من الشلف", text: "طلبت للعرس وكانت الحلويات فوق الممتاز، الكل عجبو.", stars: 5}
+];
+
+function renderTestimonials() {
+    var l = document.getElementById("testimonialsList");
+    if (!l) return;
+    
+    // مضاعفة المصفوفة مرة واحدة فقط (6 أصلية + 6 منسوخة = 12 بطاقة)
+    // هذا يضمن أن الحركة لن تنقطع أبداً
+    var all = testimonials.concat(testimonials);
+    var h = '';
+    
+    for (var i = 0; i < all.length; i++) {
+        var t = all[i], s = '';
+        for (var j = 0; j < t.stars; j++) s += '<i class="fas fa-star"></i>';
+        
+        h += '<div class="testimonial-card">' +
+             '<div class="testi-name"><i class="fas fa-user-circle" style="margin-left:4px"></i>' + t.name + '</div>' +
+             '<div class="stars">' + s + '</div>' +
+             '<p class="testi-text">"' + t.text + '"</p>' +
+             '</div>';
+    }
+    
+    l.innerHTML = h;
+}
 /* ===== الأسئلة الشائعة ===== */
 .faq-container{margin:0 20px;text-align:start}.faq-item{background:#fff;border-radius:15px;border:1px solid #fce4ec;margin-bottom:10px;overflow:hidden}.faq-question{width:100%;border:none;background:none;padding:18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Cairo';color:var(--text);font-size:.95rem}.faq-question>i{color:var(--primary);transition:.3s}.faq-answer{max-height:0;overflow:hidden;padding:0 18px;transition:.4s ease;background:var(--secondary-bg);color:var(--text);line-height:1.7}.faq-item.active .faq-answer{max-height:200px;padding:18px;border-top:1px solid #fce4ec}.faq-item.active .faq-question>i{transform:rotate(180deg)}
 .hours-card{background:#fff5f7;margin:20px auto;padding:20px;border-radius:20px;border:1px solid #fce4ec;box-shadow:0 10px 30px rgba(0,0,0,.05);max-width:900px;width:92%}.hours-table{width:100%;border-collapse:separate;border-spacing:0 10px}.hours-table tr{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:.2s}.hours-table tr:hover{transform:scale(1.02)}.hours-table td{padding:15px 12px;font-weight:700}.hours-table td:first-child{border-radius:0 12px 12px 0;text-align:right;color:#ff6b81;display:flex;align-items:center;gap:8px;font-size:.95rem}.time-cell{border-radius:12px 0 0 12px;display:flex!important;flex-direction:row-reverse;justify-content:flex-end;align-items:center;color:#666;font-family:'Arial',sans-serif;white-space:nowrap}.time-wrap{display:flex;flex-direction:row-reverse;gap:4px;direction:ltr}.dash{margin:0 8px;color:#f54c03;font-weight:bold}.working-status{text-align:center;margin-top:15px;font-weight:bold;color:#444;font-size:.9rem}.pulse-icon{color:#2ecc71;animation:pulse 2s infinite}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
