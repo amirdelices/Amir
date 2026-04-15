@@ -70,27 +70,31 @@
     overflow: hidden;
     margin: 30px 20px;
     padding: 20px 0;
-    background: #fffafb;
+    background: #fffafb; /* اللون الأصلي */
     border-radius: 20px;
-    border: 1px solid #fce4ec;
+    border: 1px solid #fce4ec; /* اللون الأصلي */
     position: relative;
-    /* تأكد من أن الاتجاه العام للحاوية هو اليسار لليمين للحركة */
-    direction: ltr; 
+    direction: ltr; /* لضمان حساب الحركة من اليسار لليمين */
 }
 
 /* تأثير التلاشي على الجوانب */
 .testimonials-wrapper::before, .testimonials-wrapper::after {
-    content: ''; position: absolute; top: 0; width: 60px; height: 100%; z-index: 2; pointer-events: none;
+    content: ''; position: absolute; top: 0; width: 40px; height: 100%; z-index: 2; pointer-events: none;
 }
-.testimonials-wrapper::before { right: 0; background: linear-gradient(to left, #fffafb, transparent); }
-.testimonials-wrapper::after { left: 0; background: linear-gradient(to right, #fffafb, transparent); }
+.testimonials-wrapper::before { 
+    right: 0; 
+    background: linear-gradient(to left, #fffafb, transparent); 
+}
+.testimonials-wrapper::after { 
+    left: 0; 
+    background: linear-gradient(to right, #fffafb, transparent); 
+}
 
 .testimonials-track {
     display: flex;
-    gap: 20px; /* المسافة بين البطاقات */
+    gap: 20px;
     width: max-content;
-    /* إضافة فراغ في النهاية ليساوي الـ gap لضبط الحسابات */
-    padding-right: 20px; 
+    padding-right: 20px; /* موازنة الفراغ الأخير لضمان سلاسة الدوران */
     animation: scrollLeftToRight 30s linear infinite; 
     will-change: transform;
 }
@@ -100,23 +104,27 @@
 }
 
 .testimonial-card {
-    background: #fff;
+    background: var(--white);
     padding: 20px;
     border-radius: 15px;
     width: 280px;
-    /* نرجع النص للعربية داخل البطاقة */
-    direction: rtl; 
+    direction: rtl; /* إعادة النص للجهة العربية */
     text-align: right;
-    border-right: 4px solid #e91e63; /* لون أساسي افتراضي */
+    border-right: 4px solid var(--primary); /* اللون الأساسي الأصلي */
     flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    transition: 0.3s;
 }
 
-/* المعادلة الصحيحة: 
-بما أننا ضاعفنا العناصر (6 أصلية + 6 نسخة)، 
-فإننا نبدأ من إزاحة كاملة لليسار بنسبة -50% 
-ونتحرك باتجاه الصفر (اليمين).
-*/
+.testimonial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.testi-name { font-weight: 700; color: var(--primary); font-size: .95rem; margin-bottom: 5px; }
+.testi-name i { margin-left: 5px; }
+.stars { color: var(--star-color); font-size: .9rem; margin-bottom: 8px; }
+.testi-text { font-size: .9rem; color: var(--text); line-height: 1.5; font-style: italic; }
+
 @keyframes scrollLeftToRight {
     0% { 
         transform: translateX(-50%); 
